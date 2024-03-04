@@ -19,10 +19,11 @@ public class ConnectingDB {
 
     public static Connection getConnection() {
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;"
-                    + "databaseName=D&CFood;"
-                    + "user=sa;password=1223;"
+//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName("org.postgresql.Driver");
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432;"
+                    + "databaseName=dcfood;"
+                    + "user=IuseArch;password=btw;"
                     + "encrypt=true;"
                     + "trustServerCertificate=true;");
 
