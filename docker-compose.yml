@@ -30,7 +30,8 @@ services:
         condition: service_healthy
     command: >
       bash -c '
-      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P sa@123456  -i docker-entrypoint-initdb.d/full.sql;
+      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P sa@123456 -d master -i docker-entrypoint-initdb.d/init.sql;
+      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P sa@123456 -d D&CFood -i docker-entrypoint-initdb.d/CreateD&CFood.sql;
       echo "All done!";
       '
     networks:
@@ -49,11 +50,9 @@ services:
       - sqlserver
       - sqlserver.configurator
 
-
 networks:
   logicloth-network:
     name: logicloth-network
-
 
 volumes:
   sqlserver_data:
