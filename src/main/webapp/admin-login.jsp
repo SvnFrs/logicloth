@@ -52,8 +52,7 @@
                 <div class="list">
                     <div class="login-form item">
                         <h3>Đăng nhập</h3>
-                        <%--                                <form action="Login" method="post" id="Login">--%>
-                        <form  id="Login">
+                        <form action="${pageContext.request.contextPath}/Login/Admin" method="post" id="Login">
                             <div class="user-name">
                                 <i class="fa-regular fa-envelope"></i>
                                 <input type="text" name="login-name" id="login-name" rules="required" placeholder="Tên đăng nhập" required>
@@ -75,7 +74,7 @@
                             </div>
 
                             <%--                                    <button class="submit" id="submitButton">Đăng nhập</button>--%>
-                            <input type="button" id="submitButton" value="Đăng nhập" class="submit">
+                            <input type="submit" id="submitButton" value="Đăng nhập" class="submit">
                         </form>
                     </div>
                 </div>

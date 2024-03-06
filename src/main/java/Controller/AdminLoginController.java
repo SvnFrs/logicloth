@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * @author admin
  */
 @WebServlet(name = "LoginControl", urlPatterns = {"/Login"})
-public class LoginController extends HttpServlet {
+public class AdminLoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -63,7 +63,7 @@ public class LoginController extends HttpServlet {
                 rd.forward(request, response);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminLoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
