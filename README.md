@@ -17,6 +17,8 @@
 
 ### TODO
 - [x] login / register with roles
+- [ ] login with google
+- [ ] create a login page for admin
 - [ ] pull data from database
 - [ ] pull login states to pages
 - [ ] update role admin
