@@ -14,3 +14,20 @@
 
 ### update theo trang 
 - load food từ data base show trên home page
+
+### TODO
+- [x] login / register with roles
+- [ ] pull data from database
+- [ ] pull login states to pages
+- [ ] update role admin
+- [ ] update role seller
+- [ ] update role user
+- [ ] add food (seller)
+- [ ] update food (seller
+- [ ] update order status (seller)
+- [ ] add to cart (user)
+- [ ] update cart (user)
+- [ ] checkout / create order (user)
+- [ ] view order (user)
+- [ ] update user (admin)
+- [ ] testing / validation (checking duplicate users/ password reset / etc...)
