@@ -1,58 +1,103 @@
 version: '3.8'
 
 services:
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=sa@123456
-      - MSSQL_PID=Developer
-    ports:
-      - 1433
-    volumes:
-      - sqlserver_data:/var/opt/mssql
-    restart: always
-    healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P sa@123456 -Q 'SELECT 1' || exit 1"]
-      interval: 10s
-      retries: 10
-      start_period: 10s
-      timeout: 3s
-    networks:
-      - logicloth-network
+    postgres:
+        image: postgres:latest
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: DaCFood
+        ports:
+            - "5432:5432"
+        networks:
+            - logicloth-network
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+            - ./init:/docker-entrypoint-initdb.d
+        restart: always
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 10s
+            retries: 10
+            start_period: 10s
+            timeout: 3s
+#        command: >
+#              psql -U postgres -d D&CFood -f docker-entrypoint-initdb.d/init.sql;
+#              '
+#
 
-  sqlserver.configurator:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    volumes:
-      - ./init:/docker-entrypoint-initdb.d
-    depends_on:
-      sqlserver:
-        condition: service_healthy
-    command: >
-      bash -c '
-      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P sa@123456 -d master -i docker-entrypoint-initdb.d/init.sql;
-      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P sa@123456 -d D&CFood -i docker-entrypoint-initdb.d/CreateD&CFood.sql;
-      echo "All done!";
-      '
-    networks:
-      - logicloth-network
+    #    glassfish:
+#        image: glassfish:latest
+#        ports:
+#            - "4848:4848"
+#            - "8080:8080"
+#        networks:
+#            - logicloth-network
+#        depends_on:
+#            - postgres
+#        restart: always
+#        healthcheck:
+#            test: ["CMD-SHELL", "curl -f http://localhost:4848"]
+#            interval: 10s
+#            retries: 10
+#            start_period: 10s
+#            timeout: 3s
 
-  tomcat-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    restart: always
-    networks:
-      - logicloth-network
-    depends_on:
-      - sqlserver
-      - sqlserver.configurator
+#  sqlserver:
+#    image: mcr.microsoft.com/mssql/server:2019-latest
+#    environment:
+#      - ACCEPT_EULA=Y
+#      - SA_PASSWORD=sa@123456
+#      - MSSQL_PID=Developer
+#    ports:
+#      - 1433
+#    volumes:
+#      - sqlserver_data:/var/opt/mssql
+#    restart: always
+#    healthcheck:
+#      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P sa@123456 -Q 'SELECT 1' || exit 1"]
+#      interval: 10s
+#      retries: 10
+#      start_period: 10s
+#      timeout: 3s
+#    networks:
+#      - logicloth-network
 
+#  sqlserver.configurator:
+#    image: mcr.microsoft.com/mssql/server:2019-latest
+#    volumes:
+#      - ./init:/docker-entrypoint-initdb.d
+#    depends_on:
+#      sqlserver:
+#        condition: service_healthy
+#    command: >
+#      bash -c '
+#      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P sa@123456 -d master -i docker-entrypoint-initdb.d/init.sql;
+#      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P sa@123456 -d D&CFood -i docker-entrypoint-initdb.d/CreateD&CFood.sql;
+#      echo "All done!";
+#      '
+#    networks:
+#      - logicloth-network
+
+    tomcat-app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8080:8080"
+        restart: always
+        networks:
+            - logicloth-network
+        depends_on:
+#            - sqlserver
+#            - sqlserver.configurator
+            - postgres
+#            - postgres.configurator
 networks:
   logicloth-network:
     name: logicloth-network
 
 volumes:
-  sqlserver_data:
+    postgres_data:
+#volumes:
+#  sqlserver_data:
