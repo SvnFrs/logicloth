@@ -67,6 +67,28 @@ public class AccountDAOs {
 
         return role;
     }
+    
+    public int getUserID(account acc) throws SQLException {
+        int userID = 0;
+        String sql = "SELECT user_id FROM public.users WHERE username = ? AND password = ?";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, acc.getUserName());
+            String hashedPassword = getMD5Hash(acc.getPassword());
+            ps.setString(2, hashedPassword);
+            try ( ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Lấy role từ kết quả của truy vấn
+                    userID = rs.getInt("user_id");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return userID;
+    }
 
     public int updatePassword(String email, String newPass) throws SQLException {
         int rowsAffected = 0;
@@ -98,7 +120,7 @@ public class AccountDAOs {
     }
 
     public int AddNew(account acc) {
-        String sql = "INSERT INTO Users VALUES  (?,?,?,?,?)";
+        String sql = "INSERT INTO public.users (user_id, username, password, email, full_name, role)" + "VALUES (DEFAULT, ?, ?, ?, ?, ?)";
         int ketqua = 0;
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
