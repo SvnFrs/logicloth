@@ -7,7 +7,7 @@ package Controller;
 import DAOs.SellerDAOs;
 import DAOs.AccountDAOs;
 import Model.account;
-import jakarta.servlet.RequestDispatcher;
+
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -43,11 +43,11 @@ public class SellerLoginController extends HttpServlet {
 
             if (result) {
                 int userID = accountDAOs.getUserID(acc);
-                Cookie userCookie = new Cookie("userID", String.valueOf(userID));
+                Cookie sellerCookie = new Cookie("userID", String.valueOf(userID));
                 HttpSession session = request.getSession();
                 session.setAttribute("userID", userID);
-                session.setAttribute("userCookie", userCookie);
-                response.addCookie(userCookie);
+                session.setAttribute("sellerCookie", sellerCookie);
+                response.addCookie(sellerCookie);
 
                 // Send success response to JavaScript
                 response.getWriter().write("Seller Login successfully");
@@ -56,7 +56,7 @@ public class SellerLoginController extends HttpServlet {
                 response.getWriter().write("Login failed");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminLoginController.class.getName()).log(Level.SEVERE, null, ex);
             // Send failure response to JavaScript
             response.getWriter().write("Login failed");
         }

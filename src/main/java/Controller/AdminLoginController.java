@@ -5,14 +5,14 @@
 package Controller;
 
 import DAOs.AccountDAOs;
+import DAOs.AdminDAOs;
 import Model.account;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
+
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-@WebServlet(name = "LoginControl", urlPatterns = {"/Login"})
+@WebServlet(name = "LoginControl", urlPatterns = {"/Login/Admin"})
 public class AdminLoginController extends HttpServlet {
 
     @Override
@@ -37,26 +37,23 @@ public class AdminLoginController extends HttpServlet {
 
         try {
             account acc = new account(username, password);
-            AccountDAOs dao = new AccountDAOs();
-            boolean result = dao.Login(acc);
+            AdminDAOs adminDAOs = new AdminDAOs();
+            AccountDAOs accountDAOs = new AccountDAOs();
+            boolean result = adminDAOs.adminLogin(acc);
 
             if (result) {
-                request.setAttribute("loginError", "");
-                String role = dao.getRole(acc);
-                switch (role) {
-                    case "user":
-                        response.sendRedirect("user.jsp");
-                        break;
-                    case "seller":
-                        response.sendRedirect("seller.jsp");
-                        break;
-                    case "admin":
-                        response.sendRedirect("admin.jsp");
-                        break;
-                    default:
-                        throw new AssertionError();
-                }
+                int userID = accountDAOs.getUserID(acc);
+                Cookie adminCookie = new Cookie("userID", String.valueOf(userID));
+                HttpSession session = request.getSession();
+                session.setAttribute("adminID", userID);
+                session.setAttribute("userCookie", adminCookie);
+                response.addCookie(adminCookie);
 
+                // Send success response to JavaScript
+                response.getWriter().write("Admin Login successfully");
+
+                // Redirect to admin page
+                response.sendRedirect(request.getContextPath() + "/admin.jsp");
             } else {
                 request.setAttribute("loginError", "Sai tài khoản hoặc mật khẩu!");
                 RequestDispatcher rd = request.getRequestDispatcher("login-register.jsp");

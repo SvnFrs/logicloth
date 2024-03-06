@@ -7,7 +7,7 @@ package Controller;
 import DAOs.UserDAOs;
 import DAOs.AccountDAOs;
 import Model.account;
-import jakarta.servlet.RequestDispatcher;
+
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -56,7 +56,7 @@ public class UserLoginController extends HttpServlet {
                 response.getWriter().write("Login failed");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminLoginController.class.getName()).log(Level.SEVERE, null, ex);
             // Send failure response to JavaScript
             response.getWriter().write("Login failed");
         }
