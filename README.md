@@ -15,6 +15,15 @@
 ### update theo trang 
 - load food từ data base show trên home page
 
+### Optional run
+
+```bash
+docker exec -it logicloth-postgres-1 psql -U postgres -c 'CREATE DATABASE dacfood'; 
+```
+```bash
+docker exec -it logicloth-postgres-1 psql -U postgres -d dacfood -f docker-entrypoint-initdb.d/postgres.sql;
+```
+
 ### TODO
 - [x] login / register with roles
 - [ ] login with google
