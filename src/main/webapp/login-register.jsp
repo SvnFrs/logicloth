@@ -89,7 +89,7 @@
                                     </div>
 
 <%--                                    <button class="submit" id="submitButton">Đăng nhập</button>--%>
-                                    <input type="button" id="submitButton" value="Đăng nhập" class="submit" onclick="Login()">
+                                    <input type="button" id="submitButton" value="Đăng nhập" class="submit" onclick="CommonLogin()">
                                     <div class="register-link">
                                         <p>Bạn chưa có tài khoản?<span id="next">Đăng ký</span></p>
                                     </div>
