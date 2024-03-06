@@ -460,11 +460,11 @@ main .banner img {
     margin-bottom: 14px;
 }
 
-.form-group label {
-    font-size: 17px;
-    margin-bottom: 3px;
-    font-weight: 500;
-}
+/*.form-group label {*/
+/*    font-size: 17px;*/
+/*    margin-bottom: 3px;*/
+/*    font-weight: 500;*/
+/*}*/
 
 .form-group input {
     width: 100%;

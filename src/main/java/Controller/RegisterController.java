@@ -32,10 +32,11 @@ public class RegisterController extends HttpServlet {
         String fullName = request.getParameter("fullname");
         String email = request.getParameter("register-email");
         String username = request.getParameter("register-name");
+        String role = request.getParameter("role");
         String password = request.getParameter("register-password");
         String confirmPassword = request.getParameter("confirm-password");
         String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-        String role = "user";
+//        String role = "user";
 
         //Kiểm tra fullname
         if (fullName.isEmpty()) {

@@ -100,32 +100,48 @@
                                 <h3>Đăng ký</h3>
                                 <form action="Register" method="post" id="regis">
                                     <div class="form-group">
-                                        <label>Họ và tên</label>
+                                        <label class="fw-medium fs-6">Họ và tên</label>
                                         <input type="text" id="fullname" name="fullname" placeholder="VD: Nguyễn Văn A" rules="required|checklengthname" required>
                                         <span class="err-message">${requestScope.fullnameError}</span>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Tên đăng nhập</label>
+                                        <label class="fw-medium fs-6">Tên đăng nhập</label>
                                         <input type="text" id="register-name" name="register-name" rules="required|checkusername" placeholder="VD: Hoang Thien" required>
                                         <span class="err-message">${requestScope.usernameError}</span>
                                     </div>
 
 
                                     <div class="form-group">
-                                        <label>Email</label>
+                                        <label class="fw-medium fs-6">Email</label>
                                         <input type="email" id="email" name="register-email" placeholder="VD: nguyenvana1123@gmail.com" rules="required|email" required>
                                         <span class="err-message">${requestScope.emailError}</span>
                                     </div>
 
+                                    <div class="role-chooser mb-2">
+                                        <label class="fw-medium fs-6">Vai trò</label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="role" id="regUser" value="user" required>
+                                            <label class="form-check-label" for="regUser">
+                                                User
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="role" id="regSeller" value="seller" required>
+                                            <label class="form-check-label" for="regSeller">
+                                                Seller
+                                            </label>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
-                                        <label>Mật khẩu</label>
+                                        <label class="fw-medium fs-6">Mật khẩu</label>
                                         <input type="password" id="password" name="register-password" rules="required|checkpasswordlength" required>
                                         <span class="err-message">${requestScope.passwordError}</span>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Nhập lại mật khẩu</label>
+                                        <label class="fw-medium fs-6">Nhập lại mật khẩu</label>
                                         <input type="password" id="confirm-password" name="confirm-password" rules="required|checkpasswordlength|checkpassword" required>
                                         <span class="err-message">${requestScope.confirmPasswordError}</span>
                                     </div>
