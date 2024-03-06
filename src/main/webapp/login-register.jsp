@@ -52,15 +52,16 @@
                         <div class="list">
                             <div class="login-form item">
                                 <h3>Đăng nhập</h3>
-                                <form action="Login" method="post" id="Login">
+<%--                                <form action="Login" method="post" id="Login">--%>
+                                <form  id="Login">
                                     <div class="user-name">
                                         <i class="fa-regular fa-envelope"></i>
-                                        <input type="text" name="login-name" rules="required" placeholder="Tên đăng nhập" required>
+                                        <input type="text" name="login-name" id="login-name" rules="required" placeholder="Tên đăng nhập" required>
                                     </div>
 
                                     <div class="pass">
                                         <i class="fa-solid fa-lock"></i>
-                                        <input type="password" name="login-password" rules="required" placeholder="Mật khẩu"required>
+                                        <input type="password" name="login-password" id="login-password" rules="required" placeholder="Mật khẩu"required>
                                     </div>
                                     <span class="err-message" style="color: red; font-size: 15px">${requestScope.loginError}</span>
 
@@ -70,13 +71,13 @@
 
                                     <div class="role-switcher">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role" id="userRole">
+                                            <input class="form-check-input" type="radio" name="role" id="userRole" value="User">
                                             <label class="form-check-label" for="userRole">
                                                 User
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role" id="sellerRole">
+                                            <input class="form-check-input" type="radio" name="role" id="sellerRole" value="Seller">
                                             <label class="form-check-label" for="sellerRole">
                                                 Seller
                                             </label>
@@ -87,8 +88,8 @@
                                         <label for="remember">Ghi nhớ tài khoản</label>
                                     </div>
 
-                                    <button class="submit">Đăng nhập</button>
-
+<%--                                    <button class="submit" id="submitButton">Đăng nhập</button>--%>
+                                    <input type="button" id="submitButton" value="Đăng nhập" class="submit" onclick="Login()">
                                     <div class="register-link">
                                         <p>Bạn chưa có tài khoản?<span id="next">Đăng ký</span></p>
                                     </div>
@@ -140,6 +141,7 @@
             </div>
         </main>
         <%@include file="footer.jsp"%>
+        <script src="js/login.js"></script>
         <script>
                 Validator('#regis');
                 ValidatorUserName('#Login');
