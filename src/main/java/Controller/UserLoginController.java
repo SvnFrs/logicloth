@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-@WebServlet(name = "LoginControl", urlPatterns = {"/Login/User"})
+@WebServlet(name = "UserLoginController", urlPatterns = {"/Login/User"})
 public class UserLoginController extends HttpServlet {
 
     @Override
