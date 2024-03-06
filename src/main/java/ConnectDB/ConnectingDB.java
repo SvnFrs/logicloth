@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ConnectDB;
 
 import java.sql.Connection;
@@ -20,13 +16,19 @@ public class ConnectingDB {
     public static Connection getConnection() {
         try {
 //            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432;"
-                    + "databaseName=dcfood;"
-                    + "user=IuseArch;password=btw;"
-                    + "encrypt=true;"
-                    + "trustServerCertificate=true;");
-
+//            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;"
+//                    + "databaseName=D&CFood;"
+//                    + "user=sa;password=123;"
+//                    + "encrypt=true;"
+//                    + "trustServerCertificate=true;");
+            String dbURL = "jdbc:postgresql://localhost:5432/D&CFood";
+            String user = "IuseArch";
+            String pass = "btw";
+            Class.forName("org.postgresql.Driver"); // do not remove this line
+            conn = DriverManager.getConnection(dbURL, user, pass);
+            if (conn != null) {
+                System.out.println("Connected");
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConnectingDB.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("NO Connection");
