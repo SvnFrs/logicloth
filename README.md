@@ -41,4 +41,7 @@ docker exec -it logicloth-postgres-1 psql -U postgres -d dacfood -f docker-entry
 - [ ] checkout / create order (user)
 - [ ] view order (user)
 - [ ] update user (admin)
+- [ ] implement cart (user)
+- [ ] implement order (user)
+- [ ] implement checkout (user)
 - [ ] testing / validation (checking duplicate users/ password reset / etc...)
