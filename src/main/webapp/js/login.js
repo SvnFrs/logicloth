@@ -4,7 +4,7 @@ function CommonLogin() {
     var loginPassword = document.getElementById('login-password').value;
 
     var xhr = new XMLHttpRequest();
-    var url = '/Login/' + selectedRole.value;
+    var url = '/FoodWeb/Login/' + selectedRole.value;
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -15,12 +15,12 @@ function CommonLogin() {
 
                 if (responseText === "User Login successfully") {
                     // Redirect to user.jsp or seller.jsp or other pages as needed
-                    // window.location.href = '/FoodWeb/user.jsp';
-                    window.location.href = '/user.jsp';
+                    window.location.href = '/FoodWeb/User';
+                    // window.location.href = '/user.jsp';
                 } else if (responseText === "Seller Login successfully") {
                     // Redirect to seller.jsp or other pages as needed
-                    // window.location.href = '/FoodWeb/seller.jsp';
-                    window.location.href = '/seller.jsp';
+                    window.location.href = '/FoodWeb/Seller';
+                    // window.location.href = '/seller.jsp';
                 } else {
                     // Handle login failure
                     alert("Login failed");

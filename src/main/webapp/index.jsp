@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,7 +35,8 @@
                         <input type="text" name="search-product" id="search" placeholder="Nhập từ khóa cần tìm...">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
-                    <div class="login" onclick="window.location.href = 'login-register.jsp'">Login/Sign Up</div>
+                    <div class="login"><a href="<%=
+                    request.getServletContext().getContextPath()%>/Login">Login/Sign Up</a></div>
                     <div class="cart">
                         <i class="fa fa-bag-shopping"></i>
                     </div>

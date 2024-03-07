@@ -1,62 +1,71 @@
 CREATE TABLE Users (
-    user_id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    full_name VARCHAR(100) NOT NULL,
-	role VARCHAR(50) NOT NULL
+                       user_id SERIAL PRIMARY KEY,
+                       username VARCHAR(50) NOT NULL,
+                       password VARCHAR(255) NOT NULL,
+                       email VARCHAR(100) NOT NULL,
+                       full_name VARCHAR(100) NOT NULL,
+                       role VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Restaurants (
-    restaurant_id SERIAL PRIMARY KEY,
-    name VARCHAR(1000) NOT NULL,
-    description VARCHAR(1000),
-    address VARCHAR(1000)
+                             restaurant_id SERIAL PRIMARY KEY,
+                             name VARCHAR(1000) NOT NULL,
+                             description VARCHAR(1000),
+                             address VARCHAR(1000)
 );
 
 CREATE TABLE Products (
-    product_id SERIAL PRIMARY KEY,
-    restaurant_id INT,
-    name VARCHAR(100) NOT NULL,
-    description VARCHAR(100),
-    price DECIMAL(10, 2) NOT NULL,
-    image_url VARCHAR(255),
-    FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
+                          product_id SERIAL PRIMARY KEY,
+                          restaurant_id INT,
+                          name VARCHAR(100) NOT NULL,
+                          description VARCHAR(100),
+                          price DECIMAL(10, 2) NOT NULL,
+                          image_url VARCHAR(255),
+                          quantity INT DEFAULT 0,
+                          FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
+);
+
+CREATE TABLE Carts (
+                       user_id INT,
+                       product_id INT,
+                       quantity INT,
+                       FOREIGN KEY (user_id) REFERENCES Users(user_id),
+                       FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
 
 CREATE TABLE Orders (
-    order_id SERIAL PRIMARY KEY,
-    user_id INT,
-    restaurant_id INT,
-    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(50),
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
+                        order_id SERIAL PRIMARY KEY,
+                        user_id INT,
+                        restaurant_id INT,
+                        order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        status VARCHAR(50),
+                        FOREIGN KEY (user_id) REFERENCES Users(user_id),
+                        FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
 );
 
 CREATE TABLE OrderDetails (
-    order_detail_id SERIAL PRIMARY KEY,
-    order_id INT,
-    product_id INT,
-    quantity INT,
-    total_price DECIMAL(10, 2),
-    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+                              order_detail_id SERIAL PRIMARY KEY,
+                              order_id INT,
+                              product_id INT,
+                              quantity INT,
+                              total_price DECIMAL(10, 2),
+                              FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+                              FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
 
 CREATE TABLE Reviews (
-    review_id SERIAL PRIMARY KEY,
-    product_id INT, 
-    user_id INT,
-    rating INT, 
-    comment TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (product_id) REFERENCES Products(product_id),
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+                         review_id SERIAL PRIMARY KEY,
+                         product_id INT,
+                         user_id INT,
+                         rating INT,
+                         comment TEXT,
+                         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                         FOREIGN KEY (product_id) REFERENCES Products(product_id),
+                         FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
 INSERT INTO Users (username, password, email, full_name, role)
-VALUES 
+VALUES
     ('admin', md5('123'), 'admin@example.com', 'Admin', 'admin'),
     ('Thien', md5('12345'), 'thien@gmail.com', 'Thien Seller', 'seller'),
     ('Khai', md5('12345'), 'khai@gmail.com', 'Khai Seller', 'seller'),
@@ -94,12 +103,12 @@ VALUES
 
 
 INSERT INTO Products
-VALUES 
-(10001,1, 'Bánh mì thịt nướng', 'Bánh mì bao gồm: Thịt nướng, dưa leo, rau mùi, hành tây, sốt me', 20000, 'http://example.com/banhmi_thitnuong.jpg'),
-(10002,1, 'Bánh mì gà xé', 'Bánh mì bao gồm: Gà xé, dưa leo, rau mùi, hành tây, sốt tiêu đen', 18000, 'http://example.com/banhmi_gaxe.jpg'),
-(10003,1, 'Bánh mì bì', 'Bánh mì bao gồm: Bì heo, dưa leo, rau mùi, hành tây, sốt tương', 17000, 'http://example.com/banhmi_bi.jpg'),
-(10004,1, 'Bánh mì chả cá', 'Bánh mì bao gồm: Chả cá, dưa leo, rau mùi, hành tây, sốt mắm', 22000, 'http://example.com/banhmi_chaca.jpg'),
-(10005,1, 'Bánh mì trứng ốp-la', 'Bánh mì bao gồm: Trứng ốp-la, chả lụa, dưa leo, rau mùi, hành tây, sốt cà chua', 19000, 'http://example.com/banhmi_trungopla.jpg');
+VALUES
+    (10001,1, 'Bánh mì thịt nướng', 'Bánh mì bao gồm: Thịt nướng, dưa leo, rau mùi, hành tây, sốt me', 20000, 'http://example.com/banhmi_thitnuong.jpg'),
+    (10002,1, 'Bánh mì gà xé', 'Bánh mì bao gồm: Gà xé, dưa leo, rau mùi, hành tây, sốt tiêu đen', 18000, 'http://example.com/banhmi_gaxe.jpg'),
+    (10003,1, 'Bánh mì bì', 'Bánh mì bao gồm: Bì heo, dưa leo, rau mùi, hành tây, sốt tương', 17000, 'http://example.com/banhmi_bi.jpg'),
+    (10004,1, 'Bánh mì chả cá', 'Bánh mì bao gồm: Chả cá, dưa leo, rau mùi, hành tây, sốt mắm', 22000, 'http://example.com/banhmi_chaca.jpg'),
+    (10005,1, 'Bánh mì trứng ốp-la', 'Bánh mì bao gồm: Trứng ốp-la, chả lụa, dưa leo, rau mùi, hành tây, sốt cà chua', 19000, 'http://example.com/banhmi_trungopla.jpg');
 
 INSERT INTO Products
 VALUES
@@ -108,7 +117,7 @@ VALUES
     (20003, 2, 'Pizza Gà BBQ', 'Pizza thơm ngon với thịt gà BBQ và rau cải.', 10.99, 'pizza_ga_bbq.jpg'),
     (20004, 2, 'Pizza Rau Cải', 'Pizza thơm ngon với nhiều loại rau cải tươi ngon.', 9.99, 'pizza_rau_cai.jpg'),
     (20005, 2, 'Pizza Phô Mai Tôm', 'Pizza thơm ngon với phô mai và tôm tươi.', 11.99, 'pizza_pho_mai_tom.jpg');
-	-- Trà Sữa
+-- Trà Sữa
 INSERT INTO Products
 VALUES
     (30001, 3, 'Trà Sữa Matcha', 'Trà sữa Matcha thơm ngon và bổ dưỡng.', 4.99, 'tra_sua_matcha.jpg'),
@@ -172,7 +181,7 @@ VALUES
     (90005, 9, 'Cơm Cá Thu Nướng', 'Cơm cá thu nướng thơm ngon và đa dạng.', 11.49, 'com_ca_thu_nuong.jpg');
 
 
-	INSERT INTO Products
+INSERT INTO Products
 VALUES
     (100001, 10, 'Bánh Tráng Trộn', 'Bánh tráng trộn với nhiều loại gia vị và nguyên liệu đặc trưng.', 15.99, 'banh_trang_tron.jpg'),
     (100002, 10, 'Bánh Mì Que', 'Bánh mì que giòn tan và thơm ngon.', 8.49, 'banh_mi_que.jpg'),
@@ -190,7 +199,7 @@ VALUES
     (110004, 11, 'Soda Sữa Hạt', 'Soda sữa hạt thơm ngon và lạ miệng.', 5.49, 'soda_sua_hat.jpg'),
     (110005, 11, 'Smoothie Xoài', 'Smoothie xoài thơm ngon và giải khát.', 5.99, 'smoothie_xoai.jpg');
 
-	INSERT INTO Products
+INSERT INTO Products
 VALUES
     (120001, 12, 'Bún Riêu Cua', 'Bún riêu cua thơm ngon và đậm đà.', 6.99, 'bun_rieu_cua.jpg'),
     (120002, 12, 'Bún Bò Huế', 'Bún bò Huế thơm ngon và đặc sắc.', 7.49, 'bun_bo_hue.jpg'),

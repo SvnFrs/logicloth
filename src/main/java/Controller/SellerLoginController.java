@@ -51,6 +51,7 @@ public class SellerLoginController extends HttpServlet {
 
                 // Send success response to JavaScript
                 response.getWriter().write("Seller Login successfully");
+//                response.getWriter().write(session.getAttribute("userID").toString());
             } else {
                 // Send failure response to JavaScript
                 response.getWriter().write("Login failed");
