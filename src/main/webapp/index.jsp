@@ -20,11 +20,11 @@
             <div class="head">
                 <div class="logo">
                     <div class="logo-img">
-                        <a href="index.jsp"><img src="images/D&C Food (1).png" alt="logo"></a>
+                        <a href="${pageContext.request.contextPath}/"><img src="images/D&C Food (1).png" alt="logo"></a>
                     </div>
 
                     <div class="logo-name">
-                        <a href="index.jsp">
+                        <a href="${pageContext.request.contextPath}/">
                             <p>D&C Food</p>
                         </a>
                     </div>

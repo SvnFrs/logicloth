@@ -67,6 +67,26 @@ public class AccountDAOs {
 
         return role;
     }
+
+    public String getRoleByID(int userID) throws SQLException {
+        String role = null;
+        String sql = "SELECT role FROM Users WHERE user_id = ?";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, userID);
+            try ( ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Lấy role từ kết quả của truy vấn
+                    role = rs.getString("role");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return role;
+    }
     
     public int getUserID(account acc) throws SQLException {
         int userID = 0;
