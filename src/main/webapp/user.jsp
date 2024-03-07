@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -88,211 +89,252 @@
                             <h4>Một số gian hàng đề cử</h4>
                         </div>
 
-                        <div class="list-food">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="food-img">
-                                        <img src="images/1707-vietnam-3881.jpg" alt="">
-                                    </div>
+<%--                        <div class="list-restaurant container">--%>
+<%--                            <div class="row">--%>
+<%--                                <div class="col-lg-4 col-md-12">--%>
+<%--                                    <div class="food-img">--%>
+<%--                                        <img src="images/1707-vietnam-3881.jpg" alt="">--%>
+<%--                                    </div>--%>
 
-                                    <div class="food-title">
-                                        <p class="restaurant-name">Tên của gian hàng</p>
-                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>
-                                        <div class="rate">
-                                            <div class="rating">
-                                                <i class="fa-solid fa-star"></i>
-                                                <span>5.0</span>
-                                            </div>
+<%--                                    <div class="food-title">--%>
+<%--                                        <p class="restaurant-name">Tên của gian hàng</p>--%>
+<%--                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>--%>
+<%--                                        <div class="rate">--%>
+<%--                                            <div class="rating">--%>
+<%--                                                <i class="fa-solid fa-star"></i>--%>
+<%--                                                <span>5.0</span>--%>
+<%--                                            </div>--%>
 
-                                            <div class="price">
-                                                <i class="fa fa-money-bill-1-wave"></i>
-                                                <p>19.000 - 199.000đ</p>
-                                            </div>
-                                        </div>
-                                    </div>
+<%--                                            <div class="price">--%>
+<%--                                                <i class="fa fa-money-bill-1-wave"></i>--%>
+<%--                                                <p>19.000 - 199.000đ</p>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+
+<%--                                <div class="col-lg-4 col-md-12">--%>
+<%--                                    <div class="food-img">--%>
+<%--                                        <img src="images/1707-vietnam-3881.jpg" alt="">--%>
+<%--                                    </div>--%>
+
+<%--                                    <div class="food-title">--%>
+<%--                                        <p class="restaurant-name">Tên của gian hàng</p>--%>
+<%--                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>--%>
+<%--                                        <div class="rate">--%>
+<%--                                            <div class="rating">--%>
+<%--                                                <i class="fa-solid fa-star"></i>--%>
+<%--                                                <span>5.0</span>--%>
+<%--                                            </div>--%>
+
+<%--                                            <div class="price">--%>
+<%--                                                <i class="fa fa-money-bill-1-wave"></i>--%>
+<%--                                                <p>19.000 - 199.000đ</p>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+
+<%--                                <div class="col-lg-4 col-md-12">--%>
+<%--                                    <div class="food-img">--%>
+<%--                                        <img src="images/1707-vietnam-3881.jpg" alt="">--%>
+<%--                                    </div>--%>
+
+<%--                                    <div class="food-title">--%>
+<%--                                        <p class="restaurant-name">Tên của gian hàng</p>--%>
+<%--                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>--%>
+<%--                                        <div class="rate">--%>
+<%--                                            <div class="rating">--%>
+<%--                                                <i class="fa-solid fa-star"></i>--%>
+<%--                                                <span>5.0</span>--%>
+<%--                                            </div>--%>
+
+<%--                                            <div class="price">--%>
+<%--                                                <i class="fa fa-money-bill-1-wave"></i>--%>
+<%--                                                <p>19.000 - 199.000đ</p>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+
+<%--                            <div class="row">--%>
+<%--                                <div class="col-lg-4 col-md-12">--%>
+<%--                                    <div class="food-img">--%>
+<%--                                        <img src="images/1707-vietnam-3881.jpg" alt="">--%>
+<%--                                    </div>--%>
+
+<%--                                    <div class="food-title">--%>
+<%--                                        <p class="restaurant-name">Tên của gian hàng</p>--%>
+<%--                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>--%>
+<%--                                        <div class="rate">--%>
+<%--                                            <div class="rating">--%>
+<%--                                                <i class="fa-solid fa-star"></i>--%>
+<%--                                                <span>5.0</span>--%>
+<%--                                            </div>--%>
+
+<%--                                            <div class="price">--%>
+<%--                                                <i class="fa fa-money-bill-1-wave"></i>--%>
+<%--                                                <p>19.000 - 199.000đ</p>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+
+<%--                                <div class="col-lg-4 col-md-12">--%>
+<%--                                    <div class="food-img">--%>
+<%--                                        <img src="images/1707-vietnam-3881.jpg" alt="">--%>
+<%--                                    </div>--%>
+
+<%--                                    <div class="food-title">--%>
+<%--                                        <p class="restaurant-name">Tên của gian hàng</p>--%>
+<%--                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>--%>
+<%--                                        <div class="rate">--%>
+<%--                                            <div class="rating">--%>
+<%--                                                <i class="fa-solid fa-star"></i>--%>
+<%--                                                <span>5.0</span>--%>
+<%--                                            </div>--%>
+
+<%--                                            <div class="price">--%>
+<%--                                                <i class="fa fa-money-bill-1-wave"></i>--%>
+<%--                                                <p>19.000 - 199.000đ</p>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+
+<%--                                <div class="col-lg-4 col-md-12">--%>
+<%--                                    <div class="food-img">--%>
+<%--                                        <img src="images/1707-vietnam-3881.jpg" alt="">--%>
+<%--                                    </div>--%>
+
+<%--                                    <div class="food-title">--%>
+<%--                                        <p class="restaurant-name">Tên của gian hàng</p>--%>
+<%--                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>--%>
+<%--                                        <div class="rate">--%>
+<%--                                            <div class="rating">--%>
+<%--                                                <i class="fa-solid fa-star"></i>--%>
+<%--                                                <span>5.0</span>--%>
+<%--                                            </div>--%>
+
+<%--                                            <div class="price">--%>
+<%--                                                <i class="fa fa-money-bill-1-wave"></i>--%>
+<%--                                                <p>19.000 - 199.000đ</p>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="row">--%>
+<%--                                <div class="col-lg-4 col-md-12">--%>
+<%--                                    <div class="food-img">--%>
+<%--                                        <img src="images/1707-vietnam-3881.jpg" alt="">--%>
+<%--                                    </div>--%>
+
+<%--                                    <div class="food-title">--%>
+<%--                                        <p class="restaurant-name">Tên của gian hàng</p>--%>
+<%--                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>--%>
+<%--                                        <div class="rate">--%>
+<%--                                            <div class="rating">--%>
+<%--                                                <i class="fa-solid fa-star"></i>--%>
+<%--                                                <span>5.0</span>--%>
+<%--                                            </div>--%>
+
+<%--                                            <div class="price">--%>
+<%--                                                <i class="fa fa-money-bill-1-wave"></i>--%>
+<%--                                                <p>19.000 - 199.000đ</p>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+
+<%--                                <div class="col-lg-4 col-md-12">--%>
+<%--                                    <div class="food-img">--%>
+<%--                                        <img src="images/1707-vietnam-3881.jpg" alt="">--%>
+<%--                                    </div>--%>
+
+<%--                                    <div class="food-title">--%>
+<%--                                        <p class="restaurant-name">Tên của gian hàng</p>--%>
+<%--                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>--%>
+<%--                                        <div class="rate">--%>
+<%--                                            <div class="rating">--%>
+<%--                                                <i class="fa-solid fa-star"></i>--%>
+<%--                                                <span>5.0</span>--%>
+<%--                                            </div>--%>
+
+<%--                                            <div class="price">--%>
+<%--                                                <i class="fa fa-money-bill-1-wave"></i>--%>
+<%--                                                <p>19.000 - 199.000đ</p>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+
+<%--                                <div class="col-lg-4 col-md-12">--%>
+<%--                                    <div class="food-img">--%>
+<%--                                        <img src="images/1707-vietnam-3881.jpg" alt="">--%>
+<%--                                    </div>--%>
+
+<%--                                    <div class="food-title">--%>
+<%--                                        <p class="restaurant-name">Tên của gian hàng</p>--%>
+<%--                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>--%>
+<%--                                        <div class="rate">--%>
+<%--                                            <div class="rating">--%>
+<%--                                                <i class="fa-solid fa-star"></i>--%>
+<%--                                                <span>5.0</span>--%>
+<%--                                            </div>--%>
+
+<%--                                            <div class="price">--%>
+<%--                                                <i class="fa fa-money-bill-1-wave"></i>--%>
+<%--                                                <p>19.000 - 199.000đ</p>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>--%>
+
+                        <div class="list-restaurant container">
+                            <jsp:useBean id="Restaurants" scope="request" type="java.util.List"/>
+                            <c:forEach var="restaurant" items="${Restaurants}" varStatus="status">
+                            <c:if test="${status.index % 3 == 0}">
+                            <c:if test="${!status.first}">
+                        </div> <!-- Close the previous row if it's not the first item -->
+                        </c:if>
+                        <div class="row">
+                            </c:if>
+
+                            <div class="col-lg-4 col-md-12">
+                                <div class="food-img">
+<%--                                    <img src="images/${restaurant.restaurantImage}" alt="">--%>
+                                    <img src="images/1707-vietnam-3881.jpg" alt="">
                                 </div>
 
-                                <div class="col">
-                                    <div class="food-img">
-                                        <img src="images/1707-vietnam-3881.jpg" alt="">
-                                    </div>
-
-                                    <div class="food-title">
-                                        <p class="restaurant-name">Tên của gian hàng</p>
-                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>
-                                        <div class="rate">
-                                            <div class="rating">
-                                                <i class="fa-solid fa-star"></i>
-                                                <span>5.0</span>
-                                            </div>
-
-                                            <div class="price">
-                                                <i class="fa fa-money-bill-1-wave"></i>
-                                                <p>19.000 - 199.000đ</p>
-                                            </div>
+                                <div class="food-title">
+                                    <p class="restaurant-name">${restaurant.restaurantName}</p>
+                                    <p class="restaurant-description">${restaurant.restaurantDescription}</p>
+                                    <div class="rate">
+                                        <div class="rating">
+                                            <i class="fa-solid fa-star"></i>
+<%--                                            <span>${restaurant.rating}</span>--%>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <div class="col">
-                                    <div class="food-img">
-                                        <img src="images/1707-vietnam-3881.jpg" alt="">
-                                    </div>
-
-                                    <div class="food-title">
-                                        <p class="restaurant-name">Tên của gian hàng</p>
-                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>
-                                        <div class="rate">
-                                            <div class="rating">
-                                                <i class="fa-solid fa-star"></i>
-                                                <span>5.0</span>
-                                            </div>
-
-                                            <div class="price">
-                                                <i class="fa fa-money-bill-1-wave"></i>
-                                                <p>19.000 - 199.000đ</p>
-                                            </div>
+                                        <div class="price">
+                                            <i class="fa fa-money-bill-1-wave"></i>
+<%--                                            <p>${restaurant.priceRange}</p>--%>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="food-img">
-                                        <img src="images/1707-vietnam-3881.jpg" alt="">
-                                    </div>
-
-                                    <div class="food-title">
-                                        <p class="restaurant-name">Tên của gian hàng</p>
-                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>
-                                        <div class="rate">
-                                            <div class="rating">
-                                                <i class="fa-solid fa-star"></i>
-                                                <span>5.0</span>
-                                            </div>
-
-                                            <div class="price">
-                                                <i class="fa fa-money-bill-1-wave"></i>
-                                                <p>19.000 - 199.000đ</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col">
-                                    <div class="food-img">
-                                        <img src="images/1707-vietnam-3881.jpg" alt="">
-                                    </div>
-
-                                    <div class="food-title">
-                                        <p class="restaurant-name">Tên của gian hàng</p>
-                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>
-                                        <div class="rate">
-                                            <div class="rating">
-                                                <i class="fa-solid fa-star"></i>
-                                                <span>5.0</span>
-                                            </div>
-
-                                            <div class="price">
-                                                <i class="fa fa-money-bill-1-wave"></i>
-                                                <p>19.000 - 199.000đ</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col">
-                                    <div class="food-img">
-                                        <img src="images/1707-vietnam-3881.jpg" alt="">
-                                    </div>
-
-                                    <div class="food-title">
-                                        <p class="restaurant-name">Tên của gian hàng</p>
-                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>
-                                        <div class="rate">
-                                            <div class="rating">
-                                                <i class="fa-solid fa-star"></i>
-                                                <span>5.0</span>
-                                            </div>
-
-                                            <div class="price">
-                                                <i class="fa fa-money-bill-1-wave"></i>
-                                                <p>19.000 - 199.000đ</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="food-img">
-                                        <img src="images/1707-vietnam-3881.jpg" alt="">
-                                    </div>
-
-                                    <div class="food-title">
-                                        <p class="restaurant-name">Tên của gian hàng</p>
-                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>
-                                        <div class="rate">
-                                            <div class="rating">
-                                                <i class="fa-solid fa-star"></i>
-                                                <span>5.0</span>
-                                            </div>
-
-                                            <div class="price">
-                                                <i class="fa fa-money-bill-1-wave"></i>
-                                                <p>19.000 - 199.000đ</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col">
-                                    <div class="food-img">
-                                        <img src="images/1707-vietnam-3881.jpg" alt="">
-                                    </div>
-
-                                    <div class="food-title">
-                                        <p class="restaurant-name">Tên của gian hàng</p>
-                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>
-                                        <div class="rate">
-                                            <div class="rating">
-                                                <i class="fa-solid fa-star"></i>
-                                                <span>5.0</span>
-                                            </div>
-
-                                            <div class="price">
-                                                <i class="fa fa-money-bill-1-wave"></i>
-                                                <p>19.000 - 199.000đ</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col">
-                                    <div class="food-img">
-                                        <img src="images/1707-vietnam-3881.jpg" alt="">
-                                    </div>
-
-                                    <div class="food-title">
-                                        <p class="restaurant-name">Tên của gian hàng</p>
-                                        <p class="restaurant-decription">Thông tin cơ bản và địa chỉ</p>
-                                        <div class="rate">
-                                            <div class="rating">
-                                                <i class="fa-solid fa-star"></i>
-                                                <span>5.0</span>
-                                            </div>
-
-                                            <div class="price">
-                                                <i class="fa fa-money-bill-1-wave"></i>
-                                                <p>19.000 - 199.000đ</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <c:if test="${status.last}">
+                        </div> <!-- Close the last row -->
+                        </c:if>
+                        </c:forEach>
                     </div>
+
+                </div>
                 </div>
 
                 <div class="category">
