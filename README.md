@@ -28,8 +28,8 @@ docker exec -it logicloth-postgres-1 psql -U postgres -d dacfood -f docker-entry
 - [x] login / register with roles
 - [ ] login with google
 - [x] create a login page for admin
-- [ ] pull data from database
-- [ ] pull login states to pages
+- [x] pull data from database
+- [x] pull login states to pages
 - [ ] update role admin
 - [ ] update role seller
 - [ ] update role user
@@ -40,8 +40,11 @@ docker exec -it logicloth-postgres-1 psql -U postgres -d dacfood -f docker-entry
 - [ ] update cart (user)
 - [ ] checkout / create order (user)
 - [ ] view order (user)
+- [x] implement restaurant (user)
+- [ ] implement products page (user)
+- [ ] implement order page (user)
 - [ ] update user (admin)
-- [ ] implement cart (user)
+- [ ] implement cart page (user)
 - [ ] implement order (user)
 - [ ] implement checkout (user)
 - [ ] testing / validation (checking duplicate users/ password reset / etc...)
