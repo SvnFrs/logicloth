@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+.bg-cream {
+    background-color: rgb(254, 240, 231);
+}
+
 .img-100 {
     /*width : 200px;*/
     /*height: 200px;*/
@@ -133,7 +137,6 @@ header {
 main {
     width: 100%;
     /*background-image: url(../images/3639_160126224550363737441452448.jpg);*/
-    background-color: rgb(254, 240, 231);
     background-repeat: no-repeat;
     background-size: cover;
     padding-bottom: 40px;

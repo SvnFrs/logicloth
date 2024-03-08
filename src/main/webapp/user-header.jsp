@@ -39,7 +39,10 @@
                 </div>
 
                 <div class="cart">
-                    <i class="fa fa-bag-shopping"></i>
+                    <a href="${pageContext.request.contextPath}/User/Cart?userID=${sessionScope.userID}">
+                        <i class="fa-regular
+                        fa-shopping-cart"></i>
+                    </a>
                 </div>
             </div>
         </div>

@@ -26,25 +26,6 @@ public class ProductDAOs implements DAO<product> {
     }
     @Override
     public List<product> getAll() {
-//        ArrayList<product> result = new ArrayList<>();
-//        String query = "SELECT * FROM dacfood.public.products WHERE restaurant_id = ?";
-//        try {
-//            ps = conn.prepareStatement(query);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                product product = new product();
-//                product.setProductID(rs.getInt("product_id"));
-//                product.setProductName(rs.getString("name"));
-//                product.setProductDescription(rs.getString("description"));
-//                product.setProductPrice(rs.getInt("price"));
-//                product.setProductImage(rs.getString("image_url"));
-//                product.setProductQuantity(rs.getInt("quantity"));
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(RestaurantDAOs.class.getName()).
-//                    log(Level.SEVERE, null, ex);
-//        }
-//        return result;
         return null;
     }
 
@@ -69,6 +50,27 @@ public class ProductDAOs implements DAO<product> {
             Logger.getLogger(RestaurantDAOs.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+
+    public product getProductByID(int id) {
+        product product = new product();
+        String query = "SELECT * FROM dacfood.public.products WHERE product_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id); // set id parameter
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                product.setProductID(rs.getInt("product_id"));
+                product.setProductName(rs.getString("name"));
+                product.setProductDescription(rs.getString("description"));
+                product.setProductPrice(rs.getInt("price"));
+                product.setProductImage(rs.getString("image_url"));
+                product.setProductQuantity(rs.getInt("quantity"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RestaurantDAOs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return product;
     }
 
 
