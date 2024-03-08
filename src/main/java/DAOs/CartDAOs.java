@@ -50,6 +50,20 @@ public class CartDAOs implements DAO<cart> {
         return result;
     }
 
+    public void addToCart(int userID, int productID, int quantity) {
+        String query = "INSERT INTO dacfood.public.carts (user_id, product_id, quantity) VALUES (?, ?, ?)";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userID);
+            ps.setInt(2, productID);
+            ps.setInt(3, quantity);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
+
     @Override
     public Optional<cart> get(int id) {
         return Optional.empty();

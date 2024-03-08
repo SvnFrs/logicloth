@@ -62,7 +62,7 @@
                                         <p>${product.productQuantity}</p>
                                     </div>
                                     <div>
-                                        <a href="${contextPath}/AddToCart?productID=${product.productID}" class="btn btn-primary">Add to Cart</a>
+                                        <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1" class="btn btn-primary">Add to Cart</a>
                                     </div>
                                 </div>
 <%--                            </a>--%>
@@ -72,6 +72,7 @@
             </div>
         </div>
     </div>
+    
 </div>
 <%@include file="footer.jsp" %>
 </body>
