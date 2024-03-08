@@ -45,7 +45,8 @@
                 <c:forEach var="product" items="${Products}">
                     <div class="col-md-4 col-sm-12 p-2">
                         <div class="card">
-<%--                            <a href="${contextPath}/Product?productID=${product.productID}" style="color: inherit; text-decoration: none;">--%>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal${product.productID}"
+                               style="color: inherit; text-decoration: none;">
                                 <div class="card-img">
                                         <%--                                <img src="${product.productImage}" class="img-fluid"/>--%>
                                     <img src="images/1707-vietnam-3881.jpg" class="img-fluid" alt="">
@@ -62,17 +63,35 @@
                                         <p>${product.productQuantity}</p>
                                     </div>
                                     <div>
-                                        <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1" class="btn btn-primary">Add to Cart</a>
+                                        <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1"
+                                           class="btn btn-primary">Add to Cart</a>
                                     </div>
                                 </div>
-<%--                            </a>--%>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="exampleModal${product.productID}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">${product.productName}</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="images/1707-vietnam-3881.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1"
+                                       class="btn btn-primary">Add to Cart</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </c:forEach>
             </div>
         </div>
     </div>
-    
+
 </div>
 <%@include file="footer.jsp" %>
 </body>
