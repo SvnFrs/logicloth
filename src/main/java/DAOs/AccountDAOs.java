@@ -88,6 +88,26 @@ public class AccountDAOs {
         return role;
     }
     
+    public String getNameByID(int userID) throws SQLException {
+        String name = null;
+        String sql = "SELECT full_name FROM Users WHERE user_id = ?";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, userID);
+            try ( ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Lấy role từ kết quả của truy vấn
+                    name = rs.getString("full_name");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(account.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return name;
+    }
+    
     public int getUserID(account acc) throws SQLException {
         int userID = 0;
         String sql = "SELECT user_id FROM public.users WHERE username = ? AND password = ?";

@@ -5,12 +5,22 @@ public class restaurant {
     private String restaurantName;
     private String restaurantDescription;
     private String restaurantAddress;
+    private String restaurantImage;
 
-    public restaurant(int restaurantID, String restaurantName, String restaurantDescription, String restaurantAddress) {
+    public restaurant(int restaurantID, String restaurantName, String restaurantDescription, String restaurantAddress, String restaurantImage) {
         this.restaurantID = restaurantID;
         this.restaurantName = restaurantName;
         this.restaurantDescription = restaurantDescription;
         this.restaurantAddress = restaurantAddress;
+        this.restaurantImage = restaurantImage;
+    }
+
+    public String getRestaurantImage() {
+        return restaurantImage;
+    }
+
+    public void setRestaurantImage(String restaurantImage) {
+        this.restaurantImage = restaurantImage;
     }
 
     public restaurant() {

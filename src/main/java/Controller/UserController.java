@@ -24,11 +24,20 @@ public class UserController extends HttpServlet {
         // if the user is not logged in, redirect to login page
         HttpSession session = request.getSession();
         if (session.getAttribute("userID") == null) {
-            response.sendRedirect(request.getContextPath() + "/login-register.jsp");
+            response.sendRedirect(request.getContextPath() + "/Login");
         } else {
+            AccountDAOs accountDAOs = new AccountDAOs();
             RestaurantDAOs restaurantDAOs = new RestaurantDAOs();
+            String username;
+            try {
+                username = accountDAOs.getNameByID((int) session.getAttribute("userID"));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             List<restaurant> restaurants = restaurantDAOs.getAll();
+            request.setAttribute("contextPath", request.getServletContext().getContextPath());
             request.setAttribute("Restaurants", restaurants);
+            request.setAttribute("username", username);
             RequestDispatcher rd = request.getRequestDispatcher("user.jsp");
             rd.forward(request, response);
         }

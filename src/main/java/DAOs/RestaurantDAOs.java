@@ -18,7 +18,7 @@ public class RestaurantDAOs implements DAO<restaurant> {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     restaurant restaurant = new restaurant();
-    List<restaurant> books = new ArrayList<>();
+    List<restaurant> restaurants = new ArrayList<>();
     String query = "";
 
     public RestaurantDAOs() {
@@ -37,6 +37,7 @@ public class RestaurantDAOs implements DAO<restaurant> {
                 restaurant.setRestaurantName(rs.getString("name"));
                 restaurant.setRestaurantDescription(rs.getString("description"));
                 restaurant.setRestaurantAddress(rs.getString("address"));
+                restaurant.setRestaurantImage(rs.getString("image_url"));
                 result.add(restaurant);
             }
         } catch (SQLException ex) {
@@ -44,6 +45,40 @@ public class RestaurantDAOs implements DAO<restaurant> {
                     log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+
+    public restaurant getRestaurantByID(int id) {
+        restaurant result = null;
+        String query = "SELECT * FROM dacfood.public.restaurants WHERE restaurant_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id); // set id parameter
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                result = new restaurant();
+                result.setRestaurantID(rs.getInt("restaurant_id"));
+                result.setRestaurantName(rs.getString("name"));
+                result.setRestaurantDescription(rs.getString("description"));
+                result.setRestaurantAddress(rs.getString("address"));
+                result.setRestaurantImage(rs.getString("image_url"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RestaurantDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+
+    public String getNameByID(int id) throws SQLException {
+        String query = "SELECT name FROM dacfood.public.restaurants WHERE restaurant_id = ?";
+        ps = conn.prepareStatement(query);
+        ps.setInt(1, id);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getString("name");
+        }
+        return null;
     }
 
     @Override
