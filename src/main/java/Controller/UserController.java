@@ -37,7 +37,7 @@ public class UserController extends HttpServlet {
             List<restaurant> restaurants = restaurantDAOs.getAll();
             request.setAttribute("contextPath", request.getServletContext().getContextPath());
             request.setAttribute("Restaurants", restaurants);
-            request.setAttribute("username", username);
+            session.setAttribute("username", username);
             RequestDispatcher rd = request.getRequestDispatcher("user.jsp");
             rd.forward(request, response);
         }

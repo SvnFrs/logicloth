@@ -29,7 +29,7 @@
                             </div>
 
                             <%--                                    <h3>Huynh Nhut Khang</h3>--%>
-                            <h3>${requestScope.username}</h3>
+                            <h3>${sessionScope.username}</h3>
                         </div>
                         <a href="#">Thông tin</a>
                         <a href="#">Đơn hàng hiện có</a>
@@ -39,9 +39,9 @@
                 </div>
 
                 <div class="cart">
-                    <a href="${pageContext.request.contextPath}/User/Cart?userID=${sessionScope.userID}">
-                        <i class="fa-regular
-                        fa-shopping-cart"></i>
+<%--                    <a href="${pageContext.request.contextPath}/User/Cart?userID=${sessionScope.userID}">--%>
+                    <a href="${pageContext.request.contextPath}/Cart">
+                        <i class="fa fa-bag-shopping"></i>
                     </a>
                 </div>
             </div>
