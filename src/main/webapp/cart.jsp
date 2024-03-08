@@ -7,6 +7,16 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="DAOs.ProductDAOs" %>
+<%@ page import="Model.product" %>
+
+
+<%
+    ProductDAOs productDAOs = new ProductDAOs();
+    request.setAttribute("productDAOs", productDAOs);
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,13 +44,13 @@
                 <c:forEach var="cartItem" items="${CartItems}">
                     <tr>
                         <td>
-                            <div class="form-check">
+                            <div class="form-check d-flex justify-content-center">
                                 <input class="form-check-input" type="checkbox" value="" id="choose">
                                 <label class="form-check-label" for="choose">
                                 </label>
                             </div>
                         </td>
-                        <td><img src="${productDAOs.getProductByID(cartItem.productID).productImage}"/></td>
+<%--                        <td><img src="${productDAOs.getProductByID(cartItem.productID).productImage}"/></td>--%>
                         <td>${productDAOs.getProductByID(cartItem.productID).productName}</td>
                         <td>${productDAOs.getProductByID(cartItem.productID).productPrice}</td>
                         <td>${cartItem.quantity}</td>
