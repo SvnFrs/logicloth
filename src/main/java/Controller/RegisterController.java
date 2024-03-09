@@ -100,7 +100,7 @@ public class RegisterController extends HttpServlet {
             ad.AddNew(acc);
             HttpSession session = request.getSession();
             session.setAttribute("message", "Bạn đã đăng ký tài khoản thành công!");
-            response.sendRedirect("/Login");
+            response.sendRedirect(request.getContextPath() + "/Login");
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("message", "Đăng ký chưa thành công, vui lòng kiểm tra lại thông tin!");

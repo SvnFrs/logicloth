@@ -5,12 +5,12 @@ public class product {
     private int restaurantID;
     private String productName;
     private String productDescription;
-    private double productPrice;
+    private long productPrice;
     private String productImage;
     private int productQuantity;
     private boolean status;
 
-    public product(int productID, int restaurantID, String productName, String productDescription, double productPrice, String productImage, int productQuantity, boolean status) {
+    public product(int productID, int restaurantID, String productName, String productDescription, long productPrice, String productImage, int productQuantity, boolean status) {
         this.productID = productID;
         this.restaurantID = restaurantID;
         this.productName = productName;
@@ -64,11 +64,11 @@ public class product {
         this.productDescription = productDescription;
     }
 
-    public double getProductPrice() {
+    public long getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(double productPrice) {
+    public void setProductPrice(long productPrice) {
         this.productPrice = productPrice;
     }
 

@@ -41,7 +41,7 @@ public class ProductDAOs implements DAO<product> {
                 product.setProductID(rs.getInt("product_id"));
                 product.setProductName(rs.getString("name"));
                 product.setProductDescription(rs.getString("description"));
-                product.setProductPrice(rs.getInt("price"));
+                product.setProductPrice(rs.getLong("price"));
                 product.setProductImage(rs.getString("image_url"));
                 product.setProductQuantity(rs.getInt("quantity"));
                 result.add(product); // Add the product to the result list
@@ -63,7 +63,7 @@ public class ProductDAOs implements DAO<product> {
                 product.setProductID(rs.getInt("product_id"));
                 product.setProductName(rs.getString("name"));
                 product.setProductDescription(rs.getString("description"));
-                product.setProductPrice(rs.getInt("price"));
+                product.setProductPrice(rs.getLong("price"));
                 product.setProductImage(rs.getString("image_url"));
                 product.setProductQuantity(rs.getInt("quantity"));
             }
