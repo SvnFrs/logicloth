@@ -4,7 +4,8 @@ CREATE TABLE Users (
                        password VARCHAR(255) NOT NULL,
                        email VARCHAR(100) NOT NULL,
                        full_name VARCHAR(100) NOT NULL,
-                       role VARCHAR(50) NOT NULL
+                       role VARCHAR(50) NOT NULL,
+                       status BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE Restaurants (
@@ -12,7 +13,8 @@ CREATE TABLE Restaurants (
                              name VARCHAR(1000) NOT NULL,
                              description VARCHAR(1000),
                              address VARCHAR(1000),
-                             image_url VARCHAR(255)
+                             image_url VARCHAR(255),
+                             status BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE Products (
@@ -23,6 +25,7 @@ CREATE TABLE Products (
                           price DECIMAL(10, 2) NOT NULL,
                           image_url VARCHAR(255),
                           quantity INT DEFAULT 0,
+                          status BOOLEAN DEFAULT TRUE,
                           FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
 );
 
@@ -65,6 +68,30 @@ CREATE TABLE Reviews (
                          FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
+CREATE TABLE RestaurantManagement (
+                                      seller_id INT,
+                                      restaurant_id INT,
+                                      FOREIGN KEY (seller_id) REFERENCES Users(user_id),
+                                      FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
+);
+
+CREATE TABLE RestaurantRecords (
+                                   seller_id INT,
+                                   restaurant_id INT,
+                                   date DATE,
+                                   sales INTEGER,
+                                   FOREIGN KEY (seller_id) REFERENCES Users(user_id),
+                                   FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
+);
+
+CREATE TABLE RestaurantSales (
+                                 seller_id INT,
+                                 restaurant_id INT,
+                                 total_sales BIGINT,
+                                 FOREIGN KEY (seller_id) REFERENCES Users(user_id),
+                                 FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
+);
+
 INSERT INTO Users (username, password, email, full_name, role)
 VALUES
     ('admin', md5('123'), 'admin@example.com', 'Admin', 'admin'),
@@ -89,7 +116,7 @@ VALUES
 INSERT INTO Restaurants
 VALUES
     (1, 'Nhà Hàng Bánh Mì', 'Nhà hàng chuyên phục vụ các loại bánh mì ngon và đa dạng.', '123 Đường NVL:, Cần Thơ', './images/shops/banh_mi_shop.jpg'),
-    (2, 'Nhà Hàng Pizza', 'Nhà hàng chuyên phục vụ pizza hấp dẫn và đa dạng.', '456 Đường NVC, Cần Thơ, './images/shops/pizza_shop.jpg'),
+    (2, 'Nhà Hàng Pizza', 'Nhà hàng chuyên phục vụ pizza hấp dẫn và đa dạng.', '456 Đường NVC, Cần Thơ', './images/shops/pizza_shop.jpg'),
     (3, 'Quán Trà Sữa', 'Quán trà sữa với nhiều loại thức uống độc đáo và ngon miệng.', '789 Đường TVK, Cần Thơ', './images/shops/tra_sua_shop.jpg'),
     (4, 'Quán Gà Rán và Hamburger', 'Quán phục vụ gà rán và hamburger chất lượng và đa dạng.', '101 Đường Trần Nam Phú, Cần Thơ', './images/shops/ga_ran_hamburger_shop.jpg'),
     (5, 'Quán Cháo', 'Quán cháo với các loại cháo truyền thống và đậm đà.', '222 Đường NVC Cần Thơ', './images/shops/chao_shop.jpg'),
@@ -207,3 +234,18 @@ VALUES
     (120003, 12, 'Bún Chả Cá', 'Bún chả cá thơm ngon và đa dạng.', 26000, 'bun_cha_ca.jpg'),
     (120004, 12, 'Bún Thịt Nướng', 'Bún thịt nướng thơm ngon và đầy đặn.', 25000, 'bun_thit_nuong.jpg'),
     (120005, 12, 'Bún Mọc', 'Bún mọc thơm ngon và đặc biệt.', 30000, 'bun_moc.jpg');
+
+INSERT INTO RestaurantManagement
+VALUES
+    (2, 1),
+    (3, 2),
+    (4, 3),
+    (5, 4),
+    (6, 5),
+    (7, 6),
+    (8, 7),
+    (9, 8),
+    (10, 9),
+    (11, 10),
+    (12, 11),
+    (13, 12);
