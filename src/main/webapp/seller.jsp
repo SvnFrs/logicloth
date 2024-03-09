@@ -13,51 +13,8 @@
         <title>D&C Food</title>
     </head>
     <body>
-        <header>
-            <div class="container">
-                <div class="head">
-                    <div class="logo">
-                        <div class="logo-img">
-                            <a href="${pageContext.request.contextPath}/"><img src="images/D&C Food (1).png" alt="logo"></a>
-                        </div>
 
-                        <div class="logo-name">
-                            <a href="${pageContext.request.contextPath}/">
-                                <p>D&C Food</p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="other" style="justify-content: end; gap: 30px">
-                        <div class="search">
-                            <input type="text" name="search-product" id="search" placeholder="Nhập từ khóa cần tìm...">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </div>
-
-                        <div class="user-icon">
-                            <div id="mySidenav" class="sidenav">
-                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                                <div class="infor">
-                                    <div class="infor-icon">
-                                        <i class="fa-regular fa-user"></i>
-                                    </div>
-
-                                    <h3>Huynh Nhut Khang</h3>
-                                </div>
-                                <a href="#">Thông tin</a>
-                                <a href="#">Đơn hàng hiện có</a>
-                                <a href="index.jsp">Đăng xuất</a>
-                            </div>
-                            <i class="fa-regular fa-user" onclick="openNav()"></i>
-                        </div>
-
-                        <div class="cart">
-                            <i class="fa fa-bag-shopping"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <%@include file="seller-header.jsp"%>
 
         <main>
             <div class="container">
