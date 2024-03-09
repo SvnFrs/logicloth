@@ -95,6 +95,7 @@ $(document).ready(function () {
             success: function(response) {
                 alert(response.message);
                 // You can also redirect the user to another page here
+                window.location.href = '/FoodWeb/Checkout';
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('An error occurred: ' + textStatus);

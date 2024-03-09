@@ -23,14 +23,14 @@ public class CartController extends HttpServlet {
         HttpSession session = req.getSession();
         if (session.getAttribute("userID") == null) {
             resp.sendRedirect(req.getContextPath() + "/Login");
+        } else {
+            int userID = (int) session.getAttribute("userID"); // Assuming the user ID is stored in the session
+            CartDAOs cartDAOs = new CartDAOs();
+            List<cart> cartItems = cartDAOs.getAllByID(userID);
+            session.setAttribute("CartItems", cartItems);
+            RequestDispatcher rd = req.getRequestDispatcher("cart.jsp");
+            rd.forward(req, resp);
         }
-
-        int userID = (int)session.getAttribute("userID"); // Assuming the user ID is stored in the session
-        CartDAOs cartDAOs = new CartDAOs();
-        List<cart> cartItems = cartDAOs.getAllByID(userID);
-        session.setAttribute("CartItems", cartItems);
-        RequestDispatcher rd = req.getRequestDispatcher("cart.jsp");
-        rd.forward(req, resp);
     }
 
 

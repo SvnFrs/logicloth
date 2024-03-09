@@ -4,6 +4,7 @@ import DAOs.CheckoutDAOs;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import Model.product;
+import Model.checkout;
 
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -20,7 +21,17 @@ import java.util.Map;
 public class CheckoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect(req.getContextPath() +"/checkout.jsp");
+        HttpSession session = req.getSession();
+        if (session.getAttribute("userID") == null) {
+            resp.sendRedirect(req.getContextPath() + "/Login");
+        } else {
+            int userID = (int) session.getAttribute("userID"); // Assuming the user ID is stored in the session
+            CheckoutDAOs checkoutDAO = new CheckoutDAOs();
+            List<checkout> checkoutItems = checkoutDAO.getAllByID(userID);
+            session.setAttribute("CheckoutItems", checkoutItems);
+            RequestDispatcher rd = req.getRequestDispatcher("checkout.jsp");
+            rd.forward(req, resp);
+        }
     }
 
     @Override

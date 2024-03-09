@@ -26,6 +26,27 @@ public class CheckoutDAOs {
         conn = ConnectingDB.getConnection();
     }
 
+    public List<checkout> getAllByID(int id) {
+        ArrayList<checkout> result = new ArrayList<>();
+        String query = "SELECT * FROM checkout WHERE user_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id); // set id parameter
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                checkout checkout = new checkout();
+                checkout.setUserID(rs.getInt("user_id"));
+                checkout.setProductID(rs.getInt("product_id"));
+                checkout.setQuantity(rs.getInt("quantity"));
+                result.add(checkout); // Add the checkout to the result list
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CheckoutDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
     public void insertCheckout(int userID, int productID, int quantity) {
         String query = "INSERT INTO checkout (user_id, product_id, quantity) VALUES (?, ?, ?)";
         try {
@@ -38,6 +59,37 @@ public class CheckoutDAOs {
             Logger.getLogger(CheckoutDAOs.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void updateCheckout(int userID, int productID, int quantity) {
+        String query = "UPDATE checkout SET quantity = ? WHERE user_id = ? AND product_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, quantity);
+            ps.setInt(2, userID);
+            ps.setInt(3, productID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CheckoutDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public boolean isProductInCheckout(int userID, int productID) {
+        String query = "SELECT * FROM checkout WHERE user_id = ? AND product_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userID);
+            ps.setInt(2, productID);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CheckoutDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
 }
