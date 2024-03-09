@@ -60,6 +60,7 @@ CREATE TABLE OrderDetails (
                               order_detail_id SERIAL PRIMARY KEY,
                               order_id INT,
                               receiver_name VARCHAR(100) NOT NULL,
+                              phone_number VARCHAR(20) NOT NULL,
                               product_id INT,
                               quantity INT,
                               total_price BIGINT,
@@ -72,6 +73,16 @@ CREATE TABLE OrderDetails (
 CREATE TABLE OrderStatus (
                             status_id SERIAL PRIMARY KEY,
                             status_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Addresses (
+                           address_id SERIAL PRIMARY KEY,
+                           user_id INT,
+                           receiver_name VARCHAR(100) NOT NULL,
+                           phone_number VARCHAR(20) NOT NULL,
+                           address VARCHAR(1000) NOT NULL,
+                           status BOOLEAN DEFAULT TRUE,
+                           FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
 CREATE TABLE Reviews (
