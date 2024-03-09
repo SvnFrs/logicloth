@@ -3,14 +3,18 @@
 
 ### role admin 
 - cho phép chỉnh sửa edit user
+- admin quản lý các quán, user và doanh thu của từng quán
 
 ### role seller
 - chỉnh sửa cập nhật food
 - xem đơn hàng, cập nhật trạng thái đơn hàng.
+- xem doanh thu của quán mình
 
 ### role user
 - cho phép đặt hàng
 - coi được giỏ hàng
+- cho phép xem lịch sử đơn hàng
+- cho phép đánh giá quán
 
 ### update theo trang 
 - load food từ data base show trên home page
@@ -36,7 +40,7 @@ docker exec -it logicloth-postgres-1 psql -U postgres -d dacfood -f docker-entry
 - [ ] add food (seller)
 - [ ] update food (seller)
 - [ ] update order status (seller)
-- [ ] add to cart (user)
+- [x] add to cart (user)
 - [ ] update cart (user)
 - [ ] checkout / create order (user)
 - [ ] view order (user)
