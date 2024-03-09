@@ -36,9 +36,17 @@
         <servlet-name>CheckoutController</servlet-name>
         <url-pattern>/Checkout</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>CheckoutCancelController</servlet-name>
+        <servlet-class>Controller.CheckoutCancelController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
         <url-pattern>/Cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutCancelController</servlet-name>
+        <url-pattern>/CheckoutCancel</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>default</servlet-name>

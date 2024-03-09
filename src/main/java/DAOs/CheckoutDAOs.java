@@ -91,5 +91,37 @@ public class CheckoutDAOs {
         }
         return false;
     }
+    
+    public void deleteCheckoutByUserID(int userID) {
+        String query = "DELETE FROM checkout WHERE user_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CheckoutDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // count how many products in the checkout
+    public int countProductInCheckout(int userID) {
+        int count = 0;
+        String query = "SELECT COUNT(product_id) FROM checkout WHERE user_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CheckoutDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
+
 
 }

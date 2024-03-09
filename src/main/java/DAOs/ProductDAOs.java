@@ -73,6 +73,38 @@ public class ProductDAOs implements DAO<product> {
         return product;
     }
 
+    public int getRestaurantID(int id) {
+        int restaurantID = 0;
+        String query = "SELECT restaurant_id FROM products WHERE product_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id); // set id parameter
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                restaurantID = rs.getInt("restaurant_id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RestaurantDAOs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return restaurantID;
+    }
+
+    public long getProductPrice(int id) {
+        long price = 0;
+        String query = "SELECT price FROM products WHERE product_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id); // set id parameter
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                price = rs.getLong("price");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RestaurantDAOs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return price;
+    }
+
 
     @Override
     public Optional<product> get(int id) {
