@@ -22,7 +22,7 @@ CREATE TABLE Products (
                           restaurant_id INT,
                           name VARCHAR(100) NOT NULL,
                           description VARCHAR(100),
-                          price DECIMAL(10, 2) NOT NULL,
+                          price BIGINT NOT NULL,
                           image_url VARCHAR(255),
                           quantity INT DEFAULT 0,
                           status BOOLEAN DEFAULT TRUE,
@@ -90,6 +90,11 @@ CREATE TABLE RestaurantSales (
                                  total_sales BIGINT,
                                  FOREIGN KEY (seller_id) REFERENCES Users(user_id),
                                  FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
+);
+
+CREATE TABLE OrderStatus (
+                            status_id SERIAL PRIMARY KEY,
+                            status_name VARCHAR(50) NOT NULL
 );
 
 INSERT INTO Users (username, password, email, full_name, role)
@@ -249,3 +254,5 @@ VALUES
     (11, 10),
     (12, 11),
     (13, 12);
+
+   INSERT INTO OrderStatus (status_name) VALUES ('Pending'), ('Accepted'), ('Shipping'), ('Delivered'), ('Cancelled'), ('Completed'), ('Rejected');
