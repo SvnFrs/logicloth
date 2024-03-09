@@ -7,17 +7,17 @@ public class product {
     private String productDescription;
     private long productPrice;
     private String productImage;
-    private int productQuantity;
+    private int quantity;
     private boolean status;
 
-    public product(int productID, int restaurantID, String productName, String productDescription, long productPrice, String productImage, int productQuantity, boolean status) {
+    public product(int productID, int restaurantID, String productName, String productDescription, long productPrice, String productImage, int quantity, boolean status) {
         this.productID = productID;
         this.restaurantID = restaurantID;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.productImage = productImage;
-        this.productQuantity = productQuantity;
+        this.quantity = quantity;
         this.status = status;
     }
 
@@ -81,10 +81,10 @@ public class product {
     }
 
     public int getProductQuantity() {
-        return productQuantity;
+        return quantity;
     }
 
     public void setProductQuantity(int productQuantity) {
-        this.productQuantity = productQuantity;
+        this.quantity = productQuantity;
     }
 }

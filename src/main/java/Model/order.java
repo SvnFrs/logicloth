@@ -6,16 +6,26 @@ public class order {
     private int restaurantID;
     private String orderDate;
     private String orderStatus;
+    private boolean status;
 
-    public order(int orderID, int userID, int restaurantID, String orderDate, String orderStatus) {
+    public order(int orderID, int userID, int restaurantID, String orderDate, String orderStatus, boolean status) {
         this.orderID = orderID;
         this.userID = userID;
         this.restaurantID = restaurantID;
         this.orderDate = orderDate;
         this.orderStatus = orderStatus;
+        this.status = status;
     }
 
     public order() {
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public int getOrderID() {
