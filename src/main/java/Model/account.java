@@ -15,13 +15,23 @@ public class account {
     private String userName;
     private String password;
     private String role;
+    private boolean status;
 
-    public account(String fullName, String email, String userName, String password, String role) {
+    public account(String fullName, String email, String userName, String password, String role, boolean status) {
         this.fullName = fullName;
         this.email = email;
         this.userName = userName;
         this.password = password;
         this.role = role;
+        this.status = status;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public String getRole() {

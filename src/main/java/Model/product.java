@@ -8,8 +8,9 @@ public class product {
     private double productPrice;
     private String productImage;
     private int productQuantity;
+    private boolean status;
 
-    public product(int productID, int restaurantID, String productName, String productDescription, double productPrice, String productImage, int productQuantity) {
+    public product(int productID, int restaurantID, String productName, String productDescription, double productPrice, String productImage, int productQuantity, boolean status) {
         this.productID = productID;
         this.restaurantID = restaurantID;
         this.productName = productName;
@@ -17,12 +18,20 @@ public class product {
         this.productPrice = productPrice;
         this.productImage = productImage;
         this.productQuantity = productQuantity;
+        this.status = status;
     }
 
     public product() {
 
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
     public int getProductID() {
         return productID;
     }

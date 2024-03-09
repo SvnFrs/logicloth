@@ -27,7 +27,7 @@ public class RestaurantDAOs implements DAO<restaurant> {
     @Override
     public List<restaurant> getAll() {
         ArrayList<restaurant> result = new ArrayList<>();
-        String query = "SELECT * FROM dacfood.public.restaurants";
+        String query = "SELECT * FROM dacfood.public.restaurants WHERE status = 'true'";
         try {
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();

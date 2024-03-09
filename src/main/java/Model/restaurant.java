@@ -7,14 +7,24 @@ public class restaurant {
     private String restaurantAddress;
     private String restaurantImage;
 
-    public restaurant(int restaurantID, String restaurantName, String restaurantDescription, String restaurantAddress, String restaurantImage) {
+    private boolean status;
+
+    public restaurant(int restaurantID, String restaurantName, String restaurantDescription, String restaurantAddress, String restaurantImage, boolean status) {
         this.restaurantID = restaurantID;
         this.restaurantName = restaurantName;
         this.restaurantDescription = restaurantDescription;
         this.restaurantAddress = restaurantAddress;
         this.restaurantImage = restaurantImage;
+        this.status = status;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
     public String getRestaurantImage() {
         return restaurantImage;
     }
