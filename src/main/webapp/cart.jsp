@@ -100,13 +100,14 @@
                 </tbody>
             </table>
             <h3 id="total">Total: </h3> <!-- You'll need to calculate the total -->
-            <a href="" class="btn btn-primary">Checkout</a>
+            <a href="" id="checkout-button" class="btn btn-primary">Checkout</a>
         </div>
     </div>
 
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="js/cart.js"></script>
+<script src="js/checkout.js"></script>
 <%@include file="footer.jsp" %>
 </body>
 </html>

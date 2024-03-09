@@ -65,4 +65,40 @@ $(document).ready(function () {
         // Update the total
         $('#total').text('Total: ' + total);
     });
+
+    // Handle the 'Checkout' button click
+    $('#checkout-button').click(function(e) {
+        e.preventDefault();  // Prevent the default action
+
+        var products = [];  // Initialize an array to hold the selected products
+
+        // Iterate over each checked checkbox
+        $('input[name="productChooser"]:checked').each(function() {
+            var id = $(this).attr('id').split('-')[1];  // Get the product ID from the checkbox's id
+            var quantityInput = $('#quantity-' + id);  // Get the quantity input element
+            var quantity = parseInt(quantityInput.val());  // Get the quantity
+            console.log(quantity);
+
+            // Add the product to the array
+            products.push({
+                productID: id,
+                quantity: quantity
+            });
+        });
+
+        // Send the array of products to the 'Checkout' controller using AJAX
+        $.ajax({
+            url: '/FoodWeb/Checkout',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(products),
+            success: function(response) {
+                alert(response.message);
+                // You can also redirect the user to another page here
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('An error occurred: ' + textStatus);
+            }
+        });
+    });
 });
