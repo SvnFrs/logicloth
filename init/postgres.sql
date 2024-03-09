@@ -37,12 +37,21 @@ CREATE TABLE Carts (
                        FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
 
+CREATE TABLE Checkout (
+                          user_id INT,
+                          product_id INT,
+                          quantity INT,
+                          FOREIGN KEY (user_id) REFERENCES Users(user_id),
+                          FOREIGN KEY (product_id) REFERENCES Products(product_id)
+);
+
 CREATE TABLE Orders (
                         order_id SERIAL PRIMARY KEY,
                         user_id INT,
                         restaurant_id INT,
                         order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        status VARCHAR(50),
+                        order_status INT DEFAULT 1,
+                        status BOOLEAN DEFAULT TRUE,
                         FOREIGN KEY (user_id) REFERENCES Users(user_id),
                         FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
 );
@@ -50,11 +59,19 @@ CREATE TABLE Orders (
 CREATE TABLE OrderDetails (
                               order_detail_id SERIAL PRIMARY KEY,
                               order_id INT,
+                              receiver_name VARCHAR(100) NOT NULL,
                               product_id INT,
                               quantity INT,
-                              total_price DECIMAL(10, 2),
+                              total_price BIGINT,
+                              address VARCHAR(1000) NOT NULL,
+                              status BOOLEAN DEFAULT TRUE,
                               FOREIGN KEY (order_id) REFERENCES Orders(order_id),
                               FOREIGN KEY (product_id) REFERENCES Products(product_id)
+);
+
+CREATE TABLE OrderStatus (
+                            status_id SERIAL PRIMARY KEY,
+                            status_name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Reviews (
@@ -90,11 +107,6 @@ CREATE TABLE RestaurantSales (
                                  total_sales BIGINT,
                                  FOREIGN KEY (seller_id) REFERENCES Users(user_id),
                                  FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
-);
-
-CREATE TABLE OrderStatus (
-                            status_id SERIAL PRIMARY KEY,
-                            status_name VARCHAR(50) NOT NULL
 );
 
 INSERT INTO Users (username, password, email, full_name, role)
@@ -256,3 +268,4 @@ VALUES
     (13, 12);
 
    INSERT INTO OrderStatus (status_name) VALUES ('Pending'), ('Accepted'), ('Shipping'), ('Delivered'), ('Cancelled'), ('Completed'), ('Rejected');
+   UPDATE products p SET quantity = 10 WHERE p.quantity < 10;
