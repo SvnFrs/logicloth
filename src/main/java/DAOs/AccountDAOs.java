@@ -30,7 +30,7 @@ public class AccountDAOs {
 
     public boolean Login(account acc) throws SQLException {
         rs = null;
-        String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, acc.getUserName());
@@ -48,7 +48,7 @@ public class AccountDAOs {
 
     public String getRole(account acc) throws SQLException {
         String role = null;
-        String sql = "SELECT role FROM Users WHERE username = ? AND password = ?";
+        String sql = "SELECT role FROM users WHERE username = ? AND password = ?";
 
         try {
             ps = conn.prepareStatement(sql);
@@ -70,7 +70,7 @@ public class AccountDAOs {
 
     public String getRoleByID(int userID) throws SQLException {
         String role = null;
-        String sql = "SELECT role FROM Users WHERE user_id = ?";
+        String sql = "SELECT role FROM users WHERE user_id = ?";
 
         try {
             ps = conn.prepareStatement(sql);
@@ -90,7 +90,7 @@ public class AccountDAOs {
     
     public String getNameByID(int userID) throws SQLException {
         String name = null;
-        String sql = "SELECT full_name FROM Users WHERE user_id = ?";
+        String sql = "SELECT full_name FROM users WHERE user_id = ?";
 
         try {
             ps = conn.prepareStatement(sql);
@@ -110,7 +110,7 @@ public class AccountDAOs {
     
     public int getUserID(account acc) throws SQLException {
         int userID = 0;
-        String sql = "SELECT user_id FROM public.users WHERE username = ? AND password = ?";
+        String sql = "SELECT user_id FROM users WHERE username = ? AND password = ?";
 
         try {
             ps = conn.prepareStatement(sql);
@@ -147,7 +147,7 @@ public class AccountDAOs {
 
     public boolean emailExits(String email) throws SQLException {
         rs = null;
-        String sql = "SELECT * FROM Users WHERE email = ?";
+        String sql = "SELECT * FROM users WHERE email = ?";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, email);
@@ -160,7 +160,7 @@ public class AccountDAOs {
     }
 
     public int AddNew(account acc) {
-        String sql = "INSERT INTO public.users (user_id, username, password, email, full_name, role)" + "VALUES (DEFAULT, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (user_id, username, password, email, full_name, role)" + "VALUES (DEFAULT, ?, ?, ?, ?, ?)";
         int ketqua = 0;
         try {
             PreparedStatement ps = conn.prepareStatement(sql);

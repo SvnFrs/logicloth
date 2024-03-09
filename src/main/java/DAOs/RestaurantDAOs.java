@@ -27,7 +27,7 @@ public class RestaurantDAOs implements DAO<restaurant> {
     @Override
     public List<restaurant> getAll() {
         ArrayList<restaurant> result = new ArrayList<>();
-        String query = "SELECT * FROM dacfood.public.restaurants WHERE status = 'true'";
+        String query = "SELECT * FROM restaurants WHERE status = 'true'";
         try {
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
@@ -49,7 +49,7 @@ public class RestaurantDAOs implements DAO<restaurant> {
 
     public restaurant getRestaurantByID(int id) {
         restaurant result = null;
-        String query = "SELECT * FROM dacfood.public.restaurants WHERE restaurant_id = ?";
+        String query = "SELECT * FROM restaurants WHERE restaurant_id = ?";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, id); // set id parameter
@@ -71,7 +71,7 @@ public class RestaurantDAOs implements DAO<restaurant> {
 
 
     public String getNameByID(int id) throws SQLException {
-        String query = "SELECT name FROM dacfood.public.restaurants WHERE restaurant_id = ?";
+        String query = "SELECT name FROM restaurants WHERE restaurant_id = ?";
         ps = conn.prepareStatement(query);
         ps.setInt(1, id);
         rs = ps.executeQuery();

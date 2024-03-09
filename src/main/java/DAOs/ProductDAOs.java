@@ -31,7 +31,7 @@ public class ProductDAOs implements DAO<product> {
 
     public List<product> getAllByID(int id) {
         ArrayList<product> result = new ArrayList<>();
-        String query = "SELECT * FROM dacfood.public.products WHERE restaurant_id = ? AND status = 'true'";
+        String query = "SELECT * FROM products WHERE restaurant_id = ? AND status = 'true'";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, id); // set id parameter
@@ -54,7 +54,7 @@ public class ProductDAOs implements DAO<product> {
 
     public product getProductByID(int id) {
         product product = new product();
-        String query = "SELECT * FROM dacfood.public.products WHERE product_id = ?";
+        String query = "SELECT * FROM products WHERE product_id = ?";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, id); // set id parameter

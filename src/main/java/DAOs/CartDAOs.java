@@ -31,7 +31,7 @@ public class CartDAOs implements DAO<cart> {
 
     public List<cart> getAllByID(int id) {
         ArrayList<cart> result = new ArrayList<>();
-        String query = "SELECT * FROM dacfood.public.carts WHERE user_id = ?";
+        String query = "SELECT * FROM carts WHERE user_id = ?";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, id); // set id parameter
@@ -51,7 +51,7 @@ public class CartDAOs implements DAO<cart> {
     }
 
     public void addToCart(int userID, int productID, int quantity) {
-        String query = "INSERT INTO dacfood.public.carts (user_id, product_id, quantity) VALUES (?, ?, ?)";
+        String query = "INSERT INTO carts (user_id, product_id, quantity) VALUES (?, ?, ?)";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, userID);
@@ -65,7 +65,7 @@ public class CartDAOs implements DAO<cart> {
     }
 
     public void addQuantity(int userID, int productID) {
-        String query = "UPDATE dacfood.public.carts SET quantity = quantity + 1  WHERE user_id = ? AND product_id = ?";
+        String query = "UPDATE Carts SET quantity = quantity + 1  WHERE user_id = ? AND product_id = ?";
         try {
             ps = conn.prepareStatement(query);
 //            ps.setInt(1, quantity);

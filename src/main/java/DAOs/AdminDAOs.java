@@ -21,7 +21,7 @@ public class AdminDAOs {
 
     public boolean adminLogin(account acc) throws SQLException {
         rs = null;
-        String sql = "SELECT * FROM public.users WHERE username = ? AND password = ? AND role = 'admin'";
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ? AND role = 'admin'";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, acc.getUserName());
