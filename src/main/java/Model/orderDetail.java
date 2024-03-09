@@ -4,35 +4,23 @@ public class orderDetail {
     private int orderDetailID;
     private int orderID;
     private String receiverName;
+    private String phoneNumber;
     private int productID;
-    private String orderAddress;
     private int quantity;
-    private double price;
+    private long totalPrice;
+    private String orderAddress;
+    private boolean status;
 
-    public orderDetail(int orderDetailID, int orderID, String receiverName, int productID, String orderAddress, int quantity, double price) {
+    public orderDetail(int orderDetailID, int orderID, String receiverName, String phoneNumber, int productID, int quantity, long totalPrice, String orderAddress, boolean status) {
         this.orderDetailID = orderDetailID;
         this.orderID = orderID;
         this.receiverName = receiverName;
+        this.phoneNumber = phoneNumber;
         this.productID = productID;
-        this.orderAddress = orderAddress;
         this.quantity = quantity;
-        this.price = price;
-    }
-
-    public String getReceiverName() {
-        return receiverName;
-    }
-
-    public void setReceiverName(String receiverName) {
-        this.receiverName = receiverName;
-    }
-
-    public String getOrderAddress() {
-        return orderAddress;
-    }
-
-    public void setOrderAddress(String orderAddress) {
+        this.totalPrice = totalPrice;
         this.orderAddress = orderAddress;
+        this.status = status;
     }
 
     public orderDetail() {
@@ -54,6 +42,22 @@ public class orderDetail {
         this.orderID = orderID;
     }
 
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public int getProductID() {
         return productID;
     }
@@ -70,11 +74,27 @@ public class orderDetail {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
+    public long getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setTotalPrice(long totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getOrderAddress() {
+        return orderAddress;
+    }
+
+    public void setOrderAddress(String orderAddress) {
+        this.orderAddress = orderAddress;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

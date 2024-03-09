@@ -31,8 +31,8 @@
                             <%--                                    <h3>Huynh Nhut Khang</h3>--%>
                             <h3>${sessionScope.username}</h3>
                         </div>
-                        <a href="#">Thông tin</a>
-                        <a href="#">Đơn hàng hiện có</a>
+                        <a href="">Thông tin</a>
+                        <a href="${contextPath}/Order">Đơn hàng hiện có</a>
                         <a href="${pageContext.request.contextPath}/Logout">Đăng xuất</a>
                     </div>
                     <i class="fa-regular fa-user" onclick="openNav()"></i>

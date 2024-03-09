@@ -22,7 +22,17 @@ import java.util.Map;
 public class OrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        HttpSession session = req.getSession();
+        if (session.getAttribute("userID") == null || session.getAttribute("userID").equals("") || session.getAttribute("userCookie") == null) {
+            resp.sendRedirect(req.getContextPath() + "/Login");
+        } else {
+            int userID = (int) session.getAttribute("userID");
+            OrderDAOs orderDAOs = new OrderDAOs();
+            List<order> orders = orderDAOs.getAllByID(userID);
+            session.setAttribute("Orders", orders);
+            RequestDispatcher rd = req.getRequestDispatcher("order.jsp");
+            rd.forward(req, resp);
+        }
     }
 
     @Override
@@ -48,7 +58,5 @@ public class OrderController extends HttpServlet {
             long totalPrice = productDAOs.getProductPrice(checkout.getProductID()) * checkout.getQuantity();
             orderDAOs.insertOrderDetail(orderDetailID, orderID, fullName, phoneNumber, checkout.getProductID(), checkout.getQuantity(), totalPrice, address);
         }
-
-        resp.getWriter().write("success");
     }
 }
