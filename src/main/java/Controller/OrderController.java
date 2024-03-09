@@ -49,5 +49,6 @@ public class OrderController extends HttpServlet {
             orderDAOs.insertOrderDetail(orderDetailID, orderID, fullName, phoneNumber, checkout.getProductID(), checkout.getQuantity(), totalPrice, address);
         }
 
+        resp.getWriter().write("success");
     }
 }

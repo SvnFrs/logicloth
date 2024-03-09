@@ -9,35 +9,6 @@ function backToCart() {
         }
     }
 }
-
-// document.querySelector(".btn-primary").addEventListener("click", function(event) {
-//     event.preventDefault();  // Prevent the form from being submitted normally
-//
-//     // Get the values from the inputs
-//     var fullName = document.getElementById("fullName").value;
-//     var phoneNumber = document.getElementById("phone-number").value;
-//     var address = document.getElementById("address").value;
-//     var saveInfo = document.getElementById("save-info").checked;
-//     var cod = document.getElementById("cod").checked;
-//
-//     // Create the form data
-//     var formData = new FormData();
-//     formData.append("fullName", fullName);
-//     formData.append("phoneNumber", phoneNumber);
-//     formData.append("address", address);
-//     formData.append("saveInfo", saveInfo);
-//     formData.append("cod", cod);
-//
-//     // Send the POST request
-//     fetch("/FoodWeb/Order", {
-//         method: "POST",
-//         body: formData
-//     })
-//         .then(response => response.text())
-//         .then(data => console.log(data))
-//         .catch(error => console.error("Error:", error));
-// });
-
 $(document).ready(function() {
     $(".btn-primary").click(function(event) {
         event.preventDefault();  // Prevent the form from being submitted normally
