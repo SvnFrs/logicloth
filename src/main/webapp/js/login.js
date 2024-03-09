@@ -2,9 +2,15 @@ function CommonLogin() {
     var selectedRole = document.querySelector('input[name="role"]:checked');
     var loginName = document.getElementById('login-name').value;
     var loginPassword = document.getElementById('login-password').value;
+    var rememberMe = document.querySelector('input[name="remember-me"]').checked;
+    var rememeberMeUrl = '';
+
+    if (rememberMe) {
+        rememeberMeUrl = 'rememberMe=' + rememberMe;
+    }
 
     var xhr = new XMLHttpRequest();
-    var url = '/FoodWeb/Login/' + selectedRole.value;
+    var url = '/FoodWeb/Login/' + selectedRole.value + '?' + rememeberMeUrl;
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 

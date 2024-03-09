@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,6 +35,7 @@ public class UserLoginController extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("login-name");
         String password = request.getParameter("login-password");
+        String remember = request.getParameter("rememberMe");
 
         try {
             account acc = new account(username, password);
@@ -48,6 +50,12 @@ public class UserLoginController extends HttpServlet {
                 session.setAttribute("userID", userID);
                 session.setAttribute("userCookie", userCookie);
                 response.addCookie(userCookie);
+
+                if (Objects.equals(remember, "true")) {
+                    userCookie.setMaxAge(60 * 60 * 24 * 30);
+                } else {
+                    userCookie.setMaxAge(0);
+                }
 
                 // Send success response to JavaScript
                 response.getWriter().write("User Login successfully");

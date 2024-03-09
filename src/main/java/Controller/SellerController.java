@@ -18,13 +18,24 @@ public class SellerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // if the user is not logged in, redirect to login page
         HttpSession session = request.getSession();
+        AccountDAOs accountDAOs = new AccountDAOs();
+        // if the user is not logged in, redirect to login page
         if (session.getAttribute("userID") == null) {
-            response.sendRedirect(request.getContextPath() + "/login-register.jsp");
-        } else {
-            RequestDispatcher rd = request.getRequestDispatcher("seller.jsp");
-            rd.forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/Login");
+        }
+        try {
+
+            int userID = (int) session.getAttribute("userID");
+            String role  = accountDAOs.getRoleByID(userID);
+            if (!role.equals("seller")) {
+                response.sendRedirect(request.getContextPath() + "/User");
+            } else {
+                RequestDispatcher rd = request.getRequestDispatcher("seller.jsp");
+                rd.forward(request, response);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

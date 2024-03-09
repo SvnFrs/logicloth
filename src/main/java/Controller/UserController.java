@@ -23,7 +23,7 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
         // if the user is not logged in, redirect to login page
         HttpSession session = request.getSession();
-        if (session.getAttribute("userID") == null) {
+        if (session.getAttribute("userID") == null || session.getAttribute("userID").equals("") || session.getAttribute("userCookie") == null) {
             response.sendRedirect(request.getContextPath() + "/Login");
         } else {
             AccountDAOs accountDAOs = new AccountDAOs();

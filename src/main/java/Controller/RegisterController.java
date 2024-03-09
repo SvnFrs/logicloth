@@ -95,12 +95,12 @@ public class RegisterController extends HttpServlet {
 
         //Kiểm tra isValid
         if (isValid) {
-            account acc = new account(fullName, email, username, password, role);
+            account acc = new account(fullName, email, username, password, role, true);
             AccountDAOs ad = new AccountDAOs();
             ad.AddNew(acc);
             HttpSession session = request.getSession();
             session.setAttribute("message", "Bạn đã đăng ký tài khoản thành công!");
-            response.sendRedirect("login-register.jsp");
+            response.sendRedirect("/Login");
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("message", "Đăng ký chưa thành công, vui lòng kiểm tra lại thông tin!");

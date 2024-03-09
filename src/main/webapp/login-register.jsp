@@ -84,8 +84,8 @@
                                         </div>
                                     </div>
                                     <div class="remember">
-                                        <input type="checkbox" name="remember" id="remember">
-                                        <label for="remember">Ghi nhớ tài khoản</label>
+                                        <input type="checkbox" name="remember-me" id="remember-me">
+                                        <label for="remember-me">Ghi nhớ tài khoản</label>
                                     </div>
 
 <%--                                    <button class="submit" id="submitButton">Đăng nhập</button>--%>
