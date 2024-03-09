@@ -91,139 +91,139 @@
         </div>
     </div>
 
-    <div class="category">
-        <div class="category-heading">
-            <p>Các món phù hợp với mọi người</p>
-        </div>
+<%--    <div class="category">--%>
+<%--        <div class="category-heading">--%>
+<%--            <p>Các món phù hợp với mọi người</p>--%>
+<%--        </div>--%>
 
-        <div class="category-infor">
-            <div class="row gap">
-                <div class="col">
-                    <div class="category-img">
-                        <img src="images/banh_mi.jpg" alt="">
-                    </div>
+<%--        <div class="category-infor">--%>
+<%--            <div class="row gap">--%>
+<%--                <div class="col">--%>
+<%--                    <div class="category-img">--%>
+<%--                        <img src="images/banh_mi.jpg" alt="">--%>
+<%--                    </div>--%>
 
-                    <div class="category-title">
-                        <p>Bánh mì</p>
-                    </div>
-                </div>
+<%--                    <div class="category-title">--%>
+<%--                        <p>Bánh mì</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <div class="col">
-                    <div class="category-img">
-                        <img src="images/pizza.jpg" alt="">
-                    </div>
+<%--                <div class="col">--%>
+<%--                    <div class="category-img">--%>
+<%--                        <img src="images/pizza.jpg" alt="">--%>
+<%--                    </div>--%>
 
-                    <div class="category-title">
-                        <p>Pizza</p>
-                    </div>
-                </div>
+<%--                    <div class="category-title">--%>
+<%--                        <p>Pizza</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <div class="col">
-                    <div class="category-img">
-                        <img src="images/tra_sua.jpg" alt="">
-                    </div>
+<%--                <div class="col">--%>
+<%--                    <div class="category-img">--%>
+<%--                        <img src="images/tra_sua.jpg" alt="">--%>
+<%--                    </div>--%>
 
-                    <div class="category-title">
-                        <p>Trà sữa</p>
-                    </div>
-                </div>
+<%--                    <div class="category-title">--%>
+<%--                        <p>Trà sữa</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <div class="col">
-                    <div class="category-img">
-                        <img src="images/Gà rán.png" alt="">
-                    </div>
+<%--                <div class="col">--%>
+<%--                    <div class="category-img">--%>
+<%--                        <img src="images/Gà rán.png" alt="">--%>
+<%--                    </div>--%>
 
-                    <div class="category-title">
-                        <p>Gà rán - Burger</p>
-                    </div>
-                </div>
-            </div>
+<%--                    <div class="category-title">--%>
+<%--                        <p>Gà rán - Burger</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
 
-            <div class="row gap">
-                <div class="col">
-                    <div class="category-img">
-                        <img src="images/cháo.jpg" alt="">
-                    </div>
+<%--            <div class="row gap">--%>
+<%--                <div class="col">--%>
+<%--                    <div class="category-img">--%>
+<%--                        <img src="images/cháo.jpg" alt="">--%>
+<%--                    </div>--%>
 
-                    <div class="category-title">
-                        <p>Cháo</p>
-                    </div>
-                </div>
+<%--                    <div class="category-title">--%>
+<%--                        <p>Cháo</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <div class="col">
-                    <div class="category-img">
-                        <img src="images/salad.jpg" alt="">
-                    </div>
+<%--                <div class="col">--%>
+<%--                    <div class="category-img">--%>
+<%--                        <img src="images/salad.jpg" alt="">--%>
+<%--                    </div>--%>
 
-                    <div class="category-title">
-                        <p>Salad</p>
-                    </div>
-                </div>
+<%--                    <div class="category-title">--%>
+<%--                        <p>Salad</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <div class="col">
-                    <div class="category-img">
-                        <img src="images/mi_y.jpg" alt="">
-                    </div>
+<%--                <div class="col">--%>
+<%--                    <div class="category-img">--%>
+<%--                        <img src="images/mi_y.jpg" alt="">--%>
+<%--                    </div>--%>
 
-                    <div class="category-title">
-                        <p>Mì Ý</p>
-                    </div>
-                </div>
+<%--                    <div class="category-title">--%>
+<%--                        <p>Mì Ý</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <div class="col">
-                    <div class="category-img">
-                        <img src="images/hu_tieu.jpg" alt="">
-                    </div>
+<%--                <div class="col">--%>
+<%--                    <div class="category-img">--%>
+<%--                        <img src="images/hu_tieu.jpg" alt="">--%>
+<%--                    </div>--%>
 
-                    <div class="category-title">
-                        <p>Hủ tiếu</p>
-                    </div>
-                </div>
-            </div>
+<%--                    <div class="category-title">--%>
+<%--                        <p>Hủ tiếu</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-            <div class="row gap">
-                <div class="col">
-                    <div class="category-img">
-                        <img src="images/com.jpg" alt="">
-                    </div>
+<%--            <div class="row gap">--%>
+<%--                <div class="col">--%>
+<%--                    <div class="category-img">--%>
+<%--                        <img src="images/com.jpg" alt="">--%>
+<%--                    </div>--%>
 
-                    <div class="category-title">
-                        <p>Cơm</p>
-                    </div>
-                </div>
+<%--                    <div class="category-title">--%>
+<%--                        <p>Cơm</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <div class="col">
-                    <div class="category-img">
-                        <img src="images/an_vat.jpg" alt="">
-                    </div>
+<%--                <div class="col">--%>
+<%--                    <div class="category-img">--%>
+<%--                        <img src="images/an_vat.jpg" alt="">--%>
+<%--                    </div>--%>
 
-                    <div class="category-title">
-                        <p>Ăn vặt</p>
-                    </div>
-                </div>
+<%--                    <div class="category-title">--%>
+<%--                        <p>Ăn vặt</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <div class="col">
-                    <div class="category-img">
-                        <img src="images/bun.jpg" alt="">
-                    </div>
+<%--                <div class="col">--%>
+<%--                    <div class="category-img">--%>
+<%--                        <img src="images/bun.jpg" alt="">--%>
+<%--                    </div>--%>
 
-                    <div class="category-title">
-                        <p>Bún</p>
-                    </div>
-                </div>
+<%--                    <div class="category-title">--%>
+<%--                        <p>Bún</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <div class="col">
-                    <div class="category-img">
-                        <img src="images/do_uong_lanh.jpg" alt="">
-                    </div>
+<%--                <div class="col">--%>
+<%--                    <div class="category-img">--%>
+<%--                        <img src="images/do_uong_lanh.jpg" alt="">--%>
+<%--                    </div>--%>
 
-                    <div class="category-title">
-                        <p>Đồ uống lạnh</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<%--                    <div class="category-title">--%>
+<%--                        <p>Đồ uống lạnh</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
 
     </div>
 </main>

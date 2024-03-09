@@ -33,7 +33,7 @@
                         </div>
                         <a href="#">Thông tin</a>
                         <a href="#">Đơn hàng hiện có</a>
-                        <a href="index.jsp">Đăng xuất</a>
+                        <a href="${pageContext.request.contextPath}/Logout">Đăng xuất</a>
                     </div>
                     <i class="fa-regular fa-user" onclick="openNav()"></i>
                 </div>

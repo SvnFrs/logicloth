@@ -1,9 +1,6 @@
 package Controller;
 
-import DAOs.AccountDAOs;
-import DAOs.AdminDAOs;
-import DAOs.ProductDAOs;
-import DAOs.RestaurantDAOs;
+import DAOs.*;
 import Model.account;
 import Model.product;
 import Model.restaurant;
@@ -23,10 +20,16 @@ public class AddToCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        CartDAOs cartDAOs = new CartDAOs();
+        boolean isInCart = cartDAOs.isProductInCart((int) session.getAttribute("userID"), Integer.parseInt(req.getParameter("productID")));
         int productID = Integer.parseInt(req.getParameter("productID"));
         int userID = (int) session.getAttribute("userID");
         int quantity = Integer.parseInt(req.getParameter("quantity"));
-        new DAOs.CartDAOs().addToCart(userID, productID, quantity);
+        if (isInCart) {
+            cartDAOs.addQuantity(userID, productID);
+        } else {
+            cartDAOs.addToCart(userID, productID, quantity);
+        }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/User");
         dispatcher.forward(req, resp);
     }

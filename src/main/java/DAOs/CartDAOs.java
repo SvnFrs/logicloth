@@ -64,6 +64,37 @@ public class CartDAOs implements DAO<cart> {
         }
     }
 
+    public void addQuantity(int userID, int productID) {
+        String query = "UPDATE dacfood.public.carts SET quantity = quantity + 1  WHERE user_id = ? AND product_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+//            ps.setInt(1, quantity);
+            ps.setInt(1, userID);
+            ps.setInt(2, productID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public boolean isProductInCart(int userID, int productID) {
+        String query = "SELECT * FROM dacfood.public.carts WHERE user_id = ? AND product_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userID);
+            ps.setInt(2, productID);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     @Override
     public Optional<cart> get(int id) {
         return Optional.empty();
