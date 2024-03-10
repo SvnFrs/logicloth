@@ -84,7 +84,8 @@ CREATE TABLE OrderDetails (
 
 CREATE TABLE OrderStatus (
                              status_id SERIAL PRIMARY KEY,
-                             status_name VARCHAR(50) NOT NULL
+                             status_name VARCHAR(50) NOT NULL,
+                             status_role VARCHAR(50)
 );
 
 CREATE TABLE Reviews (
@@ -280,5 +281,5 @@ VALUES
     (12, 11),
     (13, 12);
 
-INSERT INTO OrderStatus (status_name) VALUES ('Pending'), ('Accepted'), ('Shipping'), ('Delivered'), ('Cancelled'), ('Completed'), ('Rejected');
+INSERT INTO order_status (status_name, status_role) VALUES ('Đang xử lý', 'seller'), ('Đang giao hàng', 'seller'), ('Đã nhận hàng', 'user'), ('Đã hủy', 'user'), ('Đã hoàn thành', 'user'), ('Đã từ chối', 'seller');
 UPDATE products p SET quantity = 10 WHERE p.quantity < 10;
