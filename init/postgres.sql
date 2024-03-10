@@ -281,5 +281,5 @@ VALUES
     (12, 11),
     (13, 12);
 
-INSERT INTO order_status (status_name, status_role) VALUES ('Đang xử lý', 'seller'), ('Đang giao hàng', 'seller'), ('Đã nhận hàng', 'user'), ('Đã hủy', 'user'), ('Đã hoàn thành', 'user'), ('Đã từ chối', 'seller');
+INSERT INTO OrderStatus (status_name, status_role) VALUES ('Đang xử lý', 'seller'), ('Đang chuẩn bị', 'seller'), ('Đang giao hàng', 'seller'), ('Đã nhận hàng', 'user'), ('Đã hoàn thành', 'user'), ('Đã hủy', 'user'), ('Đã từ chối', 'seller');
 UPDATE products p SET quantity = 10 WHERE p.quantity < 10;
