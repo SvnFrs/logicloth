@@ -37,6 +37,17 @@ CREATE TABLE Carts (
                        FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
 
+CREATE TABLE Addresses (
+                           address_id SERIAL PRIMARY KEY,
+                           order_id INT,
+                           user_id INT,
+                           receiver_name VARCHAR(100) NOT NULL,
+                           phone_number VARCHAR(20) NOT NULL,
+                           address VARCHAR(1000) NOT NULL,
+                           status BOOLEAN DEFAULT TRUE,
+                           FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
 CREATE TABLE Checkout (
                           user_id INT,
                           product_id INT,
@@ -59,30 +70,21 @@ CREATE TABLE Orders (
 CREATE TABLE OrderDetails (
                               order_detail_id SERIAL PRIMARY KEY,
                               order_id INT,
-                              receiver_name VARCHAR(100) NOT NULL,
-                              phone_number VARCHAR(20) NOT NULL,
                               product_id INT,
+                              restaurant_id INT,
                               quantity INT,
                               total_price BIGINT,
-                              address VARCHAR(1000) NOT NULL,
+                              address_id INT,
                               status BOOLEAN DEFAULT TRUE,
                               FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-                              FOREIGN KEY (product_id) REFERENCES Products(product_id)
+                              FOREIGN KEY (product_id) REFERENCES Products(product_id),
+                              FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id),
+                              FOREIGN KEY (address_id) REFERENCES Addresses(address_id)
 );
 
 CREATE TABLE OrderStatus (
-                            status_id SERIAL PRIMARY KEY,
-                            status_name VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE Addresses (
-                           address_id SERIAL PRIMARY KEY,
-                           user_id INT,
-                           receiver_name VARCHAR(100) NOT NULL,
-                           phone_number VARCHAR(20) NOT NULL,
-                           address VARCHAR(1000) NOT NULL,
-                           status BOOLEAN DEFAULT TRUE,
-                           FOREIGN KEY (user_id) REFERENCES Users(user_id)
+                             status_id SERIAL PRIMARY KEY,
+                             status_name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Reviews (
@@ -278,5 +280,5 @@ VALUES
     (12, 11),
     (13, 12);
 
-   INSERT INTO OrderStatus (status_name) VALUES ('Pending'), ('Accepted'), ('Shipping'), ('Delivered'), ('Cancelled'), ('Completed'), ('Rejected');
-   UPDATE products p SET quantity = 10 WHERE p.quantity < 10;
+INSERT INTO OrderStatus (status_name) VALUES ('Pending'), ('Accepted'), ('Shipping'), ('Delivered'), ('Cancelled'), ('Completed'), ('Rejected');
+UPDATE products p SET quantity = 10 WHERE p.quantity < 10;
