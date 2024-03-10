@@ -15,10 +15,6 @@
             </div>
 
             <div class="other" style="justify-content: end; gap: 30px">
-                <div class="search">
-                    <input type="text" name="search-product" id="search" placeholder="Nhập từ khóa cần tìm...">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
 
                 <div class="user-icon">
                     <div id="mySidenav" class="sidenav">
@@ -28,7 +24,7 @@
                                 <i class="fa-regular fa-user"></i>
                             </div>
 
-                            <h3>Huynh Nhut Khang</h3>
+                            <h3>${sessionScope.username}</h3>
                         </div>
                         <a href="#">Thông tin</a>
                         <a href="#">Đơn hàng hiện có</a>

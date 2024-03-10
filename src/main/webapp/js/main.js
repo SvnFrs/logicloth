@@ -144,3 +144,21 @@ function Validator(formSelector) {
 }
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    var orderDateElement = document.getElementById('date-${orders.orderID}');
+    var rawDate = '${orders.orderDate}'; // Assuming this is a JavaScript-compatible date string
+
+    // Create a Date object from the raw date string
+    var dateObject = new Date(rawDate);
+
+    // Format the date
+    var formattedDate = `${dateObject.getFullYear()}-${padZero(dateObject.getMonth() + 1)}-${padZero(dateObject.getDate())} ${padZero(dateObject.getHours())}:${padZero(dateObject.getMinutes())}:${padZero(dateObject.getSeconds())}`;
+
+    // Display the formatted date in the HTML element
+    orderDateElement.innerText = formattedDate;
+});
+
+// Function to pad a single digit number with a leading zero
+function padZero(num) {
+    return num < 10 ? '0' + num : num;
+}

@@ -37,15 +37,20 @@
         <c:forEach items="${Orders}" var="orders">
             <tr>
                 <td>${orders.orderID}</td>
-                <td>${orders.orderDate}</td>
+                <td>
+                    <span id="date-${orders.orderID}">
+                        ${orders.orderDate}
+                    </span>
+                </td>
                 <td>${orderDAOs.getTotalPriceByOrderID(orders.orderID)}</td>
-                <td>${orders.orderStatus}</td>
-                <td><a href="order-details?orderID=${orders.orderID}">Details</a></td>
+                <td>${orderDAOs.getOrderStatusByOrderStatusID(orders.orderStatus)}</td>
+                <td><a href="OrderDetail?orderID=${orders.orderID}">Details</a></td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
 
+<%@include file="footer.jsp" %>
 </body>
 </html>
