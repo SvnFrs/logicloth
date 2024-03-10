@@ -1,5 +1,6 @@
 package Controller;
 
+import DAOs.AddressDAOs;
 import DAOs.CheckoutDAOs;
 import DAOs.OrderDAOs;
 import DAOs.ProductDAOs;
@@ -43,12 +44,13 @@ public class OrderController extends HttpServlet {
         OrderDAOs orderDAOs = new OrderDAOs();
         ProductDAOs productDAOs = new ProductDAOs();
         CheckoutDAOs checkoutDAOs = new CheckoutDAOs();
+        AddressDAOs addressDAOs = new AddressDAOs();
         HttpSession session = req.getSession();
 
         boolean saveInfo = Boolean.parseBoolean(req.getParameter("saveInfo"));
 
 //        int orderID = orderDAOs.generateOrderID();
-        int orderDetailID = orderDAOs.generateOrderDetailID();
+//        int orderDetailID = orderDAOs.generateOrderDetailID();
         int userID = (int) session.getAttribute("userID");
 
         List<checkout> checkoutItems = checkoutDAOs.getAllByID(userID);
@@ -56,7 +58,9 @@ public class OrderController extends HttpServlet {
             int orderID = orderDAOs.generateOrderID();
             orderDAOs.insertOrder(orderID, userID, productDAOs.getRestaurantID(checkout.getProductID()));
             long totalPrice = productDAOs.getProductPrice(checkout.getProductID()) * checkout.getQuantity();
-            orderDAOs.insertOrderDetail(orderDetailID, orderID, fullName, phoneNumber, checkout.getProductID(), checkout.getQuantity(), totalPrice, address);
+            int addressID = addressDAOs.generateAddressID();
+            addressDAOs.insertAddress(orderID, userID, fullName, phoneNumber, address);
+            orderDAOs.insertOrderDetail(orderID, checkout.getProductID(), productDAOs.getRestaurantID(checkout.getProductID()), checkout.getQuantity(), totalPrice, addressID);
         }
     }
 }
