@@ -2,6 +2,9 @@ package Controller;
 
 import DAOs.AccountDAOs;
 import DAOs.AdminDAOs;
+import DAOs.SellerOrderDAOs;
+import Model.order;
+import Model.orderDetail;
 import Model.account;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -10,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,9 +32,22 @@ public class SellerController extends HttpServlet {
                 AccountDAOs accountDAOs = new AccountDAOs();
                 int userID = (int) session.getAttribute("userID");
                 String role  = accountDAOs.getRoleByID(userID);
+                String username;
+                try {
+                    username = accountDAOs.getNameByID((int) session.getAttribute("userID"));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 if (!role.equals("seller")) {
                     response.sendRedirect(request.getContextPath() + "/User");
                 } else {
+                    session.setAttribute("username", username);
+                    SellerOrderDAOs sellerOrderDAOs = new SellerOrderDAOs();
+                    int restaurantID = sellerOrderDAOs.getRestaurantID(userID);
+                    List<order> orders = sellerOrderDAOs.getAllByRestaurantID(restaurantID);
+                    List<orderDetail> orderDetails = sellerOrderDAOs.getOrderDetailsByRestaurantID(restaurantID);
+                    session.setAttribute("OrderDetails", orderDetails);
+                    session.setAttribute("Orders", orders);
                     RequestDispatcher rd = request.getRequestDispatcher("seller.jsp");
                     rd.forward(request, response);
                 }
