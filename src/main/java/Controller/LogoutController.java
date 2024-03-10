@@ -35,7 +35,7 @@ public class LogoutController extends HttpServlet {
                 logoutCookie.setMaxAge(0);
                 resp.addCookie(logoutCookie);
                 session.setAttribute("sellerCookie", null);
-                session.setAttribute("sellerID", null);
+                session.setAttribute("userID", null);
                 resp.sendRedirect("/FoodWeb/");
             } else {
                 resp.sendRedirect("/FoodWeb/");
