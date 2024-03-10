@@ -74,24 +74,28 @@ public class OrderDAOs {
         return orderDetailID + 1;
     }
 
-    public void insertOrderDetail(int orderDetailID, int orderID, String fullName, String phoneNumber, int productID, int quantity, long totalPrice, String address) {
-        query = "INSERT INTO orderdetails(order_detail_id, order_id, receiver_name, phone_number, product_id, quantity, total_price, address) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    public void insertOrderDetail(int orderID, int productID, int restaurantID, int quantity, long totalPrice, int addressID) {
+        query = "INSERT INTO orderdetails(order_id, product_id, restaurant_id, quantity, total_price, address_id) VALUES(?, ?, ?, ?, ?, ?)";
         try {
             ps = conn.prepareStatement(query);
-            ps.setInt(1, orderDetailID);
-            ps.setInt(2, orderID);
-            ps.setString(3, fullName);
-            ps.setString(4, phoneNumber);
-            ps.setInt(5, productID);
-            ps.setInt(6, quantity);
-            ps.setLong(7, totalPrice);
-            ps.setString(8, address);
+            ps.setInt(1, orderID);
+            ps.setInt(2, productID);
+            ps.setInt(3, restaurantID);
+            ps.setInt(4, quantity);
+            ps.setLong(5, totalPrice);
+            ps.setInt(6, addressID);
             ps.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(OrderDAOs.class.getName()).
-                    log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDAOs.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public static void main(String[] args) {
+        OrderDAOs orderDAOs = new OrderDAOs();
+        orderDAOs.insertOrderDetail(1, 10001, 1, 1, 100000, 1);
+    }
+
+
 
     public List<order> getAllByID(int userID) {
         ArrayList<order> result = new ArrayList<>();
@@ -105,6 +109,7 @@ public class OrderDAOs {
                 order.setOrderID(rs.getInt("order_id"));
                 order.setUserID(rs.getInt("user_id"));
                 order.setRestaurantID(rs.getInt("restaurant_id"));
+                order.setOrderDate(String.valueOf(rs.getDate("order_date")));
                 order.setOrderStatus(rs.getString("order_status"));
                 result.add(order);
             }
@@ -125,12 +130,9 @@ public class OrderDAOs {
             while (rs.next()) {
                 orderDetail.setOrderDetailID(rs.getInt("order_detail_id"));
                 orderDetail.setOrderID(rs.getInt("order_id"));
-                orderDetail.setReceiverName(rs.getString("receiver_name"));
-                orderDetail.setPhoneNumber(rs.getString("phone_number"));
                 orderDetail.setProductID(rs.getInt("product_id"));
                 orderDetail.setQuantity(rs.getInt("quantity"));
                 orderDetail.setTotalPrice(rs.getLong("total_price"));
-                orderDetail.setOrderAddress(rs.getString("address"));
                 orderDetails.add(orderDetail);
             }
         } catch (SQLException ex) {
@@ -155,5 +157,22 @@ public class OrderDAOs {
                     log(Level.SEVERE, null, ex);
         }
         return totalPrice;
+    }
+    
+    public String getOrderStatusByOrderStatusID(int statusID) {
+        String orderStatus = "";
+        query = "SELECT status_name FROM orderstatus WHERE status_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, statusID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                orderStatus = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return orderStatus;
     }
 }
