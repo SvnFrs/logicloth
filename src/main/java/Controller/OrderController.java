@@ -52,15 +52,15 @@ public class OrderController extends HttpServlet {
 //        int orderID = orderDAOs.generateOrderID();
 //        int orderDetailID = orderDAOs.generateOrderDetailID();
         int userID = (int) session.getAttribute("userID");
-
+        int orderID = orderDAOs.generateOrderID();
         List<checkout> checkoutItems = checkoutDAOs.getAllByID(userID);
         for (checkout checkout : checkoutItems) {
-            int orderID = orderDAOs.generateOrderID();
             orderDAOs.insertOrder(orderID, userID, productDAOs.getRestaurantID(checkout.getProductID()));
             long totalPrice = productDAOs.getProductPrice(checkout.getProductID()) * checkout.getQuantity();
             int addressID = addressDAOs.generateAddressID();
             addressDAOs.insertAddress(orderID, userID, fullName, phoneNumber, address);
             orderDAOs.insertOrderDetail(orderID, checkout.getProductID(), productDAOs.getRestaurantID(checkout.getProductID()), checkout.getQuantity(), totalPrice, addressID);
         }
+        resp.sendRedirect(req.getContextPath() + "/OrderSuccess");
     }
 }

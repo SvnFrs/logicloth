@@ -3,7 +3,7 @@ package DAOs;
 import ConnectDB.ConnectingDB;
 import Model.order;
 import Model.orderDetail;
-
+import Model.orderStatus;
 
 import java.sql.*;
 import java.sql.Connection;
@@ -56,6 +56,30 @@ public class SellerOrderDAOs {
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, restaurantID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                orderDetail orderDetail = new orderDetail();
+                orderDetail.setOrderDetailID(rs.getInt("order_detail_id"));
+                orderDetail.setOrderID(rs.getInt("order_id"));
+                orderDetail.setProductID(rs.getInt("product_id"));
+                orderDetail.setQuantity(rs.getInt("quantity"));
+                orderDetail.setTotalPrice(rs.getLong("total_price"));
+                orderDetail.setAddressID(rs.getInt("address_id"));
+                result.add(orderDetail);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerOrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public List<orderDetail> getOrderDetailsByOrderID(int orderID) {
+        ArrayList<orderDetail> result = new ArrayList<>();
+        query = "SELECT * FROM orderdetails WHERE order_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderID);
             rs = ps.executeQuery();
             while (rs.next()) {
                 orderDetail orderDetail = new orderDetail();
@@ -180,6 +204,42 @@ public class SellerOrderDAOs {
                     log(Level.SEVERE, null, ex);
         }
         return orderStatus;
+    }
+    
+    public List<orderStatus> allOrderStatusBySeller(int orderStatusID) {
+        ArrayList<orderStatus> result = new ArrayList<>();
+        query = "SELECT * FROM orderstatus WHERE status_role = 'seller' AND status_id = ? + 1";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderStatusID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                orderStatus orderStatus = new orderStatus();
+                orderStatus.setOrderStatusID(rs.getInt("status_id"));
+                orderStatus.setOrderStatus(rs.getString("status_name"));
+                result.add(orderStatus);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerOrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public int getLastOrderStatusID() {
+        int orderID = 0;
+        query = "SELECT MAX(status_id) FROM orderstatus";
+        try {
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                orderID = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerOrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return orderID;
     }
 
 }

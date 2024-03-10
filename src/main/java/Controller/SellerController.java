@@ -3,9 +3,11 @@ package Controller;
 import DAOs.AccountDAOs;
 import DAOs.AdminDAOs;
 import DAOs.SellerOrderDAOs;
+import DAOs.SellerProductDAOs;
 import Model.order;
 import Model.orderDetail;
-import Model.account;
+import Model.product;
+
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -43,11 +45,14 @@ public class SellerController extends HttpServlet {
                 } else {
                     session.setAttribute("username", username);
                     SellerOrderDAOs sellerOrderDAOs = new SellerOrderDAOs();
+                    SellerProductDAOs sellerProductDAOs = new SellerProductDAOs();
                     int restaurantID = sellerOrderDAOs.getRestaurantID(userID);
                     List<order> orders = sellerOrderDAOs.getAllByRestaurantID(restaurantID);
                     List<orderDetail> orderDetails = sellerOrderDAOs.getOrderDetailsByRestaurantID(restaurantID);
-                    session.setAttribute("OrderDetails", orderDetails);
+                    List<product> products = sellerProductDAOs.getAllByRestaurantID(restaurantID);
                     session.setAttribute("Orders", orders);
+                    session.setAttribute("OrderDetails", orderDetails);
+                    session.setAttribute("Products", products);
                     RequestDispatcher rd = request.getRequestDispatcher("seller.jsp");
                     rd.forward(request, response);
                 }
