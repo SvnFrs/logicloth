@@ -17,7 +17,7 @@
             <div class="other" style="justify-content: end; gap: 30px">
 
                 <div class="user-icon">
-                    <div id="mySidenav" class="sidenav">
+                    <div id="mySidenav" class="sidenav" tabindex="10">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                         <div class="infor">
                             <div class="infor-icon">
