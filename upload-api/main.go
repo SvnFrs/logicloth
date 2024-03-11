@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"mime/multipart"
 	"net/http"
 	"os"
 )
@@ -15,7 +16,12 @@ func main() {
 			http.Error(w, "Failed to read file", http.StatusBadRequest)
 			return
 		}
-		defer file.Close()
+		defer func(file multipart.File) {
+			err := file.Close()
+			if err != nil {
+
+			}
+		}(file)
 
 		out, err := os.Create("../src/main/webapp/images/foods/" + header.Filename)
 		if err != nil {
@@ -30,8 +36,16 @@ func main() {
 			return
 		}
 
-		w.Write([]byte("File uploaded successfully"))
+		// w.Write([]byte("File uploaded successfully"))
+		// return uploaded file path
+		_, err = w.Write([]byte("./images/foods/" + header.Filename))
+		if err != nil {
+			return 
+		}
 	})
 
-	http.ListenAndServe(":3030", nil)
+	err := http.ListenAndServe(":3030", nil)
+	if err != nil {
+		return 
+	}
 }
