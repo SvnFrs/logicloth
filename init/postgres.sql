@@ -110,9 +110,20 @@ CREATE TABLE RestaurantRecords (
                                    seller_id INT,
                                    restaurant_id INT,
                                    date DATE,
-                                   sales INTEGER,
+                                   sales_id INTEGER,
                                    FOREIGN KEY (seller_id) REFERENCES Users(user_id),
                                    FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
+);
+
+CREATE TABLE Sales (
+                      sales_id SERIAL PRIMARY KEY,
+                      restaurant_id INT,
+                      product_id INT,
+                      quantity INT,
+                      total_sales BIGINT,
+                      date DATE,
+                      FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id),
+                      FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
 
 CREATE TABLE RestaurantSales (
