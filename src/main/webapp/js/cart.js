@@ -102,4 +102,28 @@ $(document).ready(function () {
             }
         });
     });
+
+    // Handle the 'Remove' button click
+    $('.btn-remove').click(function() {
+        var id = $(this).attr('id').split('-')[1];  // Get the product ID from the button's id
+
+        // Send the product ID to the 'RemoveFromCart' controller using AJAX
+        $.ajax({
+            url: '/FoodWeb/Cart/RemoveFromCart',
+            type: 'GET',
+            data: {
+                productID: id
+            },
+            success: function(response) {
+                // Remove the product from the cart when the request is successful
+                $('#product-' + id).remove();
+                // refresh the page
+                location.reload();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Handle any errors here
+                console.error('Error removing product:', textStatus, errorThrown);
+            }
+        });
+    });
 });

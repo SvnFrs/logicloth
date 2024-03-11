@@ -4,6 +4,7 @@ import ConnectDB.ConnectingDB;
 import Model.cart;
 import Model.order;
 import Model.orderDetail;
+import Model.orderStatus;
 
 
 import java.sql.*;
@@ -90,12 +91,6 @@ public class OrderDAOs {
         }
     }
 
-    public static void main(String[] args) {
-        OrderDAOs orderDAOs = new OrderDAOs();
-        orderDAOs.insertOrderDetail(1, 10001, 1, 1, 100000, 1);
-    }
-
-
 
     public List<order> getAllByID(int userID) {
         ArrayList<order> result = new ArrayList<>();
@@ -119,7 +114,7 @@ public class OrderDAOs {
         }
         return result;
     }
-    
+
     public List<orderDetail> getOrderDetailByOrderID(int orderID) {
         List<orderDetail> orderDetails = new ArrayList<>();
         query = "SELECT * FROM orderdetails WHERE order_id = ?";
@@ -140,6 +135,30 @@ public class OrderDAOs {
                     log(Level.SEVERE, null, ex);
         }
         return orderDetails;
+    }
+
+    public List<orderDetail> getOrderDetailsByOrderID(int orderID) {
+        ArrayList<orderDetail> result = new ArrayList<>();
+        query = "SELECT * FROM orderdetails WHERE order_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                orderDetail orderDetail = new orderDetail();
+                orderDetail.setOrderDetailID(rs.getInt("order_detail_id"));
+                orderDetail.setOrderID(rs.getInt("order_id"));
+                orderDetail.setProductID(rs.getInt("product_id"));
+                orderDetail.setQuantity(rs.getInt("quantity"));
+                orderDetail.setTotalPrice(rs.getLong("total_price"));
+                orderDetail.setAddressID(rs.getInt("address_id"));
+                result.add(orderDetail);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerOrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     public long getTotalPriceByOrderID(int orderID) {
@@ -175,4 +194,41 @@ public class OrderDAOs {
         }
         return orderStatus;
     }
+
+    public List<orderStatus> allOrderStatusByUser(int orderStatusID) {
+        ArrayList<orderStatus> result = new ArrayList<>();
+        query = "SELECT * FROM orderstatus WHERE status_role = 'user' AND status_id = ? + 1";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderStatusID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                orderStatus orderStatus = new orderStatus();
+                orderStatus.setOrderStatusID(rs.getInt("status_id"));
+                orderStatus.setOrderStatus(rs.getString("status_name"));
+                result.add(orderStatus);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerOrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public int lastOrderStatusID() {
+        int orderID = 0;
+        query = "SELECT MAX(status_id) FROM orderstatus WHERE status_role = 'user'";
+        try {
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                orderID = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerOrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return orderID;
+    }
+
 }

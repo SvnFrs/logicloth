@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CartDAOs implements DAO<cart> {
+public class CartDAOs {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
@@ -23,10 +23,6 @@ public class CartDAOs implements DAO<cart> {
 
     public CartDAOs() {
         conn = ConnectingDB.getConnection();
-    }
-    @Override
-    public List<cart> getAll() {
-        return null;
     }
 
     public List<cart> getAllByID(int id) {
@@ -108,24 +104,17 @@ public class CartDAOs implements DAO<cart> {
         }
         return false;
     }
-
-    @Override
-    public Optional<cart> get(int id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public void add(cart cart) {
-
-    }
-
-    @Override
-    public void update(cart cart) {
-
-    }
-
-    @Override
-    public void delete(cart cart) {
-
+    
+    public void deleteProduct(int userID, int productID) {
+        String query = "DELETE FROM carts WHERE user_id = ? AND product_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userID);
+            ps.setInt(2, productID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -122,7 +122,7 @@
                                                     var="orderStatus">
                                                 <option value="${orderStatus.orderStatusID}">${orderStatus.orderStatus}</option>
                                             </c:forEach>
-                                            <option value="${sellerOrderDAOs.getLastOrderStatusID()}">${sellerOrderDAOs.getOrderStatusByOrderStatusID(sellerOrderDAOs.getLastOrderStatusID())}</option>
+                                            <option value="${sellerOrderDAOs.lastOrderStatusID()}">${sellerOrderDAOs.getOrderStatusByOrderStatusID(sellerOrderDAOs.getLastOrderStatusID())}</option>
                                         </select>
                                     </div>
                                 </div>

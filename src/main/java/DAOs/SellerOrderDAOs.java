@@ -239,7 +239,7 @@ public class SellerOrderDAOs {
         }
     }
 
-    public int getLastOrderStatusID() {
+    public int lastOrderStatusID() {
         int orderID = 0;
         query = "SELECT MAX(status_id) FROM orderstatus";
         try {

@@ -94,7 +94,11 @@
                                        disabled style="width:7vw">
                             </span>
                         </td>
-                        <td><a href="">Remove</a></td>
+                        <td>
+                            <button id="remove-${cartItem.productID}" class="btn btn-sm btn-danger btn-remove">
+                                Remove
+                            </button>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
