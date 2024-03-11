@@ -50,6 +50,7 @@ public class SellerController extends HttpServlet {
                     List<order> orders = sellerOrderDAOs.getAllByRestaurantID(restaurantID);
                     List<orderDetail> orderDetails = sellerOrderDAOs.getOrderDetailsByRestaurantID(restaurantID);
                     List<product> products = sellerProductDAOs.getAllByRestaurantID(restaurantID);
+                    session.setAttribute("RestaurantID", restaurantID);
                     session.setAttribute("Orders", orders);
                     session.setAttribute("OrderDetails", orderDetails);
                     session.setAttribute("Products", products);

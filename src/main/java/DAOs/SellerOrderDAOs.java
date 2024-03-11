@@ -226,6 +226,19 @@ public class SellerOrderDAOs {
         return result;
     }
     
+    public void updateOrderStatus(int orderID, int statusID) {
+        query = "UPDATE orders SET order_status = ? WHERE order_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, statusID);
+            ps.setInt(2, orderID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerOrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
+
     public int getLastOrderStatusID() {
         int orderID = 0;
         query = "SELECT MAX(status_id) FROM orderstatus";

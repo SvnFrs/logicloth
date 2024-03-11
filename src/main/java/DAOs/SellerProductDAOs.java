@@ -47,4 +47,68 @@ public class SellerProductDAOs {
         }
         return result;
     }
+
+    public void addProduct(int productID, int restaurantID, String productName, String productDescription, long productPrice, String productImage, int productQuantity) {
+        query = "INSERT INTO products(product_id ,restaurant_id, name, description, price, image_url, quantity) VALUES(?,?,?,?,?,?,?)";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, productID);
+            ps.setInt(2, restaurantID);
+            ps.setString(3, productName);
+            ps.setString(4, productDescription);
+            ps.setLong(5, productPrice);
+            ps.setString(6, productImage);
+            ps.setInt(7, productQuantity);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerProductDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public int getNewProductIDOfRestaurant(int restaurantID) {
+        query = "SELECT MAX(product_id) FROM products WHERE restaurant_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, restaurantID);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerProductDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public void updateProduct(String productName, long productPrice, int productQuantity, boolean status, String productDescription, String productImage, int productID) {
+        query = "UPDATE products SET name = ?, price = ?, quantity = ?, status = ?, description = ?, image_url = ?  WHERE product_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, productName);
+            ps.setLong(2, productPrice);
+            ps.setInt(3, productQuantity);
+            ps.setBoolean(4, status);
+            ps.setString(5, productDescription);
+            ps.setString(6, productImage);
+            ps.setInt(7, productID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerProductDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteProduct(int productID) {
+        query = "UPDATE products SET status = 'false' WHERE product_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, productID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerProductDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
 }
