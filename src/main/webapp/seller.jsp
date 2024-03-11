@@ -157,7 +157,7 @@
                                 class="text-success fs-4">${sellerOrderDAOs.getTotalPriceByOrderID(order.orderID)}</span>
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-primary">Update</button>
+                                    <button type="button" class="btn btn-primary" onclick="updateOrderStatus(${order.orderID})">Update</button>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                                 <div class="btn-group-lg">
                                     <div class="row">
                                         <a href="" class="btn btn-primary"
-                                           data-bs-toggle="modal" data-bs-target="#product-update-modal"
+                                           data-bs-toggle="modal" data-bs-target="#product-update-modal-${product.productID}"
                                         >Update</a>
                                         <a href="" class="btn btn-danger">Delete</a>
                                     </div>
@@ -219,12 +219,97 @@
             </div>
         </div>
 
-        <div class="modal fade" id="product-update-modal" tabindex="-1" aria-hidden="true">
+        <c:forEach items="${Products}" var="product">
+        <div class="modal fade" id="product-update-modal-${product.productID}" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Update<span class="text-success fs-4"></span>
+                        <h5 class="modal-title">Update<span class="text-success fs-4">${product.productID}</span>
                             Detail</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-lg-9 col-md-12">
+                                    <div class="mb-3">
+                                        <label for="product-update-name-${product.productID}" class="form-label">Product name</label>
+                                        <input type="text" class="form-control" id="product-update-name-${product.productID}"
+                                               placeholder="${product.productName}"
+                                               aria-describedby="product-name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="mb-3">
+                                        <label for="product-update-price-${product.productID}" class="form-label
+                                        ">Product price</label>
+                                        <input type="text" class="form-control" id="product-update-price-${product.productID}"
+                                               placeholder="${product.productPrice}"
+                                               aria-describedby="product-price">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-9 col-md-12">
+                                    <div class="mb-3">
+                                        <label for="product-update-quantity-${product.productID}" class="form-label">Product quantity</label>
+                                        <input type="text" class="form-control" id="product-update-quantity-${product.productID}"
+                                               placeholder="${product.productQuantity}"
+                                               aria-describedby="product-quantity">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="mb-3">
+                                        <label for="product-update-status-${product.productID}" class="form-label">Product status</label>
+                                        <select class="form-select" aria-label="product-status" id="product-update-status-${product.productID}">
+                                            <option value="true" selected>Available</option>
+                                            <option value="false">Unavailable</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <label for="product-update-description-${product.productID}" class="form-label">Product description</label>
+                                    <textarea class="form-control" id="product-update-description-${product.productID}" rows="3"
+                                              placeholder="${product.productDescription}"
+                                    ></textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-lg-12 col-md-12">
+                            <form id="uploadForm-${product.productID}" method="post" action="" enctype="multipart/form-data">
+                                <label class="form-label">Product image</label>
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-12">
+                                        <input type="file" id="fileInput-${product.productID}" name="multiPartServlet" class="form-control"/>
+                                    </div>
+                                    <div class="col-lg-3 col-md-12">
+                                        <input type="submit" value="Upload" class="form-control"/>
+                                    </div>
+                                </div>
+                            </form>
+                            <input type="text" id="image-path-${product.productID}" hidden="hidden">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-primary" onclick="updateProduct(${product.productID})">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </c:forEach>
+
+        <div class="modal fade" id="product-add-modal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add<span class="text-success fs-4"></span>
+                            Product</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -233,16 +318,16 @@
                             <div class="row">
                                 <div class="col-lg-9 col-md-12">
                                     <div class="mb-3">
-                                        <label for="product-name" class="form-label">Product name</label>
-                                        <input type="text" class="form-control" id="product-name"
+                                        <label for="product-add-name" class="form-label">Product name</label>
+                                        <input type="text" class="form-control" id="product-add-name"
                                                aria-describedby="product-name">
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-12">
                                     <div class="mb-3">
-                                        <label for="product-price" class="form-label
+                                        <label for="product-add-price" class="form-label
                                         ">Product price</label>
-                                        <input type="text" class="form-control" id="product-price"
+                                        <input type="text" class="form-control" id="product-add-price"
                                                aria-describedby="product-price">
                                     </div>
                                 </div>
@@ -250,55 +335,50 @@
                             <div class="row">
                                 <div class="col-lg-9 col-md-12">
                                     <div class="mb-3">
-                                        <label for="product-quantity" class="form-label">Product quantity</label>
-                                        <input type="text" class="form-control" id="product-quantity"
+                                        <label for="product-add-quantity" class="form-label">Product quantity</label>
+                                        <input type="text" class="form-control" id="product-add-quantity"
                                                aria-describedby="product-quantity">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-12">
-                                    <div class="mb-3">
-                                        <label for="product-status" class="form-label">Product status</label>
-                                        <select class="form-select" aria-label="product-status" id="product-status">
-                                            <option value="1" selected>Available</option>
-                                            <option value="2">Unavailable</option>
-                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
-                                    <label for="product-description" class="form-label">Product description</label>
-                                    <textarea class="form-control" id="product-description" rows="3"></textarea>
+                                    <label for="product-add-description" class="form-label">Product description</label>
+                                    <textarea class="form-control" id="product-add-description" rows="3"></textarea>
                                 </div>
                             </div>
                         </form>
                         <div class="col-lg-12 col-md-12">
-                            <form id="uploadForm" method="post" action="" enctype="multipart/form-data">
+                            <form id="product-add-image" method="post" action="" enctype="multipart/form-data">
                                 <label class="form-label">Product image</label>
                                 <div class="row">
                                     <div class="col-lg-9 col-md-12">
-                                        <input type="file" id="fileInput" name="multiPartServlet" class="form-control"/>
+                                        <input type="file" id="product-add-file" name="multiPartServlet" class="form-control"/>
                                     </div>
                                     <div class="col-lg-3 col-md-12">
                                         <input type="submit" value="Upload" class="form-control"/>
                                     </div>
                                 </div>
                             </form>
+                            <input type="text" id="product-add-image-path" hidden="hidden">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="row">
                             <div class="col-12">
-                                <button type="button" class="btn btn-primary">Update</button>
+                                <button type="button" class="btn btn-primary" onclick="addProduct()">Add</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </main>
 
+<script src="js/add.js"></script>
+<script src="js/update.js"></script>
 <script src="js/upload.js"></script>
 <%@include file="footer.jsp" %>
 </body>

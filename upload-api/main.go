@@ -40,12 +40,12 @@ func main() {
 		// return uploaded file path
 		_, err = w.Write([]byte("./images/foods/" + header.Filename))
 		if err != nil {
-			return 
+			return
 		}
 	})
 
 	err := http.ListenAndServe(":3030", nil)
 	if err != nil {
-		return 
+		return
 	}
 }
