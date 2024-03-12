@@ -52,6 +52,7 @@ CREATE TABLE Checkout (
                           user_id INT,
                           product_id INT,
                           quantity INT,
+                          total BIGINT,
                           FOREIGN KEY (user_id) REFERENCES Users(user_id),
                           FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
@@ -107,30 +108,24 @@ CREATE TABLE RestaurantManagement (
 );
 
 CREATE TABLE RestaurantRecords (
-                                   seller_id INT,
                                    restaurant_id INT,
-                                   date DATE,
                                    sales_id INTEGER,
-                                   FOREIGN KEY (seller_id) REFERENCES Users(user_id),
                                    FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
 );
 
-CREATE TABLE Sales (
-                      sales_id SERIAL PRIMARY KEY,
-                      restaurant_id INT,
+CREATE TABLE RestaurantSales (
+                      index SERIAL PRIMARY KEY,
+                      sales_id INT,
                       product_id INT,
                       quantity INT,
                       total_sales BIGINT,
                       date DATE,
-                      FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id),
                       FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
 
-CREATE TABLE RestaurantSales (
-                                 seller_id INT,
+CREATE TABLE Expenses (
                                  restaurant_id INT,
-                                 total_sales BIGINT,
-                                 FOREIGN KEY (seller_id) REFERENCES Users(user_id),
+                                 expenses BIGINT,
                                  FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
 );
 
