@@ -1,6 +1,7 @@
 package Controller;
 
 import DAOs.CheckoutDAOs;
+import DAOs.ProductDAOs;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import Model.product;
@@ -22,13 +23,17 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        CheckoutDAOs checkoutDAO = new CheckoutDAOs();
         if (session.getAttribute("userID") == null) {
             resp.sendRedirect(req.getContextPath() + "/Login");
+        } else if (checkoutDAO.countProductInCheckout((int) session.getAttribute("userID")) == 0) {
+            resp.sendRedirect(req.getContextPath() + "/Cart");
         } else {
             int userID = (int) session.getAttribute("userID"); // Assuming the user ID is stored in the session
-            CheckoutDAOs checkoutDAO = new CheckoutDAOs();
             List<checkout> checkoutItems = checkoutDAO.getAllByID(userID);
+            long totalPrice = checkoutDAO.getTotalPriceInCheckout(userID);
             session.setAttribute("CheckoutItems", checkoutItems);
+            session.setAttribute("TotalPrice", totalPrice);
             RequestDispatcher rd = req.getRequestDispatcher("checkout.jsp");
             rd.forward(req, resp);
         }
@@ -50,6 +55,7 @@ public class CheckoutController extends HttpServlet {
         Type listType = new TypeToken<List<product>>() {}.getType();
         List<product> products = gson.fromJson(jsonString, listType);
         CheckoutDAOs checkoutDAO = new CheckoutDAOs();
+        ProductDAOs productDAO = new ProductDAOs();
         HttpSession session = req.getSession();
         int userID = (int) session.getAttribute("userID");
 
@@ -59,7 +65,7 @@ public class CheckoutController extends HttpServlet {
             int quantity = Product.getProductQuantity();
             // Get the user's id and the restaurant's id
             // Insert the product into the 'Checkout' table
-            checkoutDAO.insertCheckout(userID, productID, quantity);
+            checkoutDAO.insertCheckout(userID, productID, quantity, productDAO.getProductPrice(productID) * quantity);
         }
 
         // Send a response back to the client

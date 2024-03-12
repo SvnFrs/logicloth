@@ -37,12 +37,12 @@ public class SellerDAOs {
         return rs.next();
     }
     
-    public int getRestaurantID(int userID) {
+    public int getRestaurantID(int sellerID) {
         int restaurantID = 0;
         String sql = "SELECT restaurant_id FROM restaurantmanagement WHERE seller_id = ?";
         try {
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, userID);
+            ps.setInt(1, sellerID);
             rs = ps.executeQuery();
             if (rs.next()) {
                 restaurantID = rs.getInt("restaurant_id");

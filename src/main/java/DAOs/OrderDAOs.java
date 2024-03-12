@@ -1,7 +1,7 @@
 package DAOs;
 
 import ConnectDB.ConnectingDB;
-import Model.cart;
+import Model.restaurant;
 import Model.order;
 import Model.orderDetail;
 import Model.orderStatus;
@@ -21,7 +21,7 @@ public class OrderDAOs {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
-    orderDetail orderDetail = new orderDetail();
+//    orderDetail orderDetail = new orderDetail();
     List<order> orders = new ArrayList<>();
     String query = "";
 
@@ -29,13 +29,12 @@ public class OrderDAOs {
         conn = ConnectingDB.getConnection();
     }
     
-    public void insertOrder(int orderID, int userID, int restaurantID) {
-        query = "INSERT INTO orders(order_id, user_id, restaurant_id) VALUES(?, ?, ?)";
+    public void insertOrder(int orderID, int userID) {
+        query = "INSERT INTO orders(order_id, user_id) VALUES(?, ?)";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, orderID);
             ps.setInt(2, userID);
-            ps.setInt(3, restaurantID);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAOs.class.getName()).
@@ -103,7 +102,7 @@ public class OrderDAOs {
                 order order = new order();
                 order.setOrderID(rs.getInt("order_id"));
                 order.setUserID(rs.getInt("user_id"));
-                order.setRestaurantID(rs.getInt("restaurant_id"));
+//                order.setRestaurantID(rs.getInt("restaurant_id"));
                 order.setOrderDate(String.valueOf(rs.getDate("order_date")));
                 order.setOrderStatus(rs.getString("order_status"));
                 result.add(order);
@@ -116,15 +115,15 @@ public class OrderDAOs {
     }
 
     public List<orderDetail> getOrderDetailByOrderID(int orderID) {
-        List<orderDetail> orderDetails = new ArrayList<>();
+        ArrayList<orderDetail> orderDetails = new ArrayList<>();
         query = "SELECT * FROM orderdetails WHERE order_id = ?";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, orderID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                orderDetail.setOrderDetailID(rs.getInt("order_detail_id"));
-                orderDetail.setOrderID(rs.getInt("order_id"));
+                orderDetail orderDetail = new orderDetail();
+                orderDetail.setRestaurantID(rs.getInt("restaurant_id"));
                 orderDetail.setProductID(rs.getInt("product_id"));
                 orderDetail.setQuantity(rs.getInt("quantity"));
                 orderDetail.setTotalPrice(rs.getLong("total_price"));
@@ -195,40 +194,70 @@ public class OrderDAOs {
         return orderStatus;
     }
 
-    public List<orderStatus> allOrderStatusByUser(int orderStatusID) {
-        ArrayList<orderStatus> result = new ArrayList<>();
-        query = "SELECT * FROM orderstatus WHERE status_role = 'user' AND status_id = ? + 1";
+
+    public void updateOrderStatus(int orderID, int statusID) {
+        query = "UPDATE orders SET order_status = ? WHERE order_id = ?";
         try {
             ps = conn.prepareStatement(query);
-            ps.setInt(1, orderStatusID);
+            ps.setInt(1, statusID);
+            ps.setInt(2, orderID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String getOrderDateByOrderID(int orderID) {
+        String orderDate = "";
+        query = "SELECT order_date FROM orders WHERE order_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderID);
             rs = ps.executeQuery();
             while (rs.next()) {
-                orderStatus orderStatus = new orderStatus();
-                orderStatus.setOrderStatusID(rs.getInt("status_id"));
-                orderStatus.setOrderStatus(rs.getString("status_name"));
-                result.add(orderStatus);
+                orderDate = String.valueOf(rs.getDate(1));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(SellerOrderDAOs.class.getName()).
+            Logger.getLogger(OrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return orderDate;
+    }
+    
+//    public int getRestaurantIDByOrderID(int orderID) {
+//        int restaurantID = 0;
+//        query = "SELECT restaurant_id FROM orderdetails WHERE order_id = ?";
+//        try {
+//            ps = conn.prepareStatement(query);
+//            ps.setInt(1, orderID);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                restaurantID = rs.getInt(1);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(OrderDAOs.class.getName()).
+//                    log(Level.SEVERE, null, ex);
+//        }
+//        return restaurantID;
+//    }
+    
+    public List<restaurant> getRestaurantIDByOrderID(int orderID) {
+        ArrayList<restaurant> result = new ArrayList<>();
+        query = "SELECT DISTINCT restaurant_id FROM orderdetails WHERE order_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                restaurant restaurant = new restaurant();
+                restaurant.setRestaurantID(rs.getInt("restaurant_id"));
+                result.add(restaurant);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOs.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
         return result;
     }
-
-    public int lastOrderStatusID() {
-        int orderID = 0;
-        query = "SELECT MAX(status_id) FROM orderstatus WHERE status_role = 'user'";
-        try {
-            ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                orderID = rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(SellerOrderDAOs.class.getName()).
-                    log(Level.SEVERE, null, ex);
-        }
-        return orderID;
-    }
-
 }

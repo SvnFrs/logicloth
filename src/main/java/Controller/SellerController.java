@@ -47,8 +47,11 @@ public class SellerController extends HttpServlet {
                     SellerOrderDAOs sellerOrderDAOs = new SellerOrderDAOs();
                     SellerProductDAOs sellerProductDAOs = new SellerProductDAOs();
                     int restaurantID = sellerOrderDAOs.getRestaurantID(userID);
-                    List<order> orders = sellerOrderDAOs.getAllByRestaurantID(restaurantID);
-                    List<orderDetail> orderDetails = sellerOrderDAOs.getOrderDetailsByRestaurantID(restaurantID);
+                    List<order> orderIDs = sellerOrderDAOs.getAllOrderIDByRestaurantID(restaurantID);
+                    List<order> orders = sellerOrderDAOs.getAllByOrderIDs(orderIDs);
+                    List<orderDetail> orderDetails = sellerOrderDAOs.getOrderDetailsByOrderID(orderIDs);
+
+//                    List<orderDetail> orderDetails = sellerOrderDAOs.getOrderDetailsByRestaurantID(restaurantID);
                     List<product> products = sellerProductDAOs.getAllByRestaurantID(restaurantID);
                     session.setAttribute("RestaurantID", restaurantID);
                     session.setAttribute("Orders", orders);

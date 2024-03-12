@@ -55,7 +55,7 @@ public class OrderController extends HttpServlet {
         int orderID = orderDAOs.generateOrderID();
         List<checkout> checkoutItems = checkoutDAOs.getAllByID(userID);
         for (checkout checkout : checkoutItems) {
-            orderDAOs.insertOrder(orderID, userID, productDAOs.getRestaurantID(checkout.getProductID()));
+            orderDAOs.insertOrder(orderID, userID);
             long totalPrice = productDAOs.getProductPrice(checkout.getProductID()) * checkout.getQuantity();
             int addressID = addressDAOs.generateAddressID();
             addressDAOs.insertAddress(orderID, userID, fullName, phoneNumber, address);

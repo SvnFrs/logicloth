@@ -49,23 +49,23 @@ public class SellerOrderDAOs {
         }
         return result;
     }
-
-    public List<orderDetail> getOrderDetailsByRestaurantID(int restaurantID) {
-        ArrayList<orderDetail> result = new ArrayList<>();
-        query = "SELECT * FROM orderdetails WHERE restaurant_id = ?";
+    
+    public List<order> getAllByOrderIDs(List<order> orderIDs) {
+        ArrayList<order> result = new ArrayList<>();
+        query = "SELECT * FROM orders WHERE order_id = ?";
         try {
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, restaurantID);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                orderDetail orderDetail = new orderDetail();
-                orderDetail.setOrderDetailID(rs.getInt("order_detail_id"));
-                orderDetail.setOrderID(rs.getInt("order_id"));
-                orderDetail.setProductID(rs.getInt("product_id"));
-                orderDetail.setQuantity(rs.getInt("quantity"));
-                orderDetail.setTotalPrice(rs.getLong("total_price"));
-                orderDetail.setAddressID(rs.getInt("address_id"));
-                result.add(orderDetail);
+            for (order order : orderIDs) {
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, order.getOrderID());
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    order order1 = new order();
+                    order1.setOrderID(rs.getInt("order_id"));
+                    order1.setUserID(rs.getInt("user_id"));
+                    order1.setOrderDate(String.valueOf(rs.getDate("order_date")));
+                    order1.setOrderStatus(rs.getString("order_status"));
+                    result.add(order1);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(SellerOrderDAOs.class.getName()).
@@ -73,7 +73,26 @@ public class SellerOrderDAOs {
         }
         return result;
     }
-
+    
+    public List<order> getAllOrderIDByRestaurantID(int restaurantID) {
+        ArrayList<order> result = new ArrayList<>();
+        query = "SELECT DISTINCT order_id FROM orderdetails WHERE restaurant_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, restaurantID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                order order = new order();
+                order.setOrderID(rs.getInt("order_id"));
+                result.add(order);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerOrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
     public List<orderDetail> getOrderDetailsByOrderID(int orderID) {
         ArrayList<orderDetail> result = new ArrayList<>();
         query = "SELECT * FROM orderdetails WHERE order_id = ?";
@@ -98,26 +117,30 @@ public class SellerOrderDAOs {
         return result;
     }
     
-    public orderDetail getOrderDetailByOrderID(int orderID) {
-        orderDetail orderDetail = new orderDetail();
+    public List<orderDetail> getOrderDetailsByOrderID(List<order> orderIDs) {
+        ArrayList<orderDetail> result = new ArrayList<>();
         query = "SELECT * FROM orderdetails WHERE order_id = ?";
         try {
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, orderID);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                orderDetail.setOrderDetailID(rs.getInt("order_detail_id"));
-                orderDetail.setOrderID(rs.getInt("order_id"));
-                orderDetail.setProductID(rs.getInt("product_id"));
-                orderDetail.setQuantity(rs.getInt("quantity"));
-                orderDetail.setTotalPrice(rs.getLong("total_price"));
-                orderDetail.setAddressID(rs.getInt("address_id"));
+            for (order order : orderIDs) {
+                ps = conn.prepareStatement(query);
+                ps.setInt(1, order.getOrderID());
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    orderDetail orderDetail = new orderDetail();
+                    orderDetail.setOrderDetailID(rs.getInt("order_detail_id"));
+                    orderDetail.setOrderID(rs.getInt("order_id"));
+                    orderDetail.setProductID(rs.getInt("product_id"));
+                    orderDetail.setQuantity(rs.getInt("quantity"));
+                    orderDetail.setTotalPrice(rs.getLong("total_price"));
+                    orderDetail.setAddressID(rs.getInt("address_id"));
+                    result.add(orderDetail);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(SellerOrderDAOs.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-        return orderDetail;
+        return result;
     }
 
     public int getRestaurantID(int userID) {

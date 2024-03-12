@@ -47,13 +47,14 @@ public class CheckoutDAOs {
         return result;
     }
     
-    public void insertCheckout(int userID, int productID, int quantity) {
-        String query = "INSERT INTO checkout (user_id, product_id, quantity) VALUES (?, ?, ?)";
+    public void insertCheckout(int userID, int productID, int quantity, long totalPrice) {
+        String query = "INSERT INTO checkout (user_id, product_id, quantity, total) VALUES (?, ?, ?, ?)";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, userID);
             ps.setInt(2, productID);
             ps.setInt(3, quantity);
+            ps.setLong(4, totalPrice);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CheckoutDAOs.class.getName()).
@@ -120,6 +121,23 @@ public class CheckoutDAOs {
                     log(Level.SEVERE, null, ex);
         }
         return count;
+    }
+
+    public long getTotalPriceInCheckout(int userID) {
+        long totalPrice = 0;
+        String query = "SELECT SUM(total) FROM checkout WHERE user_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                totalPrice = rs.getLong(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CheckoutDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return totalPrice;
     }
 
 
