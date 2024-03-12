@@ -1,7 +1,4 @@
-<%@ page import="DAOs.OrderDAOs" %>
-<%@ page import="DAOs.SellerOrderDAOs" %>
-<%@ page import="DAOs.AddressDAOs" %>
-<%@ page import="DAOs.ProductDAOs" %><%--
+<%@ page import="DAOs.*" %><%--
   Created by IntelliJ IDEA.
   User: IuseArch
   Date: 3/10/24
@@ -18,6 +15,8 @@
     request.setAttribute("addressDAOs", addressDAOs);
     ProductDAOs productDAOs = new ProductDAOs();
     request.setAttribute("productDAOs", productDAOs);
+    RestaurantDAOs restaurantDAOs = new RestaurantDAOs();
+    request.setAttribute("restaurantDAOs", restaurantDAOs);
 %>
 
 <!DOCTYPE html>
@@ -28,35 +27,6 @@
 </head>
 <body>
 <%@include file="user-header.jsp" %>
-<%--<div class="container">--%>
-<%--    <h4>${sessionScope.username}'s Orders</h4>--%>
-<%--    <table class="table table-striped">--%>
-<%--        <thead>--%>
-<%--        <tr>--%>
-<%--            <th>Order ID</th>--%>
-<%--            <th>Order Date</th>--%>
-<%--            <th>Order Total</th>--%>
-<%--            <th>Order Status</th>--%>
-<%--            <th>Order Details</th>--%>
-<%--        </tr>--%>
-<%--        </thead>--%>
-<%--        <tbody>--%>
-<%--        <c:forEach items="${Orders}" var="orders">--%>
-<%--            <tr>--%>
-<%--                <td>${orders.orderID}</td>--%>
-<%--                <td>--%>
-<%--                    <span id="date-${orders.orderID}">--%>
-<%--                        ${orders.orderDate}--%>
-<%--                    </span>--%>
-<%--                </td>--%>
-<%--                <td>${orderDAOs.getTotalPriceByOrderID(orders.orderID)}</td>--%>
-<%--                <td>${orderDAOs.getOrderStatusByOrderStatusID(orders.orderStatus)}</td>--%>
-<%--                <td><a href="OrderDetail?orderID=${orders.orderID}">Details</a></td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-<%--        </tbody>--%>
-<%--    </table>--%>
-<%--</div>--%>
 
 <div class="container-xxl py-5">
     <div class="card">
@@ -137,23 +107,40 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="my-5">
+                                <div class="my-2">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Order Status
+                                        </div>
+                                        <div class="card-body">
+                                            <p>${orderDAOs.getOrderStatusByOrderStatusID(order.orderStatus)}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="my-2">
                                     <c:if test="${order.orderStatus == 1}">
-                                        <a id="cancel-order-${order.orderID}" class="btn btn-danger">
+                                        <button id="cancel-order-${order.orderID}"
+                                                class="btn btn-danger"
+                                                onclick="cancelOrder(${order.orderID})"
+                                        >
                                             Cancel Order
-                                        </a>
+                                        </button>
                                     </c:if>
                                     <c:if test="${order.orderStatus > 1 && order.orderStatus < 3 }">
-                                        <a id="receive-order-${order.orderID}" class="btn btn-success disabled">
+                                        <button id="receive-order-${order.orderID}"
+                                                class="btn btn-success disabled"
+                                        >
                                             Đã nhận được hàng
-                                        </a>
+                                        </button>
                                     </c:if>
                                     <c:if test="${order.orderStatus == 3}">
-                                        <a id="receive-order-${order.orderID}" class="btn btn-success">
+                                        <button id="receive-order-${order.orderID}"
+                                                class="btn btn-success"
+                                                onclick="receivedOrder(${order.orderID})"
+                                        >
                                             Đã nhận được hàng
-                                        </a>
+                                        </button>
                                     </c:if>
-
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12">
@@ -183,16 +170,17 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        Total Paid: <span
+                        Total: <span
                             class="text-success fs-4">${orderDAOs.getTotalPriceByOrderID(order.orderID)}</span>
                     </div>
                 </div>
             </div>
         </div>
     </c:forEach>
-
 </div>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="js/order.js"></script>
 <%@include file="footer.jsp" %>
 </body>
 </html>

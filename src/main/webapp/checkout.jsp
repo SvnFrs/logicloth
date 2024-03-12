@@ -8,10 +8,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="DAOs.ProductDAOs" %>
+<%@ page import="DAOs.CheckoutDAOs" %>
 
 <%
     ProductDAOs productDAOs = new ProductDAOs();
     request.setAttribute("productDAOs", productDAOs);
+    CheckoutDAOs checkoutDAOs = new CheckoutDAOs();
+    request.setAttribute("checkoutDAOs", checkoutDAOs);
 %>
 
 <!DOCTYPE html>
@@ -51,7 +54,7 @@
 <%--                </li>--%>
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total (VND)</span>
-                    <strong>$20</strong>
+                    <strong>${TotalPrice}</strong>
                 </li>
             </ul>
         </div>

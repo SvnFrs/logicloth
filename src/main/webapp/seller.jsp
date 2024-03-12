@@ -113,17 +113,41 @@
                                         </div>
                                     </div>
                                     <div class="my-5">
-                                        <select class="form-select" aria-label="order-status-${order.orderID}"
-                                                id="order-status-${order.orderID}">
-                                            <option value="${order.orderStatus}"
-                                                    selected>${sellerOrderDAOs.getOrderStatusByOrderStatusID(order.orderStatus)}</option>
-                                            <c:forEach
-                                                    items="${sellerOrderDAOs.allOrderStatusBySeller(order.orderStatus)}"
-                                                    var="orderStatus">
-                                                <option value="${orderStatus.orderStatusID}">${orderStatus.orderStatus}</option>
-                                            </c:forEach>
-                                            <option value="${sellerOrderDAOs.lastOrderStatusID()}">${sellerOrderDAOs.getOrderStatusByOrderStatusID(sellerOrderDAOs.getLastOrderStatusID())}</option>
-                                        </select>
+                                        <c:choose>
+                                            <c:when test="${order.orderStatus == 4}">
+                                                <div class="card">
+                                                    <div class="card-header text-center">
+                                                        Order Status
+                                                    </div>
+                                                    <div class="card-body text-center">
+                                                        <p class="text-success">${addressDAOs.getAddressByOrderID(order.orderID).receiverName} đã nhận đơn hàng</p>
+                                                    </div>
+                                                </div>
+                                            </c:when>
+                                            <c:when test="${order.orderStatus == 6}">
+                                                <div class="card">
+                                                    <div class="card-header text-center">
+                                                        Order Status
+                                                    </div>
+                                                    <div class="card-body text-center">
+                                                        <p class="text-danger">${addressDAOs.getAddressByOrderID(order.orderID).receiverName} đã hủy đơn hàng</p>
+                                                    </div>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <select class="form-select" aria-label="order-status-${order.orderID}"
+                                                        id="order-status-${order.orderID}">
+                                                    <option value="${order.orderStatus}"
+                                                            selected>${sellerOrderDAOs.getOrderStatusByOrderStatusID(order.orderStatus)}</option>
+                                                    <c:forEach
+                                                            items="${sellerOrderDAOs.allOrderStatusBySeller(order.orderStatus)}"
+                                                            var="orderStatus">
+                                                        <option value="${orderStatus.orderStatusID}">${orderStatus.orderStatus}</option>
+                                                    </c:forEach>
+                                                        <%--                                            <option value="${sellerOrderDAOs.lastOrderStatusID()}">${sellerOrderDAOs.getOrderStatusByOrderStatusID(sellerOrderDAOs.lastOrderStatusID())}</option>--%>
+                                                </select>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
