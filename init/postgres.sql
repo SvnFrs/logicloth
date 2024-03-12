@@ -60,12 +60,10 @@ CREATE TABLE Checkout (
 CREATE TABLE Orders (
                         order_id SERIAL PRIMARY KEY,
                         user_id INT,
-                        restaurant_id INT,
                         order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         order_status INT DEFAULT 1,
                         status BOOLEAN DEFAULT TRUE,
-                        FOREIGN KEY (user_id) REFERENCES Users(user_id),
-                        FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
+                        FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
 CREATE TABLE OrderDetails (
@@ -76,6 +74,7 @@ CREATE TABLE OrderDetails (
                               quantity INT,
                               total_price BIGINT,
                               address_id INT,
+                              order_status INT DEFAULT 1,
                               status BOOLEAN DEFAULT TRUE,
                               FOREIGN KEY (order_id) REFERENCES Orders(order_id),
                               FOREIGN KEY (product_id) REFERENCES Products(product_id),
@@ -114,19 +113,19 @@ CREATE TABLE RestaurantRecords (
 );
 
 CREATE TABLE RestaurantSales (
-                      index SERIAL PRIMARY KEY,
-                      sales_id INT,
-                      product_id INT,
-                      quantity INT,
-                      total_sales BIGINT,
-                      date DATE,
-                      FOREIGN KEY (product_id) REFERENCES Products(product_id)
+                                 index SERIAL PRIMARY KEY,
+                                 sales_id INT,
+                                 product_id INT,
+                                 quantity INT,
+                                 total_sales BIGINT,
+                                 date DATE,
+                                 FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
 
 CREATE TABLE Expenses (
-                                 restaurant_id INT,
-                                 expenses BIGINT,
-                                 FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
+                          restaurant_id INT,
+                          expenses BIGINT,
+                          FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
 );
 
 INSERT INTO Users (username, password, email, full_name, role)
