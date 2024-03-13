@@ -1,6 +1,7 @@
 <%@ page import="DAOs.SellerOrderDAOs" %>
 <%@ page import="DAOs.AddressDAOs" %>
 <%@ page import="DAOs.ProductDAOs" %>
+<%@ page import="DAOs.OrderDAOs" %>
 <%--
     Document   : seller
     Created on : Mar 1, 2024, 7:05:38 PM
@@ -10,6 +11,8 @@
 <%
     SellerOrderDAOs sellerOrderDAOs = new SellerOrderDAOs();
     request.setAttribute("sellerOrderDAOs", sellerOrderDAOs);
+    OrderDAOs orderDAOs = new OrderDAOs();
+    request.setAttribute("orderDAOs", orderDAOs);
     AddressDAOs addressDAOs = new AddressDAOs();
     request.setAttribute("addressDAOs", addressDAOs);
     ProductDAOs productDAOs = new ProductDAOs();
@@ -58,7 +61,7 @@
                                     ${order.orderDate}
                             </span>
                             </td>
-                            <td>${sellerOrderDAOs.getOrderStatusByOrderStatusID(order.orderStatus)}</td>
+                            <td>${sellerOrderDAOs.getOrderStatusByOrderStatusID(orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, RestaurantID))}</td>
                             <td>${sellerOrderDAOs.getTotalPriceByOrderID(order.orderID)}</td>
                             <td>
                                 <a href="" class="btn btn-primary"
@@ -137,10 +140,10 @@
                                             <c:otherwise>
                                                 <select class="form-select" aria-label="order-status-${order.orderID}"
                                                         id="order-status-${order.orderID}">
-                                                    <option value="${order.orderStatus}"
-                                                            selected>${sellerOrderDAOs.getOrderStatusByOrderStatusID(order.orderStatus)}</option>
+                                                    <option value="${orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, RestaurantID)}"
+                                                            selected>${sellerOrderDAOs.getOrderStatusByOrderStatusID(orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, RestaurantID))}</option>
                                                     <c:forEach
-                                                            items="${sellerOrderDAOs.allOrderStatusBySeller(order.orderStatus)}"
+                                                            items="${sellerOrderDAOs.allOrderStatusBySeller(orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, RestaurantID))}"
                                                             var="orderStatus">
                                                         <option value="${orderStatus.orderStatusID}">${orderStatus.orderStatus}</option>
                                                     </c:forEach>
@@ -223,7 +226,7 @@
                         <tr>
                             <td>${product.productID}</td>
                             <td>${product.productName}</td>
-                            <td><img src="${product.productImage}" alt=""></td>
+                            <td><img src="${product.productImage}" alt="" class="img-fluid" style="width: auto;height: 100px;object-fit: contain;"></td>
                             <td>${product.productPrice}</td>
                             <td>${product.productQuantity}</td>
                             <td>
@@ -397,8 +400,49 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    <div class="container-xxl py-5">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-10 col-md-9">
+                        Sales Report
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped align-middle">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <jsp:useBean id="Sales" scope="session" type="java.util.List"/>
+                    <c:forEach items="${Sales}" var="sale">
+                        <tr>
+                            <td>${sale.saleDate}</td>
+                            <td>${sale.totalSale}</td>
+                            <td>
+                                <div class="btn-group-lg">
+                                    <div class="row">
+                                        <a href="" class="btn btn-primary"
+                                           data-bs-toggle="modal" data-bs-target=""
+                                        >Detail</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </main>
 
 <script src="js/add.js"></script>

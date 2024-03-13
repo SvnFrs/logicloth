@@ -39,7 +39,7 @@
                 <tr>
                     <th>Order ID</th>
                     <th>Order Date</th>
-                    <th>Order Status</th>
+<%--                    <th>Order Status</th>--%>
                     <th>Order Total</th>
                     <th></th>
                 </tr>
@@ -53,7 +53,7 @@
                                     ${orders.orderDate}
                             </span>
                         </td>
-                        <td>${orderDAOs.getOrderStatusByOrderStatusID(orders.orderStatus)}</td>
+<%--                        <td>${orderDAOs.getOrderStatusByOrderStatusID(orders.orderStatus)}</td>--%>
                         <td>${orderDAOs.getTotalPriceByOrderID(orders.orderID)}</td>
                         <td>
                             <a href="" class="btn btn-primary"
@@ -113,34 +113,36 @@
                                             Order Status
                                         </div>
                                         <div class="card-body">
-                                            <p>${orderDAOs.getOrderStatusByOrderStatusID(order.orderStatus)}</p>
+<%--                                            <p>${orderDAOs.getOrderStatusByOrderStatusID(order.orderStatus)}</p>--%>
+                                            <c:forEach items="${orderDAOs.getRestaurantIDByOrderID(order.orderID)}" var="orderStatus">
+                                                <p>Restaurant: ${restaurantDAOs.getRestaurantByID(orderStatus.restaurantID).restaurantName}</p>
+                                                <p>Status: ${orderDAOs.getOrderStatusByOrderStatusID(orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, orderStatus.restaurantID))}</p>
+                                                <c:if test="${orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, orderStatus.restaurantID) == 1}">
+                                                    <button id="cancel-order-${order.orderID}"
+                                                            class="btn btn-danger"
+                                                            onclick="cancelOrder(${order.orderID}, ${orderStatus.restaurantID})"
+                                                    >
+                                                        Cancel Order
+                                                    </button>
+                                                </c:if>
+                                                <c:if test="${orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, orderStatus.restaurantID) > 1 && orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, orderStatus.restaurantID) < 3 }">
+                                                    <button id="receive-order-${order.orderID}"
+                                                            class="btn btn-success disabled"
+                                                    >
+                                                        Đã nhận được hàng
+                                                    </button>
+                                                </c:if>
+                                                <c:if test="${orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, orderStatus.restaurantID) == 3}">
+                                                    <button id="receive-order-${order.orderID}"
+                                                            class="btn btn-success"
+                                                            onclick="receivedOrder(${order.orderID}, ${orderStatus.restaurantID})"
+                                                    >
+                                                        Đã nhận được hàng
+                                                    </button>
+                                                </c:if>
+                                            </c:forEach>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="my-2">
-                                    <c:if test="${order.orderStatus == 1}">
-                                        <button id="cancel-order-${order.orderID}"
-                                                class="btn btn-danger"
-                                                onclick="cancelOrder(${order.orderID})"
-                                        >
-                                            Cancel Order
-                                        </button>
-                                    </c:if>
-                                    <c:if test="${order.orderStatus > 1 && order.orderStatus < 3 }">
-                                        <button id="receive-order-${order.orderID}"
-                                                class="btn btn-success disabled"
-                                        >
-                                            Đã nhận được hàng
-                                        </button>
-                                    </c:if>
-                                    <c:if test="${order.orderStatus == 3}">
-                                        <button id="receive-order-${order.orderID}"
-                                                class="btn btn-success"
-                                                onclick="receivedOrder(${order.orderID})"
-                                        >
-                                            Đã nhận được hàng
-                                        </button>
-                                    </c:if>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12">

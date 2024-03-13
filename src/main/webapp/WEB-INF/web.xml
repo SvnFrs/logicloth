@@ -9,6 +9,10 @@
         <servlet-class>Controller.RegisterController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AdminLoginController</servlet-name>
+        <servlet-class>Controller.AdminLoginController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>HomepageController</servlet-name>
         <servlet-class>Controller.HomepageController</servlet-class>
     </servlet>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminLoginController</servlet-name>
+        <url-pattern>/Login/Admin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomepageController</servlet-name>
