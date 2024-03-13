@@ -15,11 +15,12 @@ public class AdminRestaurantAddController extends HttpServlet {
         HttpSession session = req.getSession();
         int  restaurantID = Integer.parseInt(req.getParameter("restaurantID"));
         String restaurantName = req.getParameter("restaurantName");
+        int sellerID = Integer.parseInt(req.getParameter("sellerID"));
         String restaurantAddress = req.getParameter("restaurantAddress");
         String restaurantDescription = req.getParameter("restaurantDescription");
         String restaurantImage = req.getParameter("restaurantImage");
 
         AdminDAOs adminDAOs = new AdminDAOs();
-        adminDAOs.updateRestaurant(restaurantName, restaurantAddress, restaurantDescription, restaurantImage, restaurantID);
+        adminDAOs.addRestaurant(sellerID, restaurantID, restaurantName, restaurantAddress, restaurantDescription, restaurantImage);
     }
 }

@@ -2,6 +2,7 @@ package Model;
 
 public class restaurant {
     private int restaurantID;
+    private int sellerID;
     private String restaurantName;
     private String restaurantDescription;
     private String restaurantAddress;
@@ -16,6 +17,24 @@ public class restaurant {
         this.restaurantAddress = restaurantAddress;
         this.restaurantImage = restaurantImage;
         this.status = status;
+    }
+
+    public restaurant(int restaurantID, int sellerID, String restaurantName, String restaurantDescription, String restaurantAddress, String restaurantImage, boolean status) {
+        this.restaurantID = restaurantID;
+        this.sellerID = sellerID;
+        this.restaurantName = restaurantName;
+        this.restaurantDescription = restaurantDescription;
+        this.restaurantAddress = restaurantAddress;
+        this.restaurantImage = restaurantImage;
+        this.status = status;
+    }
+
+    public int getSellerID() {
+        return sellerID;
+    }
+
+    public void setSellerID(int sellerID) {
+        this.sellerID = sellerID;
     }
 
     public boolean isStatus() {

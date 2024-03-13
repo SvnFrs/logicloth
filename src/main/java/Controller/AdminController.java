@@ -34,9 +34,11 @@ public class AdminController extends HttpServlet {
             }
             List<account> accounts = adminDAOs.getAllAccountsButAdmin();
             List<restaurant> restaurants = adminDAOs.getAllRestaurants();
+            List<restaurant> restaurantOwners = adminDAOs.getAllSellerIDAndRestaurantID();
             session.setAttribute("username", username);
             request.setAttribute("accounts", accounts);
             request.setAttribute("restaurants", restaurants);
+            request.setAttribute("restaurantOwners", restaurantOwners);
             RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
             rd.forward(request, response);
         }
