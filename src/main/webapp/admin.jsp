@@ -111,7 +111,7 @@
                             </div>
                             <div class="col-lg-2 col-md-3 text-end justify-content-end">
                                 <a href="" class="btn btn-success"
-                                   data-bs-toggle="modal" data-bs-target="#food-add-modal"
+                                   data-bs-toggle="modal" data-bs-target="#restaurant-add-modal"
                                 >Thêm quán ăn</a>
                             </div>
                         </div>
@@ -153,6 +153,70 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="restaurant-add-modal" tabindex="-1" aria-labelledby="restaurant-add-modal" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thêm quán ăn</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="my-3">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="mb-3">
+                                                <label for="restaurant-add-name" class="form-label">Tên quán ăn</label>
+                                                <input type="text" class="form-control" id="restaurant-add-name"
+                                                       placeholder="Tên quán ăn"
+                                                       aria-describedby="restaurant-name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="mb-3">
+                                                <label for="restaurant-add-address" class="form-label">Địa chỉ</label>
+                                                <input type="text" class="form-control" id="restaurant-add-address"
+                                                       placeholder="Địa chỉ"
+                                                       aria-describedby="restaurant-address">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <label for="restaurant-add-description" class="form-label">Miêu tả</label>
+                                            <textarea class="form-control" id="restaurant-add-description" rows="3"
+                                                      placeholder="Miêu tả"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="col-lg-12 col-md-12">
+                                    <form id="restaurant-add-image" method="post" action="" enctype="multipart/form-data">
+                                        <label class="form-label">Ảnh quán ăn</label>
+                                        <div class="row">
+                                            <div class="col-lg-9 col-md-12">
+                                                <input type="file" id="restaurant-add-file" name="multiPartServlet" class="form-control"/>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <input type="submit" value="Upload" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <input type="text" id="restaurant-add-image-path" hidden="hidden">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary" onclick="addRestaurant(${restaurant.restaurantID})">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -260,18 +324,18 @@
                                         </div>
                                     </form>
                                     <div class="col-lg-12 col-md-12">
-                                        <form id="restaurant-add-image" method="post" action="" enctype="multipart/form-data">
+                                        <form id="restaurant-update-image" method="post" action="" enctype="multipart/form-data">
                                             <label class="form-label">Ảnh quán ăn</label>
                                             <div class="row">
                                                 <div class="col-lg-9 col-md-12">
-                                                    <input type="file" id="restaurant-add-file" name="multiPartServlet" class="form-control"/>
+                                                    <input type="file" id="restaurant-update-file" name="multiPartServlet" class="form-control"/>
                                                 </div>
                                                 <div class="col-lg-3 col-md-12">
                                                     <input type="submit" value="Upload" class="form-control"/>
                                                 </div>
                                             </div>
                                         </form>
-                                        <input type="text" id="restaurant-add-image-path" hidden="hidden">
+                                        <input type="text" id="restaurant-update-image-path" hidden="hidden">
                                     </div>
                                 </div>
                                 <div class="modal-footer">

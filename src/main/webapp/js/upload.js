@@ -11,7 +11,7 @@ document.querySelectorAll('[id^="uploadForm-"]').forEach((form) => {
 
         formData.append('file', file);
 
-        xhr.open('POST', 'http://localhost:3030/upload', true);
+        xhr.open('POST', 'http://localhost:3030/uploadFood', true);
         xhr.onload = function () {
             if (xhr.status === 200) {
                 console.log('File uploaded successfully');
@@ -37,7 +37,7 @@ document.getElementById('product-add-image').addEventListener('submit', function
 
     formData.append('file', file);
 
-    xhr.open('POST', 'http://localhost:3030/upload', true);
+    xhr.open('POST', 'http://localhost:3030/uploadFood', true);
     xhr.onload = function () {
         if (xhr.status === 200) {
             console.log('File uploaded successfully');
