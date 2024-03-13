@@ -55,8 +55,9 @@ public class AdminLoginController extends HttpServlet {
                 // Redirect to admin page
                 response.sendRedirect(request.getContextPath() + "/Admin");
             } else {
+                response.getWriter().write("Login failed");
                 request.setAttribute("loginError", "Sai tài khoản hoặc mật khẩu!");
-                RequestDispatcher rd = request.getRequestDispatcher("login-register.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("admin-login.jsp");
                 rd.forward(request, response);
             }
         } catch (SQLException ex) {

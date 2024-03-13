@@ -13,14 +13,14 @@ public class AdminRestaurantAddController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        int  restaurantID = Integer.parseInt(req.getParameter("restaurantID"));
+        AdminDAOs adminDAOs = new AdminDAOs();
+        int restaurantID = adminDAOs.generateRestaurantID();
         String restaurantName = req.getParameter("restaurantName");
-        int sellerID = Integer.parseInt(req.getParameter("sellerID"));
+        int sellerID = Integer.parseInt(req.getParameter("restaurantOwner"));
         String restaurantAddress = req.getParameter("restaurantAddress");
         String restaurantDescription = req.getParameter("restaurantDescription");
         String restaurantImage = req.getParameter("restaurantImage");
 
-        AdminDAOs adminDAOs = new AdminDAOs();
         adminDAOs.addRestaurant(sellerID, restaurantID, restaurantName, restaurantAddress, restaurantDescription, restaurantImage);
     }
 }

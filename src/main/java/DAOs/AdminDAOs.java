@@ -197,13 +197,14 @@ public class AdminDAOs {
     }
     
     public void addRestaurant(int sellerID, int restaurantID, String restaurantName, String restaurantAddress, String restaurantDescription, String restaurantImage) {
-        String query = "INSERT INTO restaurants (name, address, description, image_url) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO restaurants (restaurant_id, name, address, description, image_url) VALUES (?, ?, ?, ?, ?)";
         try {
             ps = conn.prepareStatement(query);
-            ps.setString(1, restaurantName);
-            ps.setString(2, restaurantAddress);
+            ps.setInt(1, restaurantID);
+            ps.setString(2, restaurantName);
             ps.setString(3, restaurantDescription);
-            ps.setString(4, restaurantImage);
+            ps.setString(4, restaurantAddress);
+            ps.setString(5, restaurantImage);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AdminDAOs.class.getName()).log(Level.SEVERE, null, ex);
@@ -221,6 +222,25 @@ public class AdminDAOs {
         } catch (SQLException ex) {
             Logger.getLogger(AdminDAOs.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public int generateRestaurantID() {
+        String query = "SELECT MAX(restaurant_id) FROM restaurants";
+        try {
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) + 1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAOs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        AdminDAOs adminDAOs = new AdminDAOs();
+        System.out.println(adminDAOs.generateRestaurantID());
     }
 
     public static boolean isEmptyOrNull(Collection< ? > collection) {
