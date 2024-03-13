@@ -61,7 +61,7 @@ CREATE TABLE Orders (
                         order_id SERIAL PRIMARY KEY,
                         user_id INT,
                         order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                        order_status INT DEFAULT 1,
+                        order_status INT DEFAULT 0,
                         status BOOLEAN DEFAULT TRUE,
                         FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
