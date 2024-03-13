@@ -25,6 +25,7 @@ public class OrderStatusController extends HttpServlet {
         HttpSession session = req.getSession();
         String action = req.getParameter("action");
         int orderID = Integer.parseInt(req.getParameter("orderID"));
+        int restaurantID = Integer.parseInt(req.getParameter("restaurantID"));
         OrderDAOs orderDAOs = new OrderDAOs();
         SaleDAOs saleDAOs = new SaleDAOs();
         RecordDAOs recordDAOs = new RecordDAOs();
@@ -35,21 +36,21 @@ public class OrderStatusController extends HttpServlet {
             resp.getWriter().write("Order cancelled");
         } else if (action.equals("received")) {
             orderDAOs.updateOrderStatus(orderID, 4);
-            List<orderDetail> orderDetails = orderDAOs.getOrderDetailByOrderID(orderID);
+            List<orderDetail> orderDetails = orderDAOs.getOrderDetailByOrderIDAndRestaurantID(orderID, restaurantID);
             for (orderDetail orderDetail : orderDetails) {
                 recordDAOs.insertRecord(orderDetail.getRestaurantID(), saleID);
                 saleDAOs.insertSale(saleID, orderDetail.getProductID(), orderDetail.getQuantity(),
                         orderDetail.getTotalPrice(), Date.valueOf(orderDAOs.getOrderDateByOrderID(orderID)));
             }
             try {
-                long amount = orderDAOs.getTotalPriceByOrderID(orderID);
+                long amount = orderDAOs.getTotalPriceByOrderIDAndRestaurantID(orderID, restaurantID);
 //                int restaurantID = orderDAOs.getRestaurantIDByOrderID(orderID);
-//                expenseDAOs.updateRestaurantExpense(restaurantID, amount);
+                expenseDAOs.updateRestaurantExpense(restaurantID, amount);
             } catch (Exception e) {
                 expenseDAOs.addAllRestaurantID();
-                long amount = orderDAOs.getTotalPriceByOrderID(orderID);
+                long amount = orderDAOs.getTotalPriceByOrderIDAndRestaurantID(orderID, restaurantID);
 //                int restaurantID = orderDAOs.getRestaurantIDByOrderID(orderID);
-//                expenseDAOs.updateRestaurantExpense(restaurantID, amount);
+                expenseDAOs.updateRestaurantExpense(restaurantID, amount);
             }
 
             resp.getWriter().write("Order received");

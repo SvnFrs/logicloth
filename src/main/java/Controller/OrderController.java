@@ -30,6 +30,8 @@ public class OrderController extends HttpServlet {
             int userID = (int) session.getAttribute("userID");
             OrderDAOs orderDAOs = new OrderDAOs();
             List<order> orders = orderDAOs.getAllByID(userID);
+
+
             session.setAttribute("Orders", orders);
             RequestDispatcher rd = req.getRequestDispatcher("order.jsp");
             rd.forward(req, resp);

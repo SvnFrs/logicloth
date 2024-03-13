@@ -1,12 +1,10 @@
 package Controller;
 
-import DAOs.AccountDAOs;
-import DAOs.AdminDAOs;
-import DAOs.SellerOrderDAOs;
-import DAOs.SellerProductDAOs;
+import DAOs.*;
 import Model.order;
 import Model.orderDetail;
 import Model.product;
+import Model.sale;
 
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -16,8 +14,6 @@ import jakarta.servlet.http.*;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet(name = "SellerController", urlPatterns = {"/Seller"})
 public class SellerController extends HttpServlet {
@@ -46,17 +42,20 @@ public class SellerController extends HttpServlet {
                     session.setAttribute("username", username);
                     SellerOrderDAOs sellerOrderDAOs = new SellerOrderDAOs();
                     SellerProductDAOs sellerProductDAOs = new SellerProductDAOs();
+                    SaleDAOs saleDAOs = new SaleDAOs();
                     int restaurantID = sellerOrderDAOs.getRestaurantID(userID);
+                    List<sale> saleIDs = saleDAOs.getAllSaleIDByRestaurantID(restaurantID);
+                    List<sale> sales = saleDAOs.getAllSaleBySaleIDs(saleIDs);
                     List<order> orderIDs = sellerOrderDAOs.getAllOrderIDByRestaurantID(restaurantID);
                     List<order> orders = sellerOrderDAOs.getAllByOrderIDs(orderIDs);
                     List<orderDetail> orderDetails = sellerOrderDAOs.getOrderDetailsByOrderID(orderIDs);
 
-//                    List<orderDetail> orderDetails = sellerOrderDAOs.getOrderDetailsByRestaurantID(restaurantID);
                     List<product> products = sellerProductDAOs.getAllByRestaurantID(restaurantID);
                     session.setAttribute("RestaurantID", restaurantID);
                     session.setAttribute("Orders", orders);
                     session.setAttribute("OrderDetails", orderDetails);
                     session.setAttribute("Products", products);
+                    session.setAttribute("Sales", sales);
                     RequestDispatcher rd = request.getRequestDispatcher("seller.jsp");
                     rd.forward(request, response);
                 }

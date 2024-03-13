@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-@WebServlet(name = "LoginControl", urlPatterns = {"/Login/Admin"})
+@WebServlet(name = "AdminLoginController", urlPatterns = {"/Login/Admin"})
 public class AdminLoginController extends HttpServlet {
 
     @Override
@@ -46,14 +46,14 @@ public class AdminLoginController extends HttpServlet {
                 Cookie adminCookie = new Cookie("userID", String.valueOf(userID));
                 HttpSession session = request.getSession();
                 session.setAttribute("adminID", userID);
-                session.setAttribute("userCookie", adminCookie);
+                session.setAttribute("adminCookie", adminCookie);
                 response.addCookie(adminCookie);
 
                 // Send success response to JavaScript
                 response.getWriter().write("Admin Login successfully");
 
                 // Redirect to admin page
-                response.sendRedirect(request.getContextPath() + "/admin.jsp");
+                response.sendRedirect(request.getContextPath() + "/Admin");
             } else {
                 request.setAttribute("loginError", "Sai tài khoản hoặc mật khẩu!");
                 RequestDispatcher rd = request.getRequestDispatcher("login-register.jsp");

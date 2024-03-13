@@ -11,9 +11,11 @@ public class SellerOrderStatusController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        SellerOrderDAOs sellerOrderDAOs = new SellerOrderDAOs();
+        int userID = (int) session.getAttribute("userID");
+        int restaurantID = sellerOrderDAOs.getRestaurantID(userID);
         int orderID = Integer.parseInt(req.getParameter("orderID"));
         int statusID = Integer.parseInt(req.getParameter("statusID"));
-        SellerOrderDAOs sellerOrderDAOs = new SellerOrderDAOs();
-        sellerOrderDAOs.updateOrderStatus(orderID, statusID);
+        sellerOrderDAOs.updateOrderStatus(orderID, statusID, restaurantID);
     }
 }
