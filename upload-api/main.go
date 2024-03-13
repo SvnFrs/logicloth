@@ -74,7 +74,7 @@ func main() {
 
 		// w.Write([]byte("File uploaded successfully"))
 		// return uploaded file path
-		_, err = w.Write([]byte("./images/foods/" + header.Filename))
+		_, err = w.Write([]byte("./images/restaurants/" + header.Filename))
 		if err != nil {
 			return
 		}
