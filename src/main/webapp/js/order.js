@@ -1,5 +1,5 @@
-function cancelOrder(orderID) {
-    var queryString = "?action=" + encodeURIComponent("cancel") + "&orderID=" + encodeURIComponent(orderID);
+function cancelOrder(orderID, restaurantID) {
+    var queryString = "?action=" + encodeURIComponent("cancel") + "&orderID=" + encodeURIComponent(orderID) + "&restaurantID=" + encodeURIComponent(restaurantID);
     $.ajax({
         url: "/FoodWeb/OrderStatus" + queryString,
         type: "POST",
@@ -13,8 +13,9 @@ function cancelOrder(orderID) {
     });
 }
 
-function receivedOrder(orderID) {
-    var queryString = "?action=" + encodeURIComponent("received") + "&orderID=" + encodeURIComponent(orderID);
+function receivedOrder(orderID, restaurantID) {
+    console.log(restaurantID);
+    var queryString = "?action=" + encodeURIComponent("received") + "&orderID=" + encodeURIComponent(orderID) + "&restaurantID=" + encodeURIComponent(restaurantID);
     $.ajax({
         url: "/FoodWeb/OrderStatus" + queryString,
         type: "POST",
