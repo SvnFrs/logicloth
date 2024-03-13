@@ -94,8 +94,11 @@
                                         <td>${account.fullName}</td>
                                         <td>${account.role}</td>
                                         <td>
-                                            <a href="${pageContext.request.contextPath}/Admin/User/Edit?id=${user.id}" class="btn btn-primary">Sửa</a>
-                                            <a href="${pageContext.request.contextPath}/Admin/User/Delete?id=${user.id}" class="btn btn-danger">Xóa</a>
+                                            <a href="" class="btn btn-sm btn-primary"
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#user-update-modal-${account.userID}"
+                                            >Sửa</a>
+                                            <a href="" class="btn btn-sm btn-danger">Xóa</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -104,6 +107,124 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="user-add-modal" tabindex="-1" aria-labelledby="user-add-modal" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Thêm người dùng</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="my-3">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="mb-3">
+                                            <label for="user-add-username" class="form-label">Tên đăng nhập</label>
+                                            <input type="text" class="form-control" id="user-add-username"
+                                                   placeholder="Tên đăng nhập"
+                                                   aria-describedby="user-username">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                                <div class="mb-3">
+                                                    <label for="user-add-role" class="form-label">Loại tài khoản</label>
+                                                    <select class="form-select" aria-label="user-role"
+                                                            id="user-add-role">
+                                                            <option value="user">Người dùng</option>
+                                                            <option value="seller">Chủ quán</option>
+                                                    </select>
+                                                </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="mb-3">
+                                            <label for="user-add-email" class="form-label">Email</label>
+                                            <input type="text" class="form-control" id="user-add-email"
+                                                   placeholder="example@gmail.com"
+                                                   aria-describedby="user-email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="mb-3">
+                                            <label for="user-add-fullName" class="form-label">Tên đầy đủ</label>
+                                            <input type="text" class="form-control" id="user-add-fullName"
+                                                   placeholder="Tên đầy đủ"
+                                                   aria-describedby="user-fullName">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary" onclick="addUser()">Thêm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <c:forEach items="${accounts}" var="account">
+            <div class="modal fade" id="user-update-modal-${account.userID}" tabindex="-1" aria-labelledby="user-update-modal" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Chỉnh sửa người dùng</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="my-3">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="mb-3">
+                                            <label for="user-update-username-${account.userID}" class="form-label">Tên đăng nhập</label>
+                                            <input type="text" class="form-control" id="user-update-username-${account.userID}"
+                                                   placeholder="Tên đăng nhập"
+                                                   aria-describedby="user-username">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="mb-3">
+                                            <label for="user-update-email-${account.userID}" class="form-label">Email</label>
+                                            <input type="text" class="form-control" id="user-update-email-${account.userID}"
+                                                   placeholder="example@gmail.com"
+                                                   aria-describedby="user-email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="mb-3">
+                                            <label for="user-update-fullName-${account.userID}" class="form-label">Tên đầy đủ</label>
+                                            <input type="text" class="form-control" id="user-update-fullName-${account.userID}"
+                                                   placeholder="Tên đầy đủ"
+                                                   aria-describedby="user-fullName">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary" onclick="updateUser(${account.userID})">Chỉnh sửa</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </c:forEach>
 
             <div class="container-xxl py-5">
                 <div class="card">
@@ -248,7 +369,7 @@
                             <div class="modal-footer">
                                 <div class="row">
                                     <div class="col-12">
-                                        <button type="button" class="btn btn-primary" onclick="addRestaurant(${restaurant.restaurantID})">Add</button>
+                                        <button type="button" class="btn btn-primary" onclick="addRestaurant()">Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -387,6 +508,7 @@
                 </c:forEach>
             </div>
         </main>
+        <script src="js/add.js"></script>
         <script src="js/update.js"></script>
         <script src="js/admin-upload.js"></script>
         <%@include file="footer.jsp"%>

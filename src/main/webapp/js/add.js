@@ -24,3 +24,30 @@ function addProduct() {
     };
     xhr.send();
 }
+
+function addRestaurant() {
+    // gather the values of the form fields
+    var restaurantName = document.getElementById('restaurant-add-name').value;
+    var restaurantOwner = document.getElementById('restaurant-add-owner').value;
+    var restaurantAddress = document.getElementById('restaurant-add-address').value;
+    var restaurantDescription = document.getElementById('restaurant-add-description').value;
+    var restaurantImage = document.getElementById('restaurant-add-image-path').value;
+
+    // build query string
+    var queryString = '?restaurantName=' + encodeURIComponent(restaurantName) +
+        '&restaurantOwner=' + encodeURIComponent(restaurantOwner) +
+        '&restaurantAddress=' + encodeURIComponent(restaurantAddress) +
+        '&restaurantDescription=' + encodeURIComponent(restaurantDescription) +
+        '&restaurantImage=' + encodeURIComponent(restaurantImage);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/FoodWeb/Admin/Restaurant/Add' + queryString, true);
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log('Restaurant added successfully');
+        } else {
+            console.log('Restaurant add failed');
+        }
+    };
+    xhr.send();
+}
