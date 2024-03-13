@@ -136,6 +136,29 @@ public class OrderDAOs {
         return orderDetails;
     }
 
+    public List<orderDetail> getOrderDetailByOrderIDAndRestaurantID(int orderID, int restaurantID) {
+        ArrayList<orderDetail> orderDetails = new ArrayList<>();
+        query = "SELECT * FROM orderdetails WHERE order_id = ? AND restaurant_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderID);
+            ps.setInt(2, restaurantID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                orderDetail orderDetail = new orderDetail();
+                orderDetail.setRestaurantID(rs.getInt("restaurant_id"));
+                orderDetail.setProductID(rs.getInt("product_id"));
+                orderDetail.setQuantity(rs.getInt("quantity"));
+                orderDetail.setTotalPrice(rs.getLong("total_price"));
+                orderDetails.add(orderDetail);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return orderDetails;
+    }
+
     public List<orderDetail> getOrderDetailsByOrderID(int orderID) {
         ArrayList<orderDetail> result = new ArrayList<>();
         query = "SELECT * FROM orderdetails WHERE order_id = ?";
@@ -176,6 +199,24 @@ public class OrderDAOs {
         }
         return totalPrice;
     }
+
+    public long getTotalPriceByOrderIDAndRestaurantID(int orderID, int restaurantID) {
+        long totalPrice = 0;
+        query = "SELECT SUM(total_price) FROM orderdetails WHERE order_id = ? AND restaurant_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderID);
+            ps.setInt(2, restaurantID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                totalPrice = rs.getLong(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return totalPrice;
+    }
     
     public String getOrderStatusByOrderStatusID(int statusID) {
         String orderStatus = "";
@@ -196,7 +237,7 @@ public class OrderDAOs {
 
 
     public void updateOrderStatus(int orderID, int statusID) {
-        query = "UPDATE orders SET order_status = ? WHERE order_id = ?";
+        query = "UPDATE orderdetails SET order_status = ? WHERE order_id = ?";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, statusID);
@@ -225,23 +266,6 @@ public class OrderDAOs {
         return orderDate;
     }
     
-//    public int getRestaurantIDByOrderID(int orderID) {
-//        int restaurantID = 0;
-//        query = "SELECT restaurant_id FROM orderdetails WHERE order_id = ?";
-//        try {
-//            ps = conn.prepareStatement(query);
-//            ps.setInt(1, orderID);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                restaurantID = rs.getInt(1);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(OrderDAOs.class.getName()).
-//                    log(Level.SEVERE, null, ex);
-//        }
-//        return restaurantID;
-//    }
-    
     public List<restaurant> getRestaurantIDByOrderID(int orderID) {
         ArrayList<restaurant> result = new ArrayList<>();
         query = "SELECT DISTINCT restaurant_id FROM orderdetails WHERE order_id = ?";
@@ -259,5 +283,72 @@ public class OrderDAOs {
                     log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+    
+    public int getOrderStatusByOrderIDAndRestaurantID(int orderID, int restaurantID) {
+        int statusID = 0;
+        query = "SELECT order_status FROM orderdetails WHERE order_id = ? AND restaurant_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderID);
+            ps.setInt(2, restaurantID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                statusID = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return statusID;
+    }
+    
+    public List<order> getAllOrderStatusByOrderID(int orderID) {
+        ArrayList<order> result = new ArrayList<>();
+        query = "SELECT DISTINCT order_status FROM orderdetails WHERE order_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                order order = new order();
+                order.setOrderStatus(rs.getString("order_status"));
+                result.add(order);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public void updateOrderStatus() {
+        query = "UPDATE orders SET order_status = ? WHERE order_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, 2);
+            ps.setInt(2, 1);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public int countOrderDetailsWithOrderID(int orderID) {
+        int count = 0;
+        query = "SELECT COUNT(order_detail_id) FROM orderdetails WHERE order_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return count;
     }
 }

@@ -3,19 +3,17 @@ package Model;
 public class sale {
     private int saleID;
     private int restaurantID;
-    private int orderID;
     private int productID;
     private int quantity;
-    private double totalSale;
+    private long totalSale;
     private String saleDate;
 
     public sale() {
     }
 
-    public sale(int saleID, int restaurantID, int orderID, int productID, int quantity, double totalSale, String saleDate) {
+    public sale(int saleID, int restaurantID, int productID, int quantity, long totalSale, String saleDate) {
         this.saleID = saleID;
         this.restaurantID = restaurantID;
-        this.orderID = orderID;
         this.productID = productID;
         this.quantity = quantity;
         this.totalSale = totalSale;
@@ -38,14 +36,6 @@ public class sale {
         this.restaurantID = restaurantID;
     }
 
-    public int getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
-
     public int getProductID() {
         return productID;
     }
@@ -62,11 +52,11 @@ public class sale {
         this.quantity = quantity;
     }
 
-    public double getTotalSale() {
+    public long getTotalSale() {
         return totalSale;
     }
 
-    public void setTotalSale(double totalSale) {
+    public void setTotalSale(long totalSale) {
         this.totalSale = totalSale;
     }
 

@@ -9,13 +9,25 @@ package Model;
  * @author admin
  */
 public class account {
-    
+    private int userID;
     private String fullName;
     private String email;
     private String userName;
     private String password;
     private String role;
     private boolean status;
+
+    public account() {
+    }
+    public account(int userID, String fullName, String email, String userName, String password, String role, boolean status) {
+        this.userID = userID;
+        this.fullName = fullName;
+        this.email = email;
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+        this.status = status;
+    }
 
     public account(String fullName, String email, String userName, String password, String role, boolean status) {
         this.fullName = fullName;
@@ -24,6 +36,14 @@ public class account {
         this.password = password;
         this.role = role;
         this.status = status;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public boolean isStatus() {
@@ -79,5 +99,5 @@ public class account {
         this.password = password;
     }
 
-    
+
 }
