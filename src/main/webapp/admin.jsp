@@ -1,4 +1,5 @@
 <%@ page import="DAOs.SaleDAOs" %>
+<%@ page import="DAOs.AdminDAOs" %>
 <%--
     Document   : admin
     Created on : Mar 1, 2024, 5:20:43 PM
@@ -8,6 +9,8 @@
 <%
     SaleDAOs saleDAO = new SaleDAOs();
     request.setAttribute("saleDAOs", saleDAO);
+    AdminDAOs adminDAO = new AdminDAOs();
+    request.setAttribute("adminDAOs", adminDAO);
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
@@ -122,16 +125,19 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Tên quán</th>
+                                    <th>Chủ quán</th>
                                     <th>Ảnh</th>
                                     <th>Địa chỉ</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <jsp:useBean id="restaurantOwners" scope="request" type="java.util.List"/>
                                 <c:forEach items="${restaurants}" var="restaurant">
                                     <tr>
                                         <td>${restaurant.restaurantID}</td>
                                         <td>${restaurant.restaurantName}</td>
+                                        <td>${adminDAOs.getSellerNameByID(adminDAOs.getSellerIDByRestaurantID(restaurant.restaurantID))}</td>
                                         <td><img src="${restaurant.restaurantImage}" alt="" class="img-fluid" style="width: auto;height: 100px;object-fit: contain;"></td>
                                         <td>${restaurant.restaurantAddress}</td>
                                         <td class="w-25">
@@ -173,6 +179,36 @@
                                                        placeholder="Tên quán ăn"
                                                        aria-describedby="restaurant-name">
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                                <c:choose>
+                                                    <c:when test="${adminDAOs.isEmptyOrNull(adminDAOs.allSellersWithNoRestaurant())}">
+                                                        <div class="mb-3">
+                                                            <label for="restaurant-add-owner" class="form-label">Chủ quán</label>
+                                                            <input type="text" class="form-control disabled"
+                                                                   placeholder="Hiện tại không có chủ quán nào"
+                                                                   disabled
+                                                                   aria-describedby="restaurant-owner">
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="mb-3">
+                                                        <label for="restaurant-add-owner" class="form-label">Chủ quán</label>
+                                                        <select class="form-select" aria-label="restaurant-owner"
+                                                                id="restaurant-add-owner">
+                                                            <c:forEach
+                                                                    items="${adminDAOs.allSellersWithNoRestaurant()}"
+                                                                    var="owner">
+                                                                <option value="${owner.userID}">${adminDAOs.getSellerNameByID(owner.userID)}</option>
+                                                            </c:forEach>
+                                                                <%--                                            <option value="${sellerOrderDAOs.lastOrderStatusID()}">${sellerOrderDAOs.getOrderStatusByOrderStatusID(sellerOrderDAOs.lastOrderStatusID())}</option>--%>
+                                                        </select>
+                                                        </div>
+                                                    </c:otherwise>
+
+                                                </c:choose>
                                         </div>
                                     </div>
                                     <div class="row">
