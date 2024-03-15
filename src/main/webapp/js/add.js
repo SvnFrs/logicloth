@@ -14,7 +14,7 @@ function addProduct() {
         '&productImage=' + encodeURIComponent(productImage);
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/FoodWeb/Seller/Product/Add' + queryString, true);
+    xhr.open('POST', '/Seller/Product/Add' + queryString, true);
     xhr.onload = function () {
         if (xhr.status === 200) {
             console.log('Product added successfully');
@@ -41,7 +41,7 @@ function addRestaurant() {
         '&restaurantImage=' + encodeURIComponent(restaurantImage);
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/FoodWeb/Admin/Restaurant/Add' + queryString, true);
+    xhr.open('POST', '/Admin/Restaurant/Add' + queryString, true);
     xhr.onload = function () {
         if (xhr.status === 200) {
             console.log('Restaurant added successfully');

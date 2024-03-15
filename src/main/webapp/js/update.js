@@ -17,7 +17,7 @@ function updateProduct(productID) {
         '&productImage=' + encodeURIComponent(productImage);
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/FoodWeb/Seller/Product/Update' + queryString, true);
+    xhr.open('POST', '/Seller/Product/Update' + queryString, true);
     xhr.onload = function () {
         if (xhr.status === 200) {
             console.log('Product updated successfully');
@@ -43,7 +43,7 @@ function updateRestaurant(restaurantID) {
         '&restaurantImage=' + encodeURIComponent(restaurantImage);
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/FoodWeb/Admin/Restaurant/Update' + queryString, true);
+    xhr.open('POST', '/Admin/Restaurant/Update' + queryString, true);
     xhr.onload = function () {
         if (xhr.status === 200) {
             console.log('Product updated successfully');
@@ -64,7 +64,7 @@ function updateOrderStatus(orderID) {
         '&statusID=' + encodeURIComponent(orderStatus);
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/FoodWeb/Seller/Order/Status' + queryString, true);
+    xhr.open('POST', '/Seller/Order/Status' + queryString, true);
     xhr.onload = function () {
         if (xhr.status === 200) {
             console.log('Order status updated successfully');

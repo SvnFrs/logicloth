@@ -29,26 +29,26 @@ public class LogoutController extends HttpServlet {
                 resp.addCookie(logoutCookie);
                 session.setAttribute("userCookie", null);
                 session.setAttribute("userID", null);
-                resp.sendRedirect("/FoodWeb/");
+                resp.sendRedirect("/");
             } else if ((Cookie) session.getAttribute("sellerCookie") != null) {
                 Cookie logoutCookie = (Cookie) session.getAttribute("sellerCookie");
                 logoutCookie.setMaxAge(0);
                 resp.addCookie(logoutCookie);
                 session.setAttribute("sellerCookie", null);
                 session.setAttribute("userID", null);
-                resp.sendRedirect("/FoodWeb/");
+                resp.sendRedirect("/");
             } else if ((Cookie) session.getAttribute("adminCookie") != null) {
                 Cookie logoutCookie = (Cookie) session.getAttribute("adminCookie");
                 logoutCookie.setMaxAge(0);
                 resp.addCookie(logoutCookie);
                 session.setAttribute("adminCookie", null);
                 session.setAttribute("adminID", null);
-                resp.sendRedirect("/FoodWeb/");
+                resp.sendRedirect("/");
             } else {
-                resp.sendRedirect("/FoodWeb/");
+                resp.sendRedirect("/");
             }
         } catch (Exception e) {
-            resp.sendRedirect("/FoodWeb/");
+            resp.sendRedirect("/");
         }
     }
 

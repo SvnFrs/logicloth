@@ -1,7 +1,7 @@
 function cancelOrder(orderID, restaurantID) {
     var queryString = "?action=" + encodeURIComponent("cancel") + "&orderID=" + encodeURIComponent(orderID) + "&restaurantID=" + encodeURIComponent(restaurantID);
     $.ajax({
-        url: "/FoodWeb/OrderStatus" + queryString,
+        url: "/OrderStatus" + queryString,
         type: "POST",
         success: function(data) {
             console.log("Order cancelled successfully");
@@ -17,7 +17,7 @@ function receivedOrder(orderID, restaurantID) {
     console.log(restaurantID);
     var queryString = "?action=" + encodeURIComponent("received") + "&orderID=" + encodeURIComponent(orderID) + "&restaurantID=" + encodeURIComponent(restaurantID);
     $.ajax({
-        url: "/FoodWeb/OrderStatus" + queryString,
+        url: "/OrderStatus" + queryString,
         type: "POST",
         success: function(data) {
             console.log("Order received successfully");

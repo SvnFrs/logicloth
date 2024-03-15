@@ -1,10 +1,10 @@
 function backToCart() {
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", "/FoodWeb/CheckoutCancel", true);
+    xhr.open("GET", "/CheckoutCancel", true);
     xhr.send();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            window.location.href = "/FoodWeb/Cart";
+            window.location.href = "/Cart";
             // alert("Cancel checkout successfully");
         }
     }
@@ -21,7 +21,7 @@ $(document).ready(function() {
         var cod = $("#cod").is(":checked");
 
         // Create the URL with the form data
-        var url = "/FoodWeb/Order?fullName=" + encodeURIComponent(fullName)
+        var url = "/Order?fullName=" + encodeURIComponent(fullName)
             + "&phoneNumber=" + encodeURIComponent(phoneNumber)
             + "&address=" + encodeURIComponent(address)
             + "&saveInfo=" + encodeURIComponent(saveInfo)
@@ -33,7 +33,7 @@ $(document).ready(function() {
             type: "POST",
             success: function(data) {
                 console.log(data);
-                window.location.href = "/FoodWeb/Order";
+                window.location.href = "/Order";
             },
             error: function(error) {
                 console.error("Error:", error);

@@ -10,7 +10,8 @@ function CommonLogin() {
     }
 
     var xhr = new XMLHttpRequest();
-    var url = '/FoodWeb/Login/' + selectedRole.value + '?' + rememeberMeUrl;
+    var url = '/Login/' + selectedRole.value + '?' + rememeberMeUrl;
+    // var url = '/Login/' + selectedRole.value + '?' + rememeberMeUrl;
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -21,11 +22,11 @@ function CommonLogin() {
 
                 if (responseText === "User Login successfully") {
                     // Redirect to user.jsp or seller.jsp or other pages as needed
-                    window.location.href = '/FoodWeb/User';
+                    window.location.href = '/User';
                     // window.location.href = '/user.jsp';
                 } else if (responseText === "Seller Login successfully") {
                     // Redirect to seller.jsp or other pages as needed
-                    window.location.href = '/FoodWeb/Seller';
+                    window.location.href = '/Seller';
                     // window.location.href = '/seller.jsp';
                 } else {
                     // Handle login failure

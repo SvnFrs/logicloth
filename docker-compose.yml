@@ -21,11 +21,25 @@ services:
             retries: 10
             start_period: 10s
             timeout: 3s
-#        command: >
-#            bash -c '
-#                chmod +x /docker-entrypoint-initdb.d/run.sh;
-#                /docker-entrypoint-initdb.d/run.sh;
-#            '
+
+    postgres.configurator:
+        image: postgres:latest
+        volumes:
+            - ./init:/docker-entrypoint-initdb.d
+        depends_on:
+            postgres:
+                condition: service_healthy
+        command: >
+            bash -c '
+            until pg_isready -h postgres -U postgres; do
+                echo "Waiting for postgres service to be ready...";
+                sleep 5;
+            done;
+            psql -h postgres -U postgres -d DaCFood -a -f /docker-entrypoint-initdb.d/postgres.sql;
+            echo "All done!";
+            '
+        networks:
+            - logicloth-network
 
     tomcat-app:
         build:

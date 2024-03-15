@@ -33,7 +33,7 @@ $(document).ready(function () {
     // Function to send an AJAX request to update the quantity in the database
     function updateQuantity(productId, quantity) {
         $.ajax({
-            url: '/FoodWeb/Cart/UpdateCartQuantity',  // The URL of your servlet/controller
+            url: '/Cart/UpdateCartQuantity',  // The URL of your servlet/controller
             method: 'GET',
             data: {
                 productID: productId,
@@ -88,14 +88,14 @@ $(document).ready(function () {
 
         // Send the array of products to the 'Checkout' controller using AJAX
         $.ajax({
-            url: '/FoodWeb/Checkout',
+            url: '/Checkout',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(products),
             success: function(response) {
                 alert(response.message);
                 // You can also redirect the user to another page here
-                window.location.href = '/FoodWeb/Checkout';
+                window.location.href = '/Checkout';
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('An error occurred: ' + textStatus);
@@ -109,7 +109,7 @@ $(document).ready(function () {
 
         // Send the product ID to the 'RemoveFromCart' controller using AJAX
         $.ajax({
-            url: '/FoodWeb/Cart/RemoveFromCart',
+            url: '/Cart/RemoveFromCart',
             type: 'GET',
             data: {
                 productID: id

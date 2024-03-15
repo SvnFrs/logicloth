@@ -1,16 +1,10 @@
-# Start from the latest golang base image
-FROM golang:latest
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.11
 
-WORKDIR /app
 
-COPY go.* ./
-
-RUN go mod download
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+RUN export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 
 COPY . .
 
-RUN go build -v -o /usr/local/bin/app ./...
-
-EXPOSE 3030
-
-CMD ["app"]
+CMD ["python3", "main.py"]
