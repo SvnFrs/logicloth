@@ -51,3 +51,28 @@ function addRestaurant() {
     };
     xhr.send();
 }
+
+function addUser() {
+    // gather the values of the form fields
+    var userName = document.getElementById('user-add-username').value;
+    var role = document.querySelector('input[name="role"]:checked').value;
+    var userEmail = document.getElementById('user-add-email').value;
+    var userFullName = document.getElementById('user-add-fullName').value;
+
+    // build query string
+    var queryString = '?userName=' + encodeURIComponent(userName) +
+        '&role=' + encodeURIComponent(role) +
+        '&userEmail=' + encodeURIComponent(userEmail) +
+        '&userFullName=' + encodeURIComponent(userFullName);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/Admin/User/Add' + queryString, true);
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log('User added successfully');
+        } else {
+            console.log('User add failed');
+        }
+    };
+    xhr.send();
+}
