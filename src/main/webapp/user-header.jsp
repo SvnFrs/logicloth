@@ -15,10 +15,14 @@
             </div>
 
             <div class="other" style="justify-content: end; gap: 30px">
-                <div class="search">
-                    <input type="text" name="search-product" id="search" placeholder="Nhập từ khóa cần tìm...">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
+                <form action="Search" method="get">
+                    <div class="search">
+                        <input type="text" name="search" id="search" placeholder="Nhập từ khóa cần tìm...">
+                        <button type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </form>
 
                 <div class="user-icon">
                     <div id="mySidenav" class="sidenav" tabindex="10">
