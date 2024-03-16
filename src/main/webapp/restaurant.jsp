@@ -17,7 +17,13 @@
 </head>
 <body>
 
-<%@include file="user-header.jsp" %>
+<c:if test="${sessionScope.user == null}">
+    <%@include file="guest-header.jsp" %>
+</c:if>
+<c:if test="${sessionScope.user != null}">
+    <%@include file="user-header.jsp" %>
+</c:if>
+
 <div class="bg-cream">
     <div class="container-xxl py-5">
         <div class="container">

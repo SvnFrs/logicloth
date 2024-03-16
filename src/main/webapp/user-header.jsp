@@ -15,7 +15,7 @@
             </div>
 
             <div class="other" style="justify-content: end; gap: 30px">
-                <form action="Search" method="get">
+                <form action="Search" method="get" class="search">
                     <div class="search">
                         <input type="text" name="search" id="search" placeholder="Nhập từ khóa cần tìm...">
                         <button type="submit">

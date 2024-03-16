@@ -16,6 +16,13 @@
     </head>
     <body>
 
+    <c:if test="${sessionScope.user == null}">
+        <%@include file="guest-header.jsp" %>
+    </c:if>
+    <c:if test="${sessionScope.user != null}">
+        <%@include file="user-header.jsp" %>
+    </c:if>
+
     <main>
         <div class="container">
             <div class="content">
