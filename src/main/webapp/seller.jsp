@@ -77,124 +77,129 @@
 
         <jsp:useBean id="Orders" scope="session" type="java.util.List"/>
         <c:forEach items="${Orders}" var="order">
-            <div class="modal fade" id="order-modal-${order.orderID}" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Order <span class="text-success fs-4">${order.orderID}'s</span>
-                                Detail</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            Order Detail
-                                        </div>
-                                        <div class="card-body container-fluid">
-                                            <table class="table table-striped align-middle text-center">
-                                                <thead class="align-middle">
-                                                <tr>
-                                                    <th>Product Name</th>
-                                                    <th>Quantity</th>
-                                                    <th>Price</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <c:forEach
-                                                        items="${sellerOrderDAOs.getOrderDetailsByOrderID(order.orderID)}"
-                                                        var="orderDetail">
+                <div class="modal fade" id="order-modal-${order.orderID}" tabindex="-1" aria-hidden="true">
+<%--            <c:forEach items="${sellerOrderDAOs.getOrderDetailsByOrderIDAndRestaurantID(order.orderID, restaurantID)}"--%>
+                       var="orders">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Order <span class="text-success fs-4">${order.orderID}'s</span>
+                                    Detail</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Order Detail
+                                            </div>
+                                            <div class="card-body container-fluid">
+                                                <table class="table table-striped align-middle text-center">
+                                                    <thead class="align-middle">
                                                     <tr>
-                                                        <td>${productDAOs.getProductByID(orderDetail.productID).productName}</td>
-                                                        <td>${orderDetail.quantity}</td>
-                                                        <td>${orderDetail.totalPrice}</td>
+                                                        <th>Product Name</th>
+                                                        <th>Quantity</th>
+                                                        <th>Price</th>
                                                     </tr>
-                                                </c:forEach>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="my-5">
-                                        <c:choose>
-                                            <c:when test="${order.orderStatus == 4}">
-                                                <div class="card">
-                                                    <div class="card-header text-center">
-                                                        Order Status
-                                                    </div>
-                                                    <div class="card-body text-center">
-                                                        <p class="text-success">${addressDAOs.getAddressByOrderID(order.orderID).receiverName}
-                                                            đã nhận đơn hàng</p>
-                                                    </div>
-                                                </div>
-                                            </c:when>
-                                            <c:when test="${order.orderStatus == 6}">
-                                                <div class="card">
-                                                    <div class="card-header text-center">
-                                                        Order Status
-                                                    </div>
-                                                    <div class="card-body text-center">
-                                                        <p class="text-danger">${addressDAOs.getAddressByOrderID(order.orderID).receiverName}
-                                                            đã hủy đơn hàng</p>
-                                                    </div>
-                                                </div>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <select class="form-select" aria-label="order-status-${order.orderID}"
-                                                        id="order-status-${order.orderID}">
-                                                    <option value="${orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, RestaurantID)}"
-                                                            selected>${sellerOrderDAOs.getOrderStatusByOrderStatusID(orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, RestaurantID))}</option>
+                                                    </thead>
+                                                    <tbody>
                                                     <c:forEach
-                                                            items="${sellerOrderDAOs.allOrderStatusBySeller(orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, RestaurantID))}"
-                                                            var="orderStatus">
-                                                        <option value="${orderStatus.orderStatusID}">${orderStatus.orderStatus}</option>
+                                                            items="${sellerOrderDAOs.getOrderDetailsByOrderID(order.orderID)}"
+                                                            var="orderDetail">
+                                                        <tr>
+                                                            <td>${productDAOs.getProductByID(orderDetail.productID).productName}</td>
+                                                            <td>${orderDetail.quantity}</td>
+                                                            <td>${orderDetail.totalPrice}</td>
+                                                        </tr>
                                                     </c:forEach>
-                                                        <%--                                            <option value="${sellerOrderDAOs.lastOrderStatusID()}">${sellerOrderDAOs.getOrderStatusByOrderStatusID(sellerOrderDAOs.lastOrderStatusID())}</option>--%>
-                                                </select>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            Order Information
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-lg-12 col-md-12">
-                                                    <p>Order ID: ${order.orderID}</p>
-                                                    <p>Order Date: ${order.orderDate}</p>
-                                                        <%--                                                        <p>Order Status: ${sellerOrderDAOs.getOrderStatusByOrderStatusID(order.orderStatus)}</p>--%>
-                                                </div>
-                                                <div class="col-lg-12 col-md-12">
-                                                    <p>Customer
-                                                        Name: ${addressDAOs.getAddressByOrderID(order.orderID).receiverName}</p>
-                                                    <p>Customer
-                                                        Phone: ${addressDAOs.getAddressByOrderID(order.orderID).phoneNumber}</p>
-                                                    <p>Customer
-                                                        Address: ${addressDAOs.getAddressByOrderID(order.orderID).address}</p>
+                                        <div class="my-5">
+                                            <c:choose>
+                                                <c:when test="${order.orderStatus == 4}">
+                                                    <div class="card">
+                                                        <div class="card-header text-center">
+                                                            Order Status
+                                                        </div>
+                                                        <div class="card-body text-center">
+                                                            <p class="text-success">${addressDAOs.getAddressByOrderID(order.orderID).receiverName}
+                                                                đã nhận đơn hàng</p>
+                                                        </div>
+                                                    </div>
+                                                </c:when>
+                                                <c:when test="${order.orderStatus == 6}">
+                                                    <div class="card">
+                                                        <div class="card-header text-center">
+                                                            Order Status
+                                                        </div>
+                                                        <div class="card-body text-center">
+                                                            <p class="text-danger">${addressDAOs.getAddressByOrderID(order.orderID).receiverName}
+                                                                đã hủy đơn hàng</p>
+                                                        </div>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <select class="form-select"
+                                                            aria-label="order-status-${order.orderID}"
+                                                            id="order-status-${order.orderID}">
+                                                        <option value="${orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, RestaurantID)}"
+                                                                selected>${sellerOrderDAOs.getOrderStatusByOrderStatusID(orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, RestaurantID))}</option>
+                                                        <c:forEach
+                                                                items="${sellerOrderDAOs.allOrderStatusBySeller(orderDAOs.getOrderStatusByOrderIDAndRestaurantID(order.orderID, RestaurantID))}"
+                                                                var="orderStatus">
+                                                            <option value="${orderStatus.orderStatusID}">${orderStatus.orderStatus}</option>
+                                                        </c:forEach>
+                                                            <%--                                            <option value="${sellerOrderDAOs.lastOrderStatusID()}">${sellerOrderDAOs.getOrderStatusByOrderStatusID(sellerOrderDAOs.lastOrderStatusID())}</option>--%>
+                                                    </select>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Order Information
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <p>Order ID: ${order.orderID}</p>
+                                                        <p>Order Date: ${order.orderDate}</p>
+                                                            <%--                                                        <p>Order Status: ${sellerOrderDAOs.getOrderStatusByOrderStatusID(order.orderStatus)}</p>--%>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <p>Customer
+                                                            Name: ${addressDAOs.getAddressByOrderID(order.orderID).receiverName}</p>
+                                                        <p>Customer
+                                                            Phone: ${addressDAOs.getAddressByOrderID(order.orderID).phoneNumber}</p>
+                                                        <p>Customer
+                                                            Address: ${addressDAOs.getAddressByOrderID(order.orderID).address}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            Total Paid: <span
-                                class="text-success fs-4">${sellerOrderDAOs.getTotalPriceByOrderID(order.orderID)}</span>
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="button" class="btn btn-primary"
-                                            onclick="updateOrderStatus(${order.orderID})">Update
-                                    </button>
+                            <div class="modal-footer">
+                                Total Paid: <span
+                                    class="text-success fs-4">${sellerOrderDAOs.getTotalPriceByOrderID(order.orderID)}</span>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="updateOrderStatus(${order.orderID})">Update
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+<%--            </c:forEach>--%>
         </c:forEach>
 
     </div>
@@ -241,7 +246,8 @@
                                            data-bs-toggle="modal"
                                            data-bs-target="#product-update-modal-${product.productID}"
                                         >Update</a>
-                                        <a href="" class="btn btn-danger">Delete</a>
+                                        <a href="<%= request.getServletContext().getContextPath()%>/Seller/Product/Delete?productID=${product.productID}" class="btn btn-danger">Delete</a>
+
                                     </div>
                                 </div>
                             </td>

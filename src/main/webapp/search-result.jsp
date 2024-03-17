@@ -22,10 +22,10 @@
     request.setAttribute("ProductsDAOs", productDAOs);
 %>
 
-<c:if test="${sessionScope.user == null}">
+<c:if test="${sessionScope.userID == null}">
     <%@include file="guest-header.jsp" %>
 </c:if>
-<c:if test="${sessionScope.user != null}">
+<c:if test="${sessionScope.userID != null}">
     <%@include file="user-header.jsp" %>
 </c:if>
 
