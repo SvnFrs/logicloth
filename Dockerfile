@@ -8,7 +8,7 @@ RUN java -version
 WORKDIR /app
 
 # Copy the project's pom.xml to the image
-COPY ../.. .
+COPY . .
 
 # Download the project dependencies and build the project
 RUN mvn clean install
