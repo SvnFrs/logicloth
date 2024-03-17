@@ -31,7 +31,7 @@ services:
                 condition: service_healthy
         command: >
             bash -c '
-            until pg_isready -h postgres -U postgres; do
+            until pg_isready -h postgres -U postgres -W postgres; do
                 echo "Waiting for postgres service to be ready...";
                 sleep 5;
             done;
