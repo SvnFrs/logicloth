@@ -226,6 +226,20 @@ public class AdminDAOs {
             Logger.getLogger(AdminDAOs.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void updateUser(int userID, String username, String email, String fullName) {
+        String query = "UPDATE users SET username = ?, email = ?, full_name = ? WHERE user_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, email);
+            ps.setString(3, fullName);
+            ps.setInt(4, userID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAOs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void addRestaurantManagement(int sellerID, int restaurantID) {
         String query = "INSERT INTO restaurantmanagement (seller_id, restaurant_id) VALUES (?, ?)";

@@ -224,7 +224,7 @@
                     <div class="modal-footer">
                         <div class="row">
                             <div class="col-12">
-                                <button type="button" class="btn btn-primary" onclick="updateUser(${account.userID})">
+                                <button type="button" class="btn btn-primary" onclick="updateUserInfo(${account.userID})">
                                     Chỉnh sửa
                                 </button>
                             </div>

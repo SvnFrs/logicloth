@@ -18,6 +18,7 @@ function addProduct() {
     xhr.onload = function () {
         if (xhr.status === 200) {
             console.log('Product added successfully');
+            window.location.reload();
         } else {
             console.log('Product add failed');
         }
@@ -45,6 +46,7 @@ function addRestaurant() {
     xhr.onload = function () {
         if (xhr.status === 200) {
             console.log('Restaurant added successfully');
+            window.location.reload();
         } else {
             console.log('Restaurant add failed');
         }
@@ -68,12 +70,14 @@ function addUser() {
         '&userFullName=' + encodeURIComponent(userFullName);
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/FoodWeb/Admin/User/Add' + queryString, true);
+    xhr.open('POST', '/Admin/User/Add' + queryString, true);
     xhr.onload = function () {
         if (xhr.status === 200) {
             console.log('User added successfully');
+            window.location.reload();
         } else {
             console.log('User add failed');
+            alert('User add failed');
         }
     };
     xhr.send();
