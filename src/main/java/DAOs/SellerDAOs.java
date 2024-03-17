@@ -21,7 +21,7 @@ public class SellerDAOs {
 
     public boolean sellerLogin(account acc) throws SQLException {
         rs = null;
-        String sql = "SELECT * FROM users WHERE username = ? AND password = ? AND role = 'seller'";
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ? AND role = 'seller' AND status = true";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, acc.getUserName());

@@ -98,7 +98,7 @@
                                    data-bs-toggle="modal"
                                    data-bs-target="#user-update-modal-${account.userID}"
                                 >Sửa</a>
-                                <a href="" class="btn btn-sm btn-danger">Xóa</a>
+                                <a href="<%= request.getServletContext().getContextPath()%>/Admin/User/Delete?userID=${account.userID}" class="btn btn-sm btn-danger">Xóa</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -216,6 +216,16 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
+                                    <label for="user-update-status-${account.userID}" class="form-label">User status</label>
+                                    <select class="form-select" aria-label="product-status"
+                                            id="user-update-status-${account.userID}">
+                                        <option value="true" selected>Available</option>
+                                        <option value="false">Unavailable</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
                                     <div class="mb-3">
                                         <label for="user-update-fullName-${account.userID}" class="form-label">Tên đầy
                                             đủ</label>
@@ -291,9 +301,7 @@
                                     >Chỉnh sửa quán ăn</a>
                                 </div>
                                 <div class="my-1">
-                                    <a href="" class="btn btn-sm btn-danger"
-                                       data-bs-toggle="modal" data-bs-target=""
-                                    >Xóa quán ăn</a>
+                                    <a href="<%= request.getServletContext().getContextPath()%>/Admin/Restaurant/Delete?restaurantID=${restaurant.restaurantID}" class="btn btn-sm btn-danger">Xóa quán ăn</a>
                                 </div>
                             </td>
                         </tr>
@@ -507,6 +515,16 @@
                                                    placeholder="${restaurant.restaurantAddress}"
                                                    aria-describedby="restaurant-address">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <label for="restaurant-update-status-${restaurant.restaurantID}" class="form-label">Restaurant status</label>
+                                        <select class="form-select" aria-label="restaurant-status"
+                                                id="restaurant-update-status-${restaurant.restaurantID}">
+                                            <option value="true" selected>Available</option>
+                                            <option value="false">Unavailable</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">

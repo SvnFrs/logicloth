@@ -33,6 +33,7 @@ function updateRestaurant(restaurantID) {
     // gather form field values
     var restaurantName = document.getElementById('restaurant-update-name-' + restaurantID).value;
     var restaurantAddress = document.getElementById('restaurant-update-address-' + restaurantID).value;
+    var restaurantStatus = document.getElementById('restaurant-update-status-' + restaurantID).value;
     var restaurantDescription = document.getElementById('restaurant-update-description-' + restaurantID).value;
     var restaurantImage = document.getElementById('restaurant-add-image-path').value;
 
@@ -40,6 +41,7 @@ function updateRestaurant(restaurantID) {
     var queryString = '?restaurantID=' + encodeURIComponent(restaurantID) +
         '&restaurantName=' + encodeURIComponent(restaurantName) +
         '&restaurantAddress=' + encodeURIComponent(restaurantAddress) +
+        '&restaurantStatus=' + encodeURIComponent(restaurantStatus) +
         '&restaurantDescription=' + encodeURIComponent(restaurantDescription) +
         '&restaurantImage=' + encodeURIComponent(restaurantImage);
 
@@ -82,6 +84,7 @@ function updateUserInfo(userID) {
     // gather form field values
     var userName = document.getElementById('user-update-username-' + userID).value;
     var userEmail = document.getElementById('user-update-email-' + userID).value;
+    var userStatus  = document.getElementById('user-update-status-' + userID).value;
     var userFullName = document.getElementById('user-update-fullName-' + userID).value;
     // var userRole = document.getElementById('user-update-role-' + userID).value;
 
@@ -89,6 +92,7 @@ function updateUserInfo(userID) {
     var queryString = '?userID=' + encodeURIComponent(userID) +
         '&userName=' + encodeURIComponent(userName) +
         '&userEmail=' + encodeURIComponent(userEmail) +
+        '&userStatus=' + encodeURIComponent(userStatus) +
         '&userFullName=' + encodeURIComponent(userFullName);
         // '&userRole=' + encodeURIComponent(userRole);
 

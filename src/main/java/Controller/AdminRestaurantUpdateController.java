@@ -16,10 +16,11 @@ public class AdminRestaurantUpdateController extends HttpServlet {
         int  restaurantID = Integer.parseInt(req.getParameter("restaurantID"));
         String restaurantName = req.getParameter("restaurantName");
         String restaurantAddress = req.getParameter("restaurantAddress");
+        boolean restaurantStatus = Boolean.parseBoolean(req.getParameter("restaurantStatus"));
         String restaurantDescription = req.getParameter("restaurantDescription");
         String restaurantImage = req.getParameter("restaurantImage");
 
         AdminDAOs adminDAOs = new AdminDAOs();
-        adminDAOs.updateRestaurant(restaurantName, restaurantAddress, restaurantDescription, restaurantImage, restaurantID);
+        adminDAOs.updateRestaurant(restaurantName, restaurantAddress, restaurantDescription, restaurantImage, restaurantID, restaurantStatus);
     }
 }
