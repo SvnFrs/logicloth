@@ -21,12 +21,12 @@ public class ConnectingDB {
 //                    + "user=sa;password=123;"
 //                    + "encrypt=true;"
 //                    + "trustServerCertificate=true;");
-            String dbURL = "jdbc:postgresql://localhost:5432/dacfood";
-//            String dbURL = "jdbc:postgresql://postgres:5432/dacfood";
-            String user = "IuseArch";
-//            String user = "postgres";
-            String pass = "btw";
-//            String pass = "postgres";
+//            String dbURL = "jdbc:postgresql://localhost:5432/dacfood";
+            String dbURL = "jdbc:postgresql://postgres:5432/dacfood";
+//            String user = "IuseArch";
+            String user = "postgres";
+//            String pass = "btw";
+            String pass = "postgres";
             Class.forName("org.postgresql.Driver"); // do not remove this line
             conn = DriverManager.getConnection(dbURL, user, pass);
             if (conn != null) {
