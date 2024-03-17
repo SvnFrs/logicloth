@@ -66,7 +66,7 @@
                                     <span class="err-message" style="color: red; font-size: 15px">${requestScope.loginError}</span>
 
                                     <div class="forgot-link">
-                                        <a href="forgot.jsp">Quên mật khẩu?</a>
+                                        <a href="${pageContext.request.contextPath}/Forgot">Quên mật khẩu?</a>
                                     </div>
 
                                     <div class="role-switcher">
