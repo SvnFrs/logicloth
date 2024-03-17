@@ -68,8 +68,8 @@ services:
             - tomcat-app
 
 networks:
-  logicloth-network:
-    name: logicloth-network
+    logicloth-network:
+        name: logicloth-network
 
 volumes:
     postgres_data:
