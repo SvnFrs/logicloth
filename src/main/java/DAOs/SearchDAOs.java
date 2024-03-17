@@ -26,7 +26,8 @@ public class SearchDAOs {
     }
     public List<product> searchProduct(String search) {
         ArrayList<product> result = new ArrayList<>();
-        String query = "SELECT * FROM products WHERE name LIKE ? AND status = 'true'";
+
+        String query = "SELECT * FROM products WHERE unaccent(lower(name)) LIKE unaccent(lower(?)) AND status = 'true'";
         try {
             ps = conn.prepareStatement(query);
             ps.setString(1, "%" + search + "%");
@@ -46,4 +47,5 @@ public class SearchDAOs {
         }
         return result;
     }
+
 }

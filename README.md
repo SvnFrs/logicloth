@@ -28,6 +28,15 @@ docker exec -it logicloth-postgres-1 psql -U postgres -c 'CREATE DATABASE dacfoo
 docker exec -it logicloth-postgres-1 psql -U postgres -d dacfood -f docker-entrypoint-initdb.d/postgres.sql;
 ```
 
+### Order states
+- 0: pending
+- 1: accepted
+- 2: shipping
+- 3: delivered
+- 4: canceled
+- 5: completed
+- 6: rejected
+
 ### TODO
 - [x] login / register with roles
 - [ ] login with google

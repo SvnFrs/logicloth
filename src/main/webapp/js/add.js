@@ -55,7 +55,9 @@ function addRestaurant() {
 function addUser() {
     // gather the values of the form fields
     var userName = document.getElementById('user-add-username').value;
-    var role = document.querySelector('input[name="role"]:checked').value;
+    // var role = document.querySelector('input[name="role"]:checked').value;
+    var roleElement = document.getElementById('user-add-role');
+    var role = roleElement.value;
     var userEmail = document.getElementById('user-add-email').value;
     var userFullName = document.getElementById('user-add-fullName').value;
 
@@ -66,7 +68,7 @@ function addUser() {
         '&userFullName=' + encodeURIComponent(userFullName);
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/Admin/User/Add' + queryString, true);
+    xhr.open('POST', '/FoodWeb/Admin/User/Add' + queryString, true);
     xhr.onload = function () {
         if (xhr.status === 200) {
             console.log('User added successfully');

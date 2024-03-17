@@ -211,6 +211,21 @@ public class AdminDAOs {
         }
         addRestaurantManagement(sellerID, restaurantID);
     }
+    
+    public void addUsers(String username, String email, String fullName, String role) {
+        String query = "INSERT INTO users (username, password, email, full_name, role) VALUES (?, md5('12345'), ?, ?, ?)";
+        
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, email);
+            ps.setString(3, fullName);
+            ps.setString(4, role);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAOs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void addRestaurantManagement(int sellerID, int restaurantID) {
         String query = "INSERT INTO restaurantmanagement (seller_id, restaurant_id) VALUES (?, ?)";
@@ -237,6 +252,20 @@ public class AdminDAOs {
         }
         return 0;
     }
+    
+//    public int generateUserID() {
+//        String query = "SELECT MAX(user_id) FROM users";
+//        try {
+//            ps = conn.prepareStatement(query);
+//            rs = ps.executeQuery();
+//            if (rs.next()) {
+//                return rs.getInt(1) + 1;
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(AdminDAOs.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return 0;
+//    }
 
     public static void main(String[] args) {
         AdminDAOs adminDAOs = new AdminDAOs();

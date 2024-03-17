@@ -125,4 +125,8 @@ public class ProductDAOs implements DAO<product> {
     public void delete(product product) {
 
     }
+
+    public static boolean isEmptyOrNull(Collection< ? > collection) {
+        return (collection == null || collection.isEmpty());
+    }
 }
