@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="link.jsp" %>
         <title>Login</title>
+
     </head>
     <body>
         <%
@@ -90,6 +91,8 @@
 
 <%--                                    <button class="submit" id="submitButton">Đăng nhập</button>--%>
                                     <input type="button" id="submitButton" value="Đăng nhập" class="submit" onclick="CommonLogin()">
+
+
                                     <div class="register-link">
                                         <p>Bạn chưa có tài khoản?<span id="next">Đăng ký</span></p>
                                     </div>
@@ -101,20 +104,20 @@
                                 <form action="Register" method="post" id="regis">
                                     <div class="form-group">
                                         <label class="fw-medium fs-6">Họ và tên</label>
-                                        <input type="text" id="fullname" name="fullname" placeholder="VD: Nguyễn Văn A" rules="required|checklengthname" required>
+                                        <input  pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Full name must contain only alphabetical characters with optional punctuation and spaces" type="text" id="fullname" name="fullname" placeholder="VD: Nguyễn Văn A" rules="required|checklengthname" required>
                                         <span class="err-message">${requestScope.fullnameError}</span>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="fw-medium fs-6">Tên đăng nhập</label>
-                                        <input type="text" id="register-name" name="register-name" rules="required|checkusername" placeholder="VD: Hoang Thien" required>
+                                        <input pattern="[a-zA-Z][a-zA-Z0-9_]{2,15}" title="Username must start with a letter, contain only letters, numbers, or underscores, and be between 3 and 16 characters long."  type="text" id="register-name" name="register-name" rules="required|checkusername" placeholder="VD: Hoang Thien" required>
                                         <span class="err-message">${requestScope.usernameError}</span>
                                     </div>
 
 
                                     <div class="form-group">
                                         <label class="fw-medium fs-6">Email</label>
-                                        <input type="email" id="email" name="register-email" placeholder="VD: nguyenvana1123@gmail.com" rules="required|email" required>
+                                        <input pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b" title="Please enter a valid email address." type="email" id="email" name="register-email" placeholder="VD: nguyenvana1123@gmail.com" rules="required|email" required>
                                         <span class="err-message">${requestScope.emailError}</span>
                                     </div>
 
@@ -136,13 +139,13 @@
 
                                     <div class="form-group">
                                         <label class="fw-medium fs-6">Mật khẩu</label>
-                                        <input type="password" id="password" name="register-password" rules="required|checkpasswordlength" required>
+                                        <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number." type="password" id="password" name="register-password" rules="required|checkpasswordlength" required>
                                         <span class="err-message">${requestScope.passwordError}</span>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="fw-medium fs-6">Nhập lại mật khẩu</label>
-                                        <input type="password" id="confirm-password" name="confirm-password" rules="required|checkpasswordlength|checkpassword" required>
+                                        <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number." type="password" id="confirm-password" name="confirm-password" rules="required|checkpasswordlength|checkpassword" required>
                                         <span class="err-message">${requestScope.confirmPasswordError}</span>
                                     </div>
 
@@ -157,6 +160,7 @@
             </div>
         </main>
         <%@include file="footer.jsp"%>
+
         <script src="js/login.js"></script>
         <script>
                 Validator('#regis');
