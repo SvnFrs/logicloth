@@ -101,15 +101,16 @@ public class AdminDAOs {
         return result;
     }
 
-    public void updateRestaurant(String restaurantName, String restaurantAddress, String restaurantDescription, String restaurantImage, int restaurantID) {
-        String query = "UPDATE restaurants SET name = ?, address = ?, description = ?, image_url = ? WHERE restaurant_id = ?";
+    public void updateRestaurant(String restaurantName, String restaurantAddress, String restaurantDescription, String restaurantImage, int restaurantID, boolean status) {
+        String query = "UPDATE restaurants SET name = ?, address = ?, description = ?, image_url = ?, status = ? WHERE restaurant_id = ?";
         try {
             ps = conn.prepareStatement(query);
             ps.setString(1, restaurantName);
             ps.setString(2, restaurantAddress);
             ps.setString(3, restaurantDescription);
             ps.setString(4, restaurantImage);
-            ps.setInt(5, restaurantID);
+            ps.setBoolean(5, status);
+            ps.setInt(6, restaurantID);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AdminDAOs.class.getName()).log(Level.SEVERE, null, ex);
@@ -227,14 +228,15 @@ public class AdminDAOs {
         }
     }
     
-    public void updateUser(int userID, String username, String email, String fullName) {
-        String query = "UPDATE users SET username = ?, email = ?, full_name = ? WHERE user_id = ?";
+    public void updateUser(int userID, String username, String email, String fullName, boolean status) {
+        String query = "UPDATE users SET username = ?, email = ?, full_name = ?, status = ? WHERE user_id = ?";
         try {
             ps = conn.prepareStatement(query);
             ps.setString(1, username);
             ps.setString(2, email);
             ps.setString(3, fullName);
-            ps.setInt(4, userID);
+            ps.setBoolean(4, status);
+            ps.setInt(5, userID);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AdminDAOs.class.getName()).log(Level.SEVERE, null, ex);
@@ -265,6 +267,28 @@ public class AdminDAOs {
             Logger.getLogger(AdminDAOs.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
+    }
+    
+    public void deleteUser(int userID) {
+        String query = "UPDATE users SET status = 'false' WHERE user_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAOs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteRestaurant(int restaurantID) {
+        String query = "UPDATE restaurants SET status = 'false' WHERE restaurant_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, restaurantID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAOs.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 //    public int generateUserID() {

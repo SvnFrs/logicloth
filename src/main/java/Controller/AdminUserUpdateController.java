@@ -17,8 +17,9 @@ public class AdminUserUpdateController extends HttpServlet {
         String username = req.getParameter("userName");
 //        String role = req.getParameter("role");
         String email = req.getParameter("userEmail");
+        boolean status = Boolean.parseBoolean(req.getParameter("userStatus"));
         String fullName = req.getParameter("userFullName");
 
-        adminDAOs.updateUser(userID, username, email, fullName);
+        adminDAOs.updateUser(userID, username, email, fullName, status);
     }
 }

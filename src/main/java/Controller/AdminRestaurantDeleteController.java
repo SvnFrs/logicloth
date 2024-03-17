@@ -3,18 +3,17 @@ package Controller;
 import java.io.IOException;
 
 import DAOs.AdminDAOs;
-import DAOs.SellerProductDAOs;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
-@WebServlet(name = "AdminUserDeleteController", urlPatterns = {"/Admin/User/Delete"})
-public class AdminUserDeleteController extends HttpServlet {
+@WebServlet(name = "AdminRestaurantDeleteController", urlPatterns = {"/Admin/Restaurant/Delete"})
+public class AdminRestaurantDeleteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AdminDAOs adminDAOs = new AdminDAOs();
-        int userID = Integer.parseInt(req.getParameter("userID"));
-        adminDAOs.deleteUser(userID);
+        int restaurantID = Integer.parseInt(req.getParameter("restaurantID"));
+        adminDAOs.deleteRestaurant(restaurantID);
         resp.sendRedirect(req.getContextPath() + "/Admin");
     }
 }
