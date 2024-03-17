@@ -34,6 +34,8 @@ public class ForgotController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("forgot.jsp");
+        rd.forward(request, response);
     }
 
     @Override
@@ -73,7 +75,8 @@ public class ForgotController extends HttpServlet {
                     // Gửi email chứa mã xác nhận
                     sendEmail(email, verificationCode);
 
-                    response.sendRedirect("confirm-email.jsp");
+                    response.sendRedirect(
+                            request.getContextPath() + "/Confirm");
                 } else {
                     request.setAttribute("forgotError", "Email của bạn không trùng với tài khoản nào cả!");
                     RequestDispatcher rd = request.getRequestDispatcher("forgot.jsp");

@@ -27,6 +27,8 @@ public class ResetController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("reset-password.jsp");
+        rd.forward(request, response);
     }
 
     @Override
@@ -69,10 +71,10 @@ public class ResetController extends HttpServlet {
                 int result = dao.updatePassword(email, newPass);
                 if (result > 0) {
                     session.setAttribute("message", "Đặt lại mật khẩu thành công!");
-                    response.sendRedirect("login-register.jsp");
+                    response.sendRedirect("/Login");
                 }else{
                     session.setAttribute("message", "Đặt lại mật khẩu thất bại!");
-                    response.sendRedirect("login-register.jsp");
+                    response.sendRedirect("/Login");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ResetController.class.getName()).log(Level.SEVERE, null, ex);

@@ -23,6 +23,8 @@ public class ConfirmController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("confirm-email.jsp");
+        rd.forward(request, response);
     }
 
     @Override
@@ -48,7 +50,7 @@ public class ConfirmController extends HttpServlet {
 
         if (isValid) {
             session.removeAttribute("verificationCode");
-            response.sendRedirect("reset-password.jsp");
+            response.sendRedirect(request.getContextPath() + "/Reset");
         } else {
             RequestDispatcher rd = request.getRequestDispatcher("confirm-email.jsp");
             rd.forward(request, response);
