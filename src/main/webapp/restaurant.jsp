@@ -69,7 +69,7 @@
                                         <p class="text-center text-success">Số lượng : ${product.productQuantity}</p>
                                     </div>
                                     <div>
-                                        <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1"
+                                        <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1&restaurantID=${Restaurant.restaurantID}"
                                            class="btn btn-primary">Add to Cart</a>
                                     </div>
                                 </div>

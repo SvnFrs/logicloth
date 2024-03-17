@@ -116,6 +116,31 @@ public class SellerOrderDAOs {
         }
         return result;
     }
+
+    public List<orderDetail> getOrderDetailsByOrderIDAndRestaurantID(int orderID, int restaurantID) {
+        ArrayList<orderDetail> result = new ArrayList<>();
+        query = "SELECT * FROM orderdetails WHERE order_id = ? AND restaurant_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderID);
+            ps.setInt(2, restaurantID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                orderDetail orderDetail = new orderDetail();
+                orderDetail.setOrderDetailID(rs.getInt("order_detail_id"));
+                orderDetail.setOrderID(rs.getInt("order_id"));
+                orderDetail.setProductID(rs.getInt("product_id"));
+                orderDetail.setQuantity(rs.getInt("quantity"));
+                orderDetail.setTotalPrice(rs.getLong("total_price"));
+                orderDetail.setAddressID(rs.getInt("address_id"));
+                result.add(orderDetail);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SellerOrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
     
     public List<orderDetail> getOrderDetailsByOrderID(List<order> orderIDs) {
         ArrayList<orderDetail> result = new ArrayList<>();

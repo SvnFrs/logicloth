@@ -30,8 +30,23 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        AccountDAOs accountDAOs = new AccountDAOs();
         if (session.getAttribute("userID") != null) {
-            response.sendRedirect(request.getContextPath() + "/");
+            int userID = (int) session.getAttribute("userID");
+            String role  = null;
+            try {
+                role = accountDAOs.getRoleByID(userID);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            if (role.equals("seller")) {
+//                    rd = request.getRequestDispatcher("/Seller");
+                response.sendRedirect(request.getContextPath() + "/Seller");
+            } else {
+//                    rd = request.getRequestDispatcher("/User");
+                response.sendRedirect(request.getContextPath() + "/User");
+            }
         } else {
 //            response.sendRedirect(request.getContextPath() + "/login-register.jsp");
             RequestDispatcher rd = request.getRequestDispatcher("login-register.jsp");

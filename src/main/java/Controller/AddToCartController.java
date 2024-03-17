@@ -30,8 +30,10 @@ public class AddToCartController extends HttpServlet {
         } else {
             cartDAOs.addToCart(userID, productID, quantity);
         }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/User");
-        dispatcher.forward(req, resp);
+        // Redirect to restaurant page
+        resp.sendRedirect(req.getContextPath() + "/Restaurant?restaurantID=" + req.getParameter("restaurantID"));
+//        RequestDispatcher dispatcher = req.getRequestDispatcher("/User");
+//        dispatcher.forward(req, resp);
     }
 
     @Override

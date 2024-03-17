@@ -30,6 +30,7 @@ public class RestaurantController extends HttpServlet {
             restaurant singleRestaurant = restaurantDAOs.getRestaurantByID(restaurantID);
             String restaurantName = restaurantDAOs.getNameByID(restaurantID);
             List<product> products = productDAOs.getAllByID(restaurantID);
+            req.setAttribute("restaurantID", restaurantID);
             req.setAttribute("Restaurant", singleRestaurant);
             req.setAttribute("restaurantName", restaurantName);
             req.setAttribute("Products", products);

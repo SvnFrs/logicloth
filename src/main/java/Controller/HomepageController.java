@@ -25,7 +25,7 @@ public class HomepageController extends HttpServlet {
         HttpSession session = request.getSession();
         AccountDAOs accountDAOs = new AccountDAOs();
         RequestDispatcher rd;
-        if (session.getAttribute("userID") == null || session.getAttribute("userID").equals("") || session.getAttribute("userCookie") == null) {
+        if (session.getAttribute("userID") == null || session.getAttribute("userID").equals("") || session.getAttribute("userCookie") == null || session.getAttribute("sellerCookie") == null) {
 //            response.sendRedirect(request.getContextPath() + "/Login");
             RestaurantDAOs restaurantDAOs = new RestaurantDAOs();
             List<restaurant> restaurants = restaurantDAOs.getAll();
