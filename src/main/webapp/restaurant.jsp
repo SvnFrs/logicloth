@@ -1,12 +1,5 @@
 <jsp:useBean id="Restaurant" scope="request" type="Model.restaurant"/>
 <%--<jsp:useBean id="Products" scope="request" type="Model.product"/>--%>
-<%--
-  Created by IntelliJ IDEA.
-  User: IuseArch
-  Date: 3/8/24
-  Time: 1:30 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -54,8 +47,8 @@
                             <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal${product.productID}"
                                style="color: inherit; text-decoration: none;">
                                 <div class="card-img">
-                                        <%--                                <img src="${product.productImage}" class="img-fluid"/>--%>
-                                    <img src="images/1707-vietnam-3881.jpg" class="img-fluid" alt="">
+                                    <img src="${product.productImage}" class="img-fluid" alt="images/1707-vietnam-3881.jpg"/>
+<%--                                    <img src="images/1707-vietnam-3881.jpg" class="img-fluid" alt="">--%>
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">${product.productName}</h5>
@@ -84,7 +77,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <img src="images/1707-vietnam-3881.jpg" class="img-fluid" alt="">
+                                    <img src="${product.productImage}" class="img-fluid" alt="images/1707-vietnam-3881.jpg"/>
                                 </div>
                                 <div class="modal-footer">
                                     <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1"

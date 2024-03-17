@@ -50,8 +50,8 @@
                                     <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal${product.productID}"
                                        style="color: inherit; text-decoration: none;">
                                         <div class="card-img">
-                                                <%--                                <img src="${product.productImage}" class="img-fluid"/>--%>
-                                            <img src="images/1707-vietnam-3881.jpg" class="img-fluid" alt="">
+                                            <img src="${product.productImage}" class="img-fluid" alt="images/1707-vietnam-3881.jpg"/>
+<%--                                            <img src="images/1707-vietnam-3881.jpg" class="img-fluid" alt="">--%>
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title">${product.productName}</h5>
