@@ -29,8 +29,8 @@ public class HomepageController extends HttpServlet {
 //            response.sendRedirect(request.getContextPath() + "/Login");
             RestaurantDAOs restaurantDAOs = new RestaurantDAOs();
             List<restaurant> restaurants = restaurantDAOs.getAll();
-            request.setAttribute("contextPath", request.getServletContext().getContextPath());
-            request.setAttribute("Restaurants", restaurants);
+            session.setAttribute("contextPath", request.getServletContext().getContextPath());
+            session.setAttribute("Restaurants", restaurants);
             rd = request.getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
         } else {

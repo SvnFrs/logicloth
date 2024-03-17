@@ -1,4 +1,5 @@
-<%-- 
+<%--<jsp:useBean id="Restaurant" scope="session" type="Model.restaurant"/>--%>
+<%--
     Document   : index
     Created on : Jan 4, 2024, 8:49:25 PM
     Author     : admin
@@ -53,7 +54,7 @@
                     </div>
                     <div class="list-restaurant container">
                         <%--<c:forEach var="restaurant" items="${Restaurants}" varStatus="status">--%>
-                        <jsp:useBean id="Restaurants" scope="request" type="java.util.List"/>
+                        <jsp:useBean id="Restaurants" scope="session" type="java.util.List"/>
                         <c:forEach var="restaurant" items="${Restaurants}" varStatus="status">
                         <c:if test="${status.index % 3 == 0}">
                         <c:if test="${!status.first}">
