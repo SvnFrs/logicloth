@@ -121,7 +121,9 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="mb-3">
                                     <label for="user-add-username" class="form-label">Tên đăng nhập</label>
-                                    <input type="text" class="form-control" id="user-add-username"
+                                    <input 
+                                    pattern="[a-zA-Z][a-zA-Z0-9_]{2,15}" title="Username must start with a letter, contain only letters, numbers, or underscores, and be between 3 and 16 characters long."
+                                    type="text" class="form-control" id="user-add-username"
                                            placeholder="Tên đăng nhập"
                                            aria-describedby="user-username">
                                 </div>
@@ -134,7 +136,7 @@
                                     <select class="form-select" aria-label="user-role"
                                             id="user-add-role"
                                             name="role">
-                                        <option value="user">Người dùng</option>
+                                        <!-- <option value="user">Người dùng</option> -->
                                         <option value="seller">Chủ quán</option>
                                     </select>
                                 </div>
@@ -144,7 +146,9 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="mb-3">
                                     <label for="user-add-email" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="user-add-email"
+                                    <input pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b" 
+                                        title="Please enter a valid email address."
+                                        type="text" class="form-control" id="user-add-email"
                                            placeholder="example@gmail.com"
                                            aria-describedby="user-email">
                                 </div>
@@ -154,7 +158,10 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="mb-3">
                                     <label for="user-add-fullName" class="form-label">Tên đầy đủ</label>
-                                    <input type="text" class="form-control" id="user-add-fullName"
+                                    <input
+                                    pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Full name must contain only alphabetical characters with optional punctuation and spaces"
+                                    
+                                    type="text" class="form-control" id="user-add-fullName"
                                            placeholder="Tên đầy đủ"
                                            aria-describedby="user-fullName">
                                 </div>
