@@ -19,13 +19,10 @@ import java.util.Base64;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.Authenticator;
 
 /**
  *
@@ -97,38 +94,40 @@ public class ForgotController extends HttpServlet {
     }
 
     private void sendEmail(String email, String verificationCode) {
-        final String username = "khanghuynhfdp@gmail.com";
-        final String password = "uxnvcxivdalkyyef";
+        String host = "smtp.gmail.com";
+        String username = "khanghuynhfdp@gmail.com";
+        String password = "uxnvcxivdalkyyef";
         String content = "Mã xác nhận của bạn là: ";
 
-        // Thiết lập cấu hình cho máy chủ SMTP của Gmail
         Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
+        props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.ssl.trust", host);
+//        props.put("mail.smtp.socketFactory.port", "25");
+        props.put("mail.smtp.port", "587");
+//        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+//        props.put("mail.smtp.socketFactory.fallback", "false");
 
-        // Tạo một đối tượng Session để gửi email
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+        Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
         });
 
         try {
-            // Tạo đối tượng Message
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             message.setSubject("D&C Food");
-            message.setContent(content + verificationCode, "text/html; charset=UTF-8");
+            message.setText(content + verificationCode);
 
-            // Gửi email
             Transport.send(message);
+            System.out.println("Verification code email sent successfully.");
         } catch (MessagingException e) {
-            // Xử lý ngoại lệ nếu gặp lỗi khi gửi email
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            System.err.println("Error sending verification code email: " + e.getMessage());
         }
     }
 

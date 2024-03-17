@@ -80,6 +80,20 @@ public class RestaurantDAOs implements DAO<restaurant> {
         }
         return null;
     }
+    
+    public void updateProductQuantity(int restaurantID, int productID, int quantity) {
+        String query = "UPDATE products SET quantity = quantity - ? WHERE restaurant_id = ? AND product_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, quantity);
+            ps.setInt(2, restaurantID);
+            ps.setInt(3, productID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(RestaurantDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public Optional<restaurant> get(int id) {

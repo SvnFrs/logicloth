@@ -63,10 +63,10 @@
                                         <p class="card-text">${product.productDescription}</p>
                                     </div>
                                     <div class="p-lg-2">
-                                        <p class="card-text text-center text-success">${product.productPrice}</p>
+                                        <p class="card-text text-center text-success">Giá : ${product.productPrice}.Đ</p>
                                     </div>
                                     <div>
-                                        <p>${product.productQuantity}</p>
+                                        <p class="text-center text-success">Số lượng : ${product.productQuantity}</p>
                                     </div>
                                     <div>
                                         <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1"

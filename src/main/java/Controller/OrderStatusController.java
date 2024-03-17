@@ -30,6 +30,7 @@ public class OrderStatusController extends HttpServlet {
         SaleDAOs saleDAOs = new SaleDAOs();
         RecordDAOs recordDAOs = new RecordDAOs();
         ExpenseDAOs expenseDAOs = new ExpenseDAOs();
+        RestaurantDAOs restaurantDAOs = new RestaurantDAOs();
         int saleID = saleDAOs.generateSaleID();
         if (action.equals("cancel")) {
             orderDAOs.updateOrderStatus(orderID, 6);
@@ -38,6 +39,7 @@ public class OrderStatusController extends HttpServlet {
             orderDAOs.updateOrderStatus(orderID, 4);
             List<orderDetail> orderDetails = orderDAOs.getOrderDetailByOrderIDAndRestaurantID(orderID, restaurantID);
             for (orderDetail orderDetail : orderDetails) {
+                restaurantDAOs.updateProductQuantity(orderDetail.getRestaurantID(), orderDetail.getProductID(), orderDetail.getQuantity());
                 recordDAOs.insertRecord(orderDetail.getRestaurantID(), saleID);
                 saleDAOs.insertSale(saleID, orderDetail.getProductID(), orderDetail.getQuantity(),
                         orderDetail.getTotalPrice(), Date.valueOf(orderDAOs.getOrderDateByOrderID(orderID)));
