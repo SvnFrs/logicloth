@@ -275,7 +275,8 @@
                                         <div class="mb-3">
                                             <label for="product-update-name-${product.productID}" class="form-label">Product
                                                 name</label>
-                                            <input type="text" class="form-control"
+                                            <input pattern="^[a-zA-Z0-9\s\-_',.()&]+$" 
+                                            title="Product name can contain letters, numbers, spaces, and certain punctuation marks" type="text" class="form-control"
                                                    id="product-update-name-${product.productID}"
                                                    placeholder="${product.productName}"
                                                    aria-describedby="product-name">
@@ -285,7 +286,9 @@
                                         <div class="mb-3">
                                             <label for="product-update-price-${product.productID}" class="form-label
                                         ">Product price</label>
-                                            <input type="text" class="form-control"
+                                        <!-- add pattern to input only numer as prices -->
+                                            <input pattern="^\d+(\.\d{1,2})?$" 
+                                            title="Price must be in decimal format (e.g., 10.99, 100.00)" type="text" class="form-control"
                                                    id="product-update-price-${product.productID}"
                                                    placeholder="${product.productPrice}"
                                                    aria-describedby="product-price">
@@ -297,7 +300,8 @@
                                         <div class="mb-3">
                                             <label for="product-update-quantity-${product.productID}"
                                                    class="form-label">Product quantity</label>
-                                            <input type="text" class="form-control"
+                                            <input pattern="^[1-9]\d*$" title="Quantity must be a positive integer"
+                                             type="text" class="form-control"
                                                    id="product-update-quantity-${product.productID}"
                                                    placeholder="${product.productQuantity}"
                                                    aria-describedby="product-quantity">
