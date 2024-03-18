@@ -20,7 +20,8 @@
     <c:if test="${sessionScope.user == null}">
         <%@include file="guest-header.jsp" %>
     </c:if>
-    <c:if test="${sessionScope.user != null}">
+    <c:if test="${sessionScope.user != null}"> 
+        <!-- object user -->
         <%@include file="user-header.jsp" %>
     </c:if>
 
