@@ -576,8 +576,14 @@
                                                class="form-label">Restaurant status</label>
                                         <select class="form-select" aria-label="restaurant-status"
                                                 id="restaurant-update-status-${restaurant.restaurantID}">
-                                            <option value="true" selected>Available</option>
-                                            <option value="false">Unavailable</option>
+                                            <c:if test="${restaurant.status == false}">
+                                                <option value="false" selected>Unavailable</option>
+                                                <option value="true">Available</option>
+                                            </c:if>
+                                            <c:if test="${restaurant.status == true}">
+                                                <option value="true" selected>Available</option>
+                                                <option value="false">Unavailable</option>
+                                            </c:if>
                                         </select>
                                     </div>
                                 </div>

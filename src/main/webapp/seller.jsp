@@ -313,8 +313,14 @@
                                                 status</label>
                                             <select class="form-select" aria-label="product-status"
                                                     id="product-update-status-${product.productID}">
-                                                <option value="true" selected>Available</option>
-                                                <option value="false">Unavailable</option>
+                                                <c:if test="${product.status == false}">
+                                                    <option value="false" selected>Unavailable</option>
+                                                    <option value="true">Available</option>
+                                                </c:if>
+                                                <c:if test="${product.status == true}">
+                                                    <option value="true" selected>Available</option>
+                                                    <option value="false">Unavailable</option>
+                                                </c:if>
                                             </select>
                                         </div>
                                     </div>
