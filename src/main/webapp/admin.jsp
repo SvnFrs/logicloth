@@ -71,7 +71,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <input class="form-control border-end-0 border rounded-pill" type="text"
-                                           value="search" id="example-search-input">
+                                           placeholder="search" id="example-search-input">
                                     <span class="input-group-append">
                                         <button class="btn btn-outline-secondary bg-white border-start-0 border rounded-pill ms-n3"
                                                 type="button">
@@ -216,6 +216,8 @@
                                         <label for="user-update-username-${account.userID}" class="form-label">Tên đăng
                                             nhập</label>
                                         <input type="text" class="form-control"
+                                               pattern="[a-zA-Z][a-zA-Z0-9_]{2,15}"
+                                               title="Username must start with a letter, contain only letters, numbers, or underscores, and be between 3 and 16 characters long."
                                                id="user-update-username-${account.userID}"
                                                value="${account.userName}"
                                                aria-describedby="user-username">
@@ -228,6 +230,8 @@
                                         <label for="user-update-email-${account.userID}"
                                                class="form-label">Email</label>
                                         <input type="text" class="form-control" id="user-update-email-${account.userID}"
+                                               pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+                                               title="Please enter a valid email address."
                                                value="${account.email}"
                                                aria-describedby="user-email">
                                     </div>
@@ -258,6 +262,8 @@
                                             đủ</label>
                                         <input type="text" class="form-control"
                                                id="user-update-fullName-${account.userID}"
+                                               pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+                                               title="Full name must contain only alphabetical characters with optional punctuation and spaces"
                                                value="${account.fullName}"
                                                aria-describedby="user-fullName">
                                     </div>
@@ -355,6 +361,8 @@
                                     <div class="mb-3">
                                         <label for="restaurant-add-name" class="form-label">Tên quán ăn</label>
                                         <input type="text" class="form-control" id="restaurant-add-name"
+                                               pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+                                               title="Restaurant name must contain only alphabetical characters with optional punctuation and spaces"
                                                placeholder="Tên quán ăn"
                                                aria-describedby="restaurant-name">
                                     </div>
@@ -395,6 +403,7 @@
                                     <div class="mb-3">
                                         <label for="restaurant-add-address" class="form-label">Địa chỉ</label>
                                         <input type="text" class="form-control" id="restaurant-add-address"
+                                               pattern="[a-zA-Z0-9\s\.,#-]+" title="Please enter a valid address. Only letters, numbers, spaces, periods, commas, dashes, and hash symbols are allowed."
                                                placeholder="Địa chỉ"
                                                aria-describedby="restaurant-address">
                                     </div>
@@ -422,11 +431,10 @@
                             <%--                                        </div>--%>
                             <%--                                    </form>--%>
 
-                            <div class="mb-3">
-                                <label class="form-label" for="restaurant-add-image-path">Ảnh quán ăn</label>
-                                <input type="text" id="restaurant-add-image-path" class="form-control"
-                                       placeholder="Xin nhập link ảnh">
-                            </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="restaurant-add-image-path">Ảnh quán ăn</label>
+                                    <input type="url" id="restaurant-add-image-path" class="form-control" placeholder="Xin nhập link ảnh" pattern="https?://.*" title="Please enter a valid URL starting with http:// or https://">
+                                </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -542,6 +550,8 @@
                                                    class="form-label">Tên quán ăn</label>
                                             <input type="text" class="form-control"
                                                    id="restaurant-update-name-${restaurant.restaurantID}"
+                                                   pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+                                                   title="Restaurant name must contain only alphabetical characters with optional punctuation and spaces"
                                                    value="${restaurant.restaurantName}"
                                                    aria-describedby="restaurant-name">
                                         </div>
@@ -554,6 +564,7 @@
                                                    class="form-label">Địa chỉ</label>
                                             <input type="text" class="form-control"
                                                    id="restaurant-update-address-${restaurant.restaurantID}"
+                                                   pattern="[a-zA-Z0-9\s\.,#-]+" title="Please enter a valid address. Only letters, numbers, spaces, periods, commas, dashes, and hash symbols are allowed."
                                                    value="${restaurant.restaurantAddress}"
                                                    aria-describedby="restaurant-address">
                                         </div>
@@ -598,8 +609,10 @@
                                     <%--                                <input type="text" id="restaurant-update-image-path" hidden="hidden">--%>
                                 <div class="mb-3">
                                     <label class="form-label" for="restaurant-update-image-path">Ảnh quán ăn</label>
-                                    <input type="text" id="restaurant-update-image-path" class="form-control"
-                                           placeholder="Xin nhập link ảnh">
+                                    <input type="url" id="restaurant-update-image-path" class="form-control"
+                                           placeholder="Xin nhập link ảnh"
+                                           pattern="https?://.*" title="Please enter a valid URL starting with http:// or https://"
+                                    >
                                 </div>
                             </div>
                         </div>
