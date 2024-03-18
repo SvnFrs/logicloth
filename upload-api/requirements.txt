@@ -1,0 +1,4 @@
+google-auth
+Unidecode
+requests
+psycopg2
