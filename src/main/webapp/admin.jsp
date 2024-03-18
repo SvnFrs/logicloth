@@ -198,7 +198,7 @@
                                             nhập</label>
                                         <input type="text" class="form-control"
                                                id="user-update-username-${account.userID}"
-                                               placeholder="Tên đăng nhập"
+                                               value="${account.userName}"
                                                aria-describedby="user-username">
                                     </div>
                                 </div>
@@ -209,7 +209,7 @@
                                         <label for="user-update-email-${account.userID}"
                                                class="form-label">Email</label>
                                         <input type="text" class="form-control" id="user-update-email-${account.userID}"
-                                               placeholder="example@gmail.com"
+                                               value="${account.email}"
                                                aria-describedby="user-email">
                                     </div>
                                 </div>
@@ -231,7 +231,7 @@
                                             đủ</label>
                                         <input type="text" class="form-control"
                                                id="user-update-fullName-${account.userID}"
-                                               placeholder="Tên đầy đủ"
+                                               value="${account.fullName}"
                                                aria-describedby="user-fullName">
                                     </div>
                                 </div>
@@ -424,6 +424,18 @@
                         <div class="modal-body">
                             <div class="card mb-3">
                                 <div class="card-header">
+                                    Chủ quán
+                                </div>
+                                <div class="card-body">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control"
+                                               value="${adminDAOs.getSellerNameByID(adminDAOs.getSellerIDByRestaurantID(restaurant.restaurantID))}" disabled
+                                               aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-header">
                                     Thông tin quán ăn
                                 </div>
                                 <div class="card-body">
@@ -500,7 +512,7 @@
                                                    class="form-label">Tên quán ăn</label>
                                             <input type="text" class="form-control"
                                                    id="restaurant-update-name-${restaurant.restaurantID}"
-                                                   placeholder="${restaurant.restaurantName}"
+                                                   value="${restaurant.restaurantName}"
                                                    aria-describedby="restaurant-name">
                                         </div>
                                     </div>
@@ -512,7 +524,7 @@
                                                    class="form-label">Địa chỉ</label>
                                             <input type="text" class="form-control"
                                                    id="restaurant-update-address-${restaurant.restaurantID}"
-                                                   placeholder="${restaurant.restaurantAddress}"
+                                                   value="${restaurant.restaurantAddress}"
                                                    aria-describedby="restaurant-address">
                                         </div>
                                     </div>
@@ -533,7 +545,7 @@
                                                class="form-label">Product description</label>
                                         <textarea class="form-control"
                                                   id="restaurant-update-description-${restaurant.restaurantID}" rows="3"
-                                                  placeholder="${restaurant.restaurantDescription}"
+                                                  value="${restaurant.restaurantDescription}"
                                         ></textarea>
                                     </div>
                                 </div>

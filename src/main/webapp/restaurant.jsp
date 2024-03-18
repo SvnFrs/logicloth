@@ -80,7 +80,7 @@
                                     <img src="${product.productImage}" class="img-fluid" alt="images/1707-vietnam-3881.jpg"/>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1"
+                                    <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1&restaurantID=${Restaurant.restaurantID}"
                                        class="btn btn-primary">Add to Cart</a>
                                 </div>
                             </div>
