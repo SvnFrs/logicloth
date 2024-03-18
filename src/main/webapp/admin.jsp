@@ -239,8 +239,15 @@
                                         status</label>
                                     <select class="form-select" aria-label="product-status"
                                             id="user-update-status-${account.userID}">
-                                        <option value="true" selected>Available</option>
-                                        <option value="false">Unavailable</option>
+                                        <option value="true">Available</option>
+                                        <c:if test="${account.status == false}">
+                                            <option value="false" selected>Unavailable</option>
+                                            <option value="true">Available</option>
+                                        </c:if>
+                                        <c:if test="${account.status == true}">
+                                            <option value="true" selected>Available</option>
+                                            <option value="false">Unavailable</option>
+                                        </c:if>
                                     </select>
                                 </div>
                             </div>
