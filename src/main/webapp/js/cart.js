@@ -1,4 +1,10 @@
 $(document).ready(function () {
+
+    $('#select-all-products').click(function() {
+        $('input[name="productChooser"]').prop('checked', $(this).prop('checked'));
+        // Trigger change event to update total when checkboxes are checked
+        $('input[name="productChooser"]').change();
+    });
     // Enable the minus and plus buttons
     // $('.btn-minus, .btn-plus').prop('disabled', false);
 

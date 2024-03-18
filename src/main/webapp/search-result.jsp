@@ -86,8 +86,8 @@
                                                     aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <img src="${product.productImage}" class="img-200 img-fluid"
-                                                 alt="https://thachan.vn/wp-content/uploads/2023/09/do-an-vat-min-1.jpg"/>
+                                            <img src="${product.productImage}" class="img-200 img-fluid justify-content-center"
+                                                 alt="${product.productName}"/>
                                         </div>
                                         <div class="modal-footer">
                                             <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1&restaurantID=${Restaurant.restaurantID}"

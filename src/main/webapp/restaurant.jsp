@@ -43,11 +43,11 @@
                 <jsp:useBean id="Products" scope="request" type="java.util.List"/>
                 <c:forEach var="product" items="${Products}">
                     <div class="col-md-4 col-sm-12 p-2">
-                        <div class="card">
+                        <div class="fixed-height card">
                             <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal${product.productID}"
                                style="color: inherit; text-decoration: none;">
                                 <div class="card-img">
-                                    <img src="${product.productImage}" class="img-fluid" alt="https://bizweb.dktcdn.net/100/339/225/files/thuc-an-nhanh.jpg?v=1627638748869"/>
+                                    <img src="${product.productImage}" class="img-200 img-fluid justify-content-center" alt="${product.productImage}"/>
 <%--                                    <img src="images/1707-vietnam-3881.jpg" class="img-fluid" alt="">--%>
                                 </div>
                                 <div class="card-body">
@@ -77,7 +77,8 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <img src="${product.productImage}" class="img-fluid" alt="https://bizweb.dktcdn.net/100/339/225/files/thuc-an-nhanh.jpg?v=1627638748869"/>
+                                    <img src="${product.productImage}" class="img-200 img-fluid justify-content-center"
+                                         alt="${product.productName}"/>
                                 </div>
                                 <div class="modal-footer">
                                     <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1&restaurantID=${Restaurant.restaurantID}"

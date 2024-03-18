@@ -32,7 +32,12 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th></th>
+                    <th>
+                        <div class="form-check d-flex justify-content-center">
+                            <input class="form-check-input" type="checkbox" id="select-all-products">
+                        </div>
+
+                    </th>
                     <th>Product Name</th>
                     <th>Price</th>
                     <th>Quantity</th>
