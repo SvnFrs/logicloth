@@ -239,7 +239,7 @@
                                         status</label>
                                     <select class="form-select" aria-label="product-status"
                                             id="user-update-status-${account.userID}">
-                                        <option value="true">Available</option>
+<%--                                        <option value="true">Available</option>--%>
                                         <c:if test="${account.status == false}">
                                             <option value="false" selected>Unavailable</option>
                                             <option value="true">Available</option>
