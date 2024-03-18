@@ -64,13 +64,13 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="fullName">Full name</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="" value="" required="">
+                        <input pattern="[A-Za-z-' ]+"  type="text" class="form-control" id="fullName" placeholder="" value="" required="">
                         <div class="invalid-feedback"> Valid full name is required. </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="phone-number">Số điện thoại</label>
-                    <input type="text" class="form-control" id="phone-number" placeholder="0123456789" required="">
+                    <input pattern="^\+?[0-9()-\s]+$" type="number" class="form-control" id="phone-number" placeholder="0123456789" required="">
                     <div class="invalid-feedback"> Please enter your shipping address. </div>
                 </div>
                 <div class="mb-3">
