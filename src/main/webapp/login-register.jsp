@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="link.jsp" %>
         <title>Login</title>
+        <script src="https://accounts.google.com/gsi/client" async></script>
 
     </head>
     <body>
@@ -67,7 +68,7 @@
                                     <span class="err-message" style="color: red; font-size: 15px">${requestScope.loginError}</span>
 
                                     <div class="forgot-link">
-                                        <a href="${pageContext.request.contextPath}/Forgot">Quên mật khẩu?</a>
+                                        <a href="${pageContext.request.contextPath}/Forgot">Quên mật khẩu ?</a>
                                     </div>
 
                                     <div class="role-switcher">
@@ -89,8 +90,27 @@
                                         <label for="remember-me">Ghi nhớ tài khoản</label>
                                     </div>
 
-<%--                                    <button class="submit" id="submitButton">Đăng nhập</button>--%>
+
                                     <input type="button" id="submitButton" value="Đăng nhập" class="submit" onclick="CommonLogin()">
+                                    
+
+                                        <div id="g_id_onload"
+                                            data-client_id="520426773417-jkl1slr0qquv9vrujs83crfmf8f8nnlg.apps.googleusercontent.com"
+                                            data-context="signin"
+                                            data-ux_mode="popup"
+                                            data-callback="onSignIn"
+                                            data-auto_prompt="false">
+                                        </div>
+
+                                        <div class="g_id_signin"
+                                            data-type="standard"
+                                            data-shape="rectangular"
+                                            data-theme="outline"
+                                            data-text="signin_with"
+                                            data-size="large"
+                                            data-logo_alignment="left">
+                                        </div>
+
 
 
                                     <div class="register-link">
@@ -160,6 +180,42 @@
             </div>
         </main>
         <%@include file="footer.jsp"%>
+        <script>
+            function onSignIn(googleUser) {
+              // Lấy các trường thông tin từ đối tượng JSON googleUser
+              console.log(googleUser);
+              const clientId = googleUser.clientId;
+              const client_id = googleUser.client_id;
+              const credential = googleUser.credential;
+              console.log(clientId);
+          
+              // Gửi GET request đến server
+              fetch(`http://localhost:3030/get_credential/` + credential, {
+                method: "GET",
+                mode: "cors",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              })
+                .then((response) => response.json())
+                .then((data) => {
+
+
+                  console.log(data);
+                  document.getElementById("login-name").value = data.email.split("@")[0];
+                  document.getElementById("login-password").value = data.password;
+                  var regUserInput = document.querySelector("#userRole");
+                  regUserInput.setAttribute("checked", true);
+          
+                  // document.getElementById("txtEmail").style.display = "none";
+                  // document.getElementById("txtPassword").style.display = "none";
+                  CommonLogin()
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
+            }
+          </script>
 
         <script src="js/login.js"></script>
         <script>
