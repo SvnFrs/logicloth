@@ -27,6 +27,7 @@ public class OrderStatusController extends HttpServlet {
         int orderID = Integer.parseInt(req.getParameter("orderID"));
         int restaurantID = Integer.parseInt(req.getParameter("restaurantID"));
         OrderDAOs orderDAOs = new OrderDAOs();
+        CartDAOs cartDAOs = new CartDAOs();
         SaleDAOs saleDAOs = new SaleDAOs();
         RecordDAOs recordDAOs = new RecordDAOs();
         ExpenseDAOs expenseDAOs = new ExpenseDAOs();
@@ -39,6 +40,8 @@ public class OrderStatusController extends HttpServlet {
             orderDAOs.updateOrderStatus(orderID, 4, restaurantID);
             List<orderDetail> orderDetails = orderDAOs.getOrderDetailByOrderIDAndRestaurantID(orderID, restaurantID);
             for (orderDetail orderDetail : orderDetails) {
+                // remove product from cart
+                cartDAOs.removeCartItemWhichReceived(orderDAOs.getUserIDByOrderID(orderDetail.getOrderID()), orderDetail.getProductID());
                 restaurantDAOs.updateProductQuantity(orderDetail.getRestaurantID(), orderDetail.getProductID(), orderDetail.getQuantity());
                 recordDAOs.insertRecord(orderDetail.getRestaurantID(), saleID);
                 saleDAOs.insertSale(saleID, orderDetail.getProductID(), orderDetail.getQuantity(),

@@ -234,6 +234,23 @@ public class OrderDAOs {
         }
         return orderStatus;
     }
+    
+    public int getUserIDByOrderID(int orderID) {
+        int userID = 0;
+        query = "SELECT user_id FROM orders WHERE order_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, orderID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                userID = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return userID;
+    }
 
 
     public void updateOrderStatus(int orderID, int statusID, int restaurantID) {

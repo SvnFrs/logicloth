@@ -117,4 +117,17 @@ public class CartDAOs {
                     log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void removeCartItemWhichReceived(int userID, int productID) {
+        String query = "DELETE FROM carts WHERE user_id = ? AND product_id = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userID);
+            ps.setInt(2, productID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAOs.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
 }

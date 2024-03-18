@@ -93,6 +93,7 @@ public class AdminDAOs {
                 res.setRestaurantDescription(rs.getString("description"));
                 res.setRestaurantAddress(rs.getString("address"));
                 res.setRestaurantImage(rs.getString("image_url"));
+                res.setStatus(rs.getBoolean("status"));
                 result.add(res);
             }
         } catch (SQLException ex) {
