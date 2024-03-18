@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from model.Google_Auth import GoogleAuth
 import shutil
 import os
 
@@ -34,6 +35,18 @@ async def upload_restaurant_image(file: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail="Failed to save file")
     
     return {"file_path": f"./images/restaurants/{file.filename}"}
+
+
+
+
+@app.get('/get_credential/{token_info}')
+async def get_credential(token_info: str):
+    google_auth = GoogleAuth()
+    return google_auth.verify_google_id_token(token_info)
+
+
+# @app.get("/")
+
 
 if __name__ == "__main__":
     import uvicorn
