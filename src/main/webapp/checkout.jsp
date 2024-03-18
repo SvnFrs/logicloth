@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="fullName">Full name</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="" value="" required="">
+                        <input type="text" class="form-control" id="fullName" placeholder="" value="" required="required">
                         <div class="invalid-feedback"> Valid full name is required. </div>
                     </div>
                 </div>
