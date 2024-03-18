@@ -7,6 +7,14 @@
     box-sizing: border-box;
 }
 
+.fixed-height  {
+    height: 10vh;
+}
+
+.fixed-height-des {
+    height: 5vh;
+}
+
 .bg-cream {
     background-color: rgb(254, 240, 231);
 }

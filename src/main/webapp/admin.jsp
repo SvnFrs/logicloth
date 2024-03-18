@@ -63,13 +63,29 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-lg-10 col-md-9">
+                    <div class="col-lg-8">
                         Quản lý người dùng
                     </div>
-                    <div class="col-lg-2 col-md-3 text-end justify-content-end">
-                        <a href="" class="btn btn-success"
-                           data-bs-toggle="modal" data-bs-target="#user-add-modal"
-                        >Thêm người dùng</a>
+                    <div class="col-lg-4 text-end justify-content-end">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <input class="form-control border-end-0 border rounded-pill" type="text"
+                                           value="search" id="example-search-input">
+                                    <span class="input-group-append">
+                                        <button class="btn btn-outline-secondary bg-white border-start-0 border rounded-pill ms-n3"
+                                                type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="" class="btn btn-success"
+                                   data-bs-toggle="modal" data-bs-target="#user-add-modal"
+                                >Thêm người dùng</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -98,7 +114,8 @@
                                    data-bs-toggle="modal"
                                    data-bs-target="#user-update-modal-${account.userID}"
                                 >Sửa</a>
-                                <a href="<%= request.getServletContext().getContextPath()%>/Admin/User/Delete?userID=${account.userID}" class="btn btn-sm btn-danger">Xóa</a>
+                                <a href="<%= request.getServletContext().getContextPath()%>/Admin/User/Delete?userID=${account.userID}"
+                                   class="btn btn-sm btn-danger">Xóa</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -121,11 +138,12 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="mb-3">
                                     <label for="user-add-username" class="form-label">Tên đăng nhập</label>
-                                    <input 
-                                    pattern="[a-zA-Z][a-zA-Z0-9_]{2,15}" title="Username must start with a letter, contain only letters, numbers, or underscores, and be between 3 and 16 characters long."
-                                    type="text" class="form-control" id="user-add-username"
-                                           placeholder="Tên đăng nhập"
-                                           aria-describedby="user-username">
+                                    <input
+                                            pattern="[a-zA-Z][a-zA-Z0-9_]{2,15}"
+                                            title="Username must start with a letter, contain only letters, numbers, or underscores, and be between 3 and 16 characters long."
+                                            type="text" class="form-control" id="user-add-username"
+                                            placeholder="Tên đăng nhập"
+                                            aria-describedby="user-username">
                                 </div>
                             </div>
                         </div>
@@ -146,9 +164,9 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="mb-3">
                                     <label for="user-add-email" class="form-label">Email</label>
-                                    <input pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b" 
-                                        title="Please enter a valid email address."
-                                        type="text" class="form-control" id="user-add-email"
+                                    <input pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+                                           title="Please enter a valid email address."
+                                           type="text" class="form-control" id="user-add-email"
                                            placeholder="example@gmail.com"
                                            aria-describedby="user-email">
                                 </div>
@@ -159,11 +177,12 @@
                                 <div class="mb-3">
                                     <label for="user-add-fullName" class="form-label">Tên đầy đủ</label>
                                     <input
-                                    pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Full name must contain only alphabetical characters with optional punctuation and spaces"
-                                    
-                                    type="text" class="form-control" id="user-add-fullName"
-                                           placeholder="Tên đầy đủ"
-                                           aria-describedby="user-fullName">
+                                            pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+                                            title="Full name must contain only alphabetical characters with optional punctuation and spaces"
+
+                                            type="text" class="form-control" id="user-add-fullName"
+                                            placeholder="Tên đầy đủ"
+                                            aria-describedby="user-fullName">
                                 </div>
                             </div>
                         </div>
@@ -216,7 +235,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
-                                    <label for="user-update-status-${account.userID}" class="form-label">User status</label>
+                                    <label for="user-update-status-${account.userID}" class="form-label">User
+                                        status</label>
                                     <select class="form-select" aria-label="product-status"
                                             id="user-update-status-${account.userID}">
                                         <option value="true" selected>Available</option>
@@ -241,7 +261,8 @@
                     <div class="modal-footer">
                         <div class="row">
                             <div class="col-12">
-                                <button type="button" class="btn btn-primary" onclick="updateUserInfo(${account.userID})">
+                                <button type="button" class="btn btn-primary"
+                                        onclick="updateUserInfo(${account.userID})">
                                     Chỉnh sửa
                                 </button>
                             </div>
@@ -301,7 +322,8 @@
                                     >Chỉnh sửa quán ăn</a>
                                 </div>
                                 <div class="my-1">
-                                    <a href="<%= request.getServletContext().getContextPath()%>/Admin/Restaurant/Delete?restaurantID=${restaurant.restaurantID}" class="btn btn-sm btn-danger">Xóa quán ăn</a>
+                                    <a href="<%= request.getServletContext().getContextPath()%>/Admin/Restaurant/Delete?restaurantID=${restaurant.restaurantID}"
+                                       class="btn btn-sm btn-danger">Xóa quán ăn</a>
                                 </div>
                             </td>
                         </tr>
@@ -429,7 +451,8 @@
                                 <div class="card-body">
                                     <div class="input-group">
                                         <input type="text" class="form-control"
-                                               value="${adminDAOs.getSellerNameByID(adminDAOs.getSellerIDByRestaurantID(restaurant.restaurantID))}" disabled
+                                               value="${adminDAOs.getSellerNameByID(adminDAOs.getSellerIDByRestaurantID(restaurant.restaurantID))}"
+                                               disabled
                                                aria-label="Username" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
@@ -531,7 +554,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12">
-                                        <label for="restaurant-update-status-${restaurant.restaurantID}" class="form-label">Restaurant status</label>
+                                        <label for="restaurant-update-status-${restaurant.restaurantID}"
+                                               class="form-label">Restaurant status</label>
                                         <select class="form-select" aria-label="restaurant-status"
                                                 id="restaurant-update-status-${restaurant.restaurantID}">
                                             <option value="true" selected>Available</option>
@@ -587,6 +611,26 @@
         </c:forEach>
     </div>
 </main>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("example-search-input");
+        const searchButton = document.querySelector(".input-group-append button");
+        const tableRows = document.querySelectorAll("tbody tr");
+
+        searchButton.addEventListener("click", function () {
+            const searchTerm = searchInput.value.toLowerCase();
+            tableRows.forEach(function (row) {
+                const rowData = row.textContent.toLowerCase();
+                if (rowData.includes(searchTerm)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+    });
+</script>
+
 <script src="js/add.js"></script>
 <script src="js/update.js"></script>
 <script src="js/admin-upload.js"></script>

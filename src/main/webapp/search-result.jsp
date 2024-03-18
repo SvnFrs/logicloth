@@ -46,23 +46,26 @@
                     <c:otherwise>
                         <c:forEach var="product" items="${Products}">
                             <div class="col-md-4 col-sm-12 p-2">
-                                <div class="card">
+                                <div class="fixed-height card ">
                                     <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal${product.productID}"
                                        style="color: inherit; text-decoration: none;">
                                         <div class="card-img">
-                                            <img src="${product.productImage}" class="img-fluid" alt="images/1707-vietnam-3881.jpg"/>
+                                            <img src="${product.productImage}" class="img-200 img-fluid justify-content-center"
+                                                 alt="${product.productName}"/>
                                                 <%--                                    <img src="images/1707-vietnam-3881.jpg" class="img-fluid" alt="">--%>
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title">${product.productName}</h5>
-                                            <div class="h-25">
+                                            <div class="fixed-height-des">
                                                 <p class="card-text">${product.productDescription}</p>
                                             </div>
                                             <div class="p-lg-2">
-                                                <p class="card-text text-center text-success">Giá : ${product.productPrice}.Đ</p>
+                                                <p class="card-text text-center text-success">Giá
+                                                    : ${product.productPrice}.Đ</p>
                                             </div>
                                             <div>
-                                                <p class="text-center text-success">Số lượng : ${product.productQuantity}</p>
+                                                <p class="text-center text-success">Số lượng
+                                                    : ${product.productQuantity}</p>
                                             </div>
                                             <div>
                                                 <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1&restaurantID=${Restaurant.restaurantID}"
@@ -72,15 +75,19 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="modal fade" id="exampleModal${product.productID}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal${product.productID}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">${product.productName}</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <h1 class="modal-title fs-5"
+                                                id="exampleModalLabel">${product.productName}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <img src="${product.productImage}" class="img-fluid" alt="images/1707-vietnam-3881.jpg"/>
+                                            <img src="${product.productImage}" class="img-200 img-fluid"
+                                                 alt="https://thachan.vn/wp-content/uploads/2023/09/do-an-vat-min-1.jpg"/>
                                         </div>
                                         <div class="modal-footer">
                                             <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1&restaurantID=${Restaurant.restaurantID}"
@@ -100,6 +107,8 @@
 
 </div>
 <script src="js/main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 </html>

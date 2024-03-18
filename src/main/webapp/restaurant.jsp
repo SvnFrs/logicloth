@@ -47,12 +47,12 @@
                             <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal${product.productID}"
                                style="color: inherit; text-decoration: none;">
                                 <div class="card-img">
-                                    <img src="${product.productImage}" class="img-fluid" alt="images/1707-vietnam-3881.jpg"/>
+                                    <img src="${product.productImage}" class="img-fluid" alt="https://bizweb.dktcdn.net/100/339/225/files/thuc-an-nhanh.jpg?v=1627638748869"/>
 <%--                                    <img src="images/1707-vietnam-3881.jpg" class="img-fluid" alt="">--%>
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">${product.productName}</h5>
-                                    <div class="h-25">
+                                    <div class="fixed-height-des">
                                         <p class="card-text">${product.productDescription}</p>
                                     </div>
                                     <div class="p-lg-2">
@@ -77,7 +77,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <img src="${product.productImage}" class="img-fluid" alt="images/1707-vietnam-3881.jpg"/>
+                                    <img src="${product.productImage}" class="img-fluid" alt="https://bizweb.dktcdn.net/100/339/225/files/thuc-an-nhanh.jpg?v=1627638748869"/>
                                 </div>
                                 <div class="modal-footer">
                                     <a href="${contextPath}/AddToCart?productID=${product.productID}&quantity=1&restaurantID=${Restaurant.restaurantID}"
