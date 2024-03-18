@@ -22,7 +22,7 @@ public class ConnectingDB {
 //                    + "encrypt=true;"
 //                    + "trustServerCertificate=true;");
 //            String dbURL = "jdbc:postgresql://localhost:5432/dacfood";
-            String dbURL = "jdbc:postgresql://postgres:5432/dacfood";
+            String dbURL = "jdbc:postgresql://postgres:5432/DaCFood";
 //            String user = "IuseArch";
             String user = "postgres";
 //            String pass = "btw";
