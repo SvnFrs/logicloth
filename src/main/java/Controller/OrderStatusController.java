@@ -33,10 +33,10 @@ public class OrderStatusController extends HttpServlet {
         RestaurantDAOs restaurantDAOs = new RestaurantDAOs();
         int saleID = saleDAOs.generateSaleID();
         if (action.equals("cancel")) {
-            orderDAOs.updateOrderStatus(orderID, 6);
+            orderDAOs.updateOrderStatus(orderID, 6, restaurantID);
             resp.getWriter().write("Order cancelled");
         } else if (action.equals("received")) {
-            orderDAOs.updateOrderStatus(orderID, 4);
+            orderDAOs.updateOrderStatus(orderID, 4, restaurantID);
             List<orderDetail> orderDetails = orderDAOs.getOrderDetailByOrderIDAndRestaurantID(orderID, restaurantID);
             for (orderDetail orderDetail : orderDetails) {
                 restaurantDAOs.updateProductQuantity(orderDetail.getRestaurantID(), orderDetail.getProductID(), orderDetail.getQuantity());

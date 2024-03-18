@@ -75,7 +75,7 @@ public class CartDAOs {
     }
 
     public void addQuantity(int userID, int productID) {
-        String query = "UPDATE Carts SET quantity = quantity + 1  WHERE user_id = ? AND product_id = ?";
+        String query = "UPDATE carts SET quantity = quantity + 1  WHERE user_id = ? AND product_id = ?";
         try {
             ps = conn.prepareStatement(query);
 //            ps.setInt(1, quantity);
@@ -89,7 +89,7 @@ public class CartDAOs {
     }
 
     public boolean isProductInCart(int userID, int productID) {
-        String query = "SELECT * FROM dacfood.public.carts WHERE user_id = ? AND product_id = ?";
+        String query = "SELECT * FROM carts WHERE user_id = ? AND product_id = ?";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, userID);

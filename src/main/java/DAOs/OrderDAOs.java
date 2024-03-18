@@ -236,12 +236,13 @@ public class OrderDAOs {
     }
 
 
-    public void updateOrderStatus(int orderID, int statusID) {
-        query = "UPDATE orderdetails SET order_status = ? WHERE order_id = ?";
+    public void updateOrderStatus(int orderID, int statusID, int restaurantID) {
+        query = "UPDATE orderdetails SET order_status = ? WHERE order_id = ? AND restaurant_id = ?";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, statusID);
             ps.setInt(2, orderID);
+            ps.setInt(3, restaurantID);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAOs.class.getName()).
