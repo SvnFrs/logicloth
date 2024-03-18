@@ -64,14 +64,15 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="fullName">Full name</label>
-                        <input pattern="[A-Za-z-' ]+"  type="text" class="form-control" id="fullName" placeholder="" value="" required="">
+                        <input type="text" class="form-control" id="fullName" placeholder="" value="" required="required">
                         <div class="invalid-feedback"> Valid full name is required. </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="phone-number">Số điện thoại</label>
-                    <input pattern="^\+?[0-9()-\s]+$" type="number" class="form-control" id="phone-number" placeholder="0123456789" required="">
-                    <div class="invalid-feedback"> Please enter your shipping address. </div>
+                    <input type="text" class="form-control" id="phone-number" placeholder="0123456789" required="required"
+                           pattern="0\d{9,10}" title="Please enter a valid Vietnam phone number starting with 0, and containing 10 or 11 digits">
+                    <div class="invalid-feedback"> Please enter your phone number. </div>
                 </div>
                 <div class="mb-3">
                     <label for="address">Address</label>
@@ -104,6 +105,29 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <%@include file="footer.jsp" %>
+<script>
+    $(document).ready(function () {
+        $('#phone-number').on('input', function () {
+            var phoneNumber = $(this).val();
+            var phoneNumberPattern = /^(0\d{9,10})$/;
+
+            if (phoneNumberPattern.test(phoneNumber)) {
+                $(this).removeClass('is-invalid');
+                $(this).addClass('is-valid');
+            } else {
+                $(this).removeClass('is-valid');
+                $(this).addClass('is-invalid');
+            }
+        });
+
+        $('#phone-number').on('invalid', function () {
+            if ($(this).val() === '') {
+                $(this).removeClass('is-valid');
+                $(this).addClass('is-invalid');
+            }
+        });
+    });
+</script>
 <script src="js/checkout.js"></script>
 </body>
 </html>

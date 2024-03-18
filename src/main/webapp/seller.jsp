@@ -488,9 +488,113 @@
 
 </main>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="js/add.js"></script>
 <script src="js/update.js"></script>
 <script src="js/upload.js"></script>
 <%@include file="footer.jsp" %>
+<script>
+    $(document).ready(function () {
+        // Product name validation
+        $('input[id^="product-update-name"]').on('input', function () {
+            var productName = $(this).val();
+            var productNamePattern = /^[a-zA-Z0-9\s\-_',.()&]+$/;
+
+            if (productNamePattern.test(productName)) {
+                $(this).removeClass('is-invalid');
+                $(this).addClass('is-valid');
+            } else {
+                $(this).removeClass('is-valid');
+                $(this).addClass('is-invalid');
+            }
+        });
+
+        // Product price validation
+        $('input[id^="product-update-price"]').on('input', function () {
+            var productPrice = $(this).val();
+            var productPricePattern = /^\d+(\.\d{1,2})?$/;
+
+            if (productPricePattern.test(productPrice)) {
+                $(this).removeClass('is-invalid');
+                $(this).addClass('is-valid');
+            } else {
+                $(this).removeClass('is-valid');
+                $(this).addClass('is-invalid');
+            }
+        });
+
+        // Product quantity validation
+        $('input[id^="product-update-quantity"]').on('input', function () {
+            var productQuantity = $(this).val();
+            var productQuantityPattern = /^[1-9]\d*$/;
+
+            if (productQuantityPattern.test(productQuantity)) {
+                $(this).removeClass('is-invalid');
+                $(this).addClass('is-valid');
+            } else {
+                $(this).removeClass('is-valid');
+                $(this).addClass('is-invalid');
+            }
+        });
+
+        // Handling invalid event for empty inputs
+        $('input[id^="product-update"]').on('invalid', function () {
+            if ($(this).val() === '') {
+                $(this).removeClass('is-valid');
+                $(this).addClass('is-invalid');
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Product name validation
+        $('#product-add-name').on('input', function () {
+            var productName = $(this).val();
+
+            if (productName.trim() !== '') {
+                $(this).removeClass('is-invalid');
+                $(this).addClass('is-valid');
+            } else {
+                $(this).removeClass('is-valid');
+                $(this).addClass('is-invalid');
+            }
+        });
+
+        // Product price validation
+        $('#product-add-price').on('input', function () {
+            var productPrice = $(this).val();
+
+            if (!isNaN(productPrice) && parseFloat(productPrice) >= 0) {
+                $(this).removeClass('is-invalid');
+                $(this).addClass('is-valid');
+            } else {
+                $(this).removeClass('is-valid');
+                $(this).addClass('is-invalid');
+            }
+        });
+
+        // Product quantity validation
+        $('#product-add-quantity').on('input', function () {
+            var productQuantity = $(this).val();
+
+            if (!isNaN(productQuantity) && parseInt(productQuantity) > 0) {
+                $(this).removeClass('is-invalid');
+                $(this).addClass('is-valid');
+            } else {
+                $(this).removeClass('is-valid');
+                $(this).addClass('is-invalid');
+            }
+        });
+
+        // Handling invalid event for empty inputs
+        $('input[id^="product-add"]').on('invalid', function () {
+            if ($(this).val() === '') {
+                $(this).removeClass('is-valid');
+                $(this).addClass('is-invalid');
+            }
+        });
+    });
+</script>
 </body>
 </html>
