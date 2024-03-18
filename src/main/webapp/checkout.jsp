@@ -70,7 +70,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="phone-number">Số điện thoại</label>
-                    <input type="text" class="form-control" id="phone-number" placeholder="0123456789" required="">
+                    <input type="text" class="form-control" id="phone-number" placeholder="0123456789" required="required"
+                           pattern="0\d{9,10}" title="Please enter a valid Vietnam phone number starting with 0, and containing 10 or 11 digits">
                     <div class="invalid-feedback"> Please enter your shipping address. </div>
                 </div>
                 <div class="mb-3">
